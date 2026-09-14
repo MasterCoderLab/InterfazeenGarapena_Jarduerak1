@@ -6,22 +6,14 @@
              BackgroundColor="#F4F1EA">
 
     <Grid Padding="30"
-          RowDefinitions="Auto,*,Auto"
+          RowDefinitions="*,Auto"
           ColumnDefinitions="250,*,250"
           ColumnSpacing="30"
           RowSpacing="20">
 
-        <!-- Izenburua -->
-        <Label Grid.Row="0"
-               Grid.ColumnSpan="3"
-               Text="Opariak"
-               FontSize="28"
-               FontAttributes="Bold"
-               TextColor="#2F3437" />
-
         <!-- Opari lista -->
         <ListView x:Name="OpariListView"
-                  Grid.Row="1"
+                  Grid.Row="0"
                   Grid.Column="0"
                   ItemSelected="OpariListView_ItemSelected"
                   BackgroundColor="White"
@@ -43,7 +35,7 @@
         </ListView>
 
         <!-- Aukeratutako opariaren irudia -->
-        <VerticalStackLayout Grid.Row="1"
+        <VerticalStackLayout Grid.Row="0"
                              Grid.Column="1"
                              HorizontalOptions="Center"
                              VerticalOptions="Center"
@@ -63,7 +55,7 @@
         </VerticalStackLayout>
 
         <!-- Lehen eta bigarren opariak -->
-        <VerticalStackLayout Grid.Row="1"
+        <VerticalStackLayout Grid.Row="0"
                              Grid.Column="2"
                              Spacing="10">
 
@@ -89,7 +81,7 @@
         </VerticalStackLayout>
 
         <!-- Botoiak -->
-        <HorizontalStackLayout Grid.Row="2"
+        <HorizontalStackLayout Grid.Row="1"
                                Grid.ColumnSpan="3"
                                Spacing="15">
 

@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" ?>
+
 <Shell
     x:Class="I01_03_OpariLista.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:I01_03_OpariLista"
-    Title="I01_03_OpariLista">
+    Title="I01_03_OpariLista"
+    Shell.BackgroundColor="#F4F1EA"
+    Shell.TitleColor="#2F3437"
+    Shell.ForegroundColor="#2F3437">
 
     <ShellContent
-        Title="Home"
+        Title="Opariak"
         ContentTemplate="{DataTemplate local:MainPage}"
         Route="MainPage" />
 
