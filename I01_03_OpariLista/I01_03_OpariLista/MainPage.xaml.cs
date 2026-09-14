@@ -3,19 +3,19 @@
     // Opari bakoitzaren datuak gordetzeko klasea
     public class Oparia
     {
-        public string izena;
-        public string irudia;
+        public string Izena { get; set; }
+        public string Irudia { get; set; }
 
         public Oparia(string izena, string irudia)
         {
-            this.izena = izena;
-            this.irudia = irudia;
+            Izena = izena;
+            Irudia = irudia;
         }
 
         // ListView-ean opariaren izena erakusteko
         public override string ToString()
         {
-            return izena;
+            return Izena;
         }
     }
 
@@ -48,9 +48,8 @@
         }
 
         // Listako opari bat aukeratzean
-        private void OpariListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        private void OpariListView_ItemSelected(object? sender, SelectedItemChangedEventArgs e)
         {
-            // Ez badago ezer aukeratuta
             if (e.SelectedItem == null)
             {
                 aukeratutakoOparia = null;
@@ -63,31 +62,30 @@
             aukeratutakoOparia = (Oparia)e.SelectedItem;
 
             // Opariaren izena eta irudia erakutsi
-            AukeratutakoOpariaLabel.Text = aukeratutakoOparia.izena;
-            OpariImage.Source = aukeratutakoOparia.irudia;
+            AukeratutakoOpariaLabel.Text = aukeratutakoOparia.Izena;
+            OpariImage.Source = aukeratutakoOparia.Irudia;
         }
 
         // Aukeratu botoia sakatzean
-        private void AukeratuButton_Clicked(object sender, EventArgs e)
+        private void AukeratuButton_Clicked(object? sender, EventArgs e)
         {
-            // Ez badago oparirik aukeratuta
             if (aukeratutakoOparia == null)
             {
                 return;
             }
 
-            // Lehen oparia hutsik badago
+            // Lehen oparia
             if (lehenOparia == null)
             {
                 lehenOparia = aukeratutakoOparia;
-                LehenOpariaLabel.Text = lehenOparia.izena;
+                LehenOpariaLabel.Text = lehenOparia.Izena;
             }
 
-            // Lehen oparia badago, bigarrena ezarri
+            // Bigarren oparia
             else if (bigarrenOparia == null)
             {
                 bigarrenOparia = aukeratutakoOparia;
-                BigarrenOpariaLabel.Text = bigarrenOparia.izena;
+                BigarrenOpariaLabel.Text = bigarrenOparia.Izena;
 
                 // Ezin dira bi opari baino gehiago aukeratu
                 AukeratuButton.IsEnabled = false;
@@ -95,27 +93,24 @@
         }
 
         // Dena garbitzeko
-        private void EzabatuButton_Clicked(object sender, EventArgs e)
+        private void EzabatuButton_Clicked(object? sender, EventArgs e)
         {
             aukeratutakoOparia = null;
             lehenOparia = null;
             bigarrenOparia = null;
 
-            // ListView-ko aukeraketa kendu
             OpariListView.SelectedItem = null;
 
-            // Irudia eta testuak garbitu
             OpariImage.Source = null;
             AukeratutakoOpariaLabel.Text = "";
             LehenOpariaLabel.Text = "";
             BigarrenOpariaLabel.Text = "";
 
-            // Aukeratu botoia berriro aktibatu
             AukeratuButton.IsEnabled = true;
         }
 
         // Aplikaziotik irteteko
-        private void IrtenButton_Clicked(object sender, EventArgs e)
+        private void IrtenButton_Clicked(object? sender, EventArgs e)
         {
             if (Window != null)
             {

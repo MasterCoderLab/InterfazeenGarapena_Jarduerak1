@@ -13,21 +13,36 @@
 
         <!-- Opari lista -->
         <ListView x:Name="OpariListView"
-                  Grid.Row="0"
-                  Grid.Column="0"
-                  ItemSelected="OpariListView_ItemSelected"
-                  BackgroundColor="White"
-                  SeparatorColor="#DDDDDD">
+          Grid.Row="0"
+          Grid.Column="0"
+          ItemSelected="OpariListView_ItemSelected"
+          BackgroundColor="White"
+          SeparatorColor="#DDDDDD"
+          RowHeight="70">
 
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <Grid Padding="12">
-                            <Label Text="{Binding .}"
-                                   FontSize="18"
-                                   TextColor="#2F3437"
-                                   VerticalOptions="Center" />
+
+                        <Grid Padding="10"
+                      ColumnDefinitions="50,*"
+                      ColumnSpacing="12">
+
+                            <Image Grid.Column="0"
+                           Source="{Binding Irudia}"
+                           WidthRequest="45"
+                           HeightRequest="45"
+                           Aspect="AspectFit"
+                           VerticalOptions="Center" />
+
+                            <Label Grid.Column="1"
+                           Text="{Binding Izena}"
+                           FontSize="18"
+                           TextColor="#2F3437"
+                           VerticalOptions="Center" />
+
                         </Grid>
+
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
