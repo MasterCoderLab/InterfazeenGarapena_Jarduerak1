@@ -2,7 +2,8 @@
 
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="I01_03_OpariLista.MainPage">
+             x:Class="I01_03_OpariLista.MainPage"
+             BackgroundColor="#F4F1EA">
 
     <Grid Padding="30"
           RowDefinitions="Auto,*,Auto"
@@ -15,13 +16,31 @@
                Grid.ColumnSpan="3"
                Text="Opariak"
                FontSize="28"
-               FontAttributes="Bold" />
+               FontAttributes="Bold"
+               TextColor="#2F3437" />
 
         <!-- Opari lista -->
         <ListView x:Name="OpariListView"
                   Grid.Row="1"
                   Grid.Column="0"
-                  ItemSelected="OpariListView_ItemSelected" />
+                  ItemSelected="OpariListView_ItemSelected"
+                  BackgroundColor="White"
+                  SeparatorColor="#DDDDDD">
+
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid Padding="12">
+                            <Label Text="{Binding .}"
+                                   FontSize="18"
+                                   TextColor="#2F3437"
+                                   VerticalOptions="Center" />
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+
+        </ListView>
 
         <!-- Aukeratutako opariaren irudia -->
         <VerticalStackLayout Grid.Row="1"
@@ -37,6 +56,8 @@
 
             <Label x:Name="AukeratutakoOpariaLabel"
                    FontSize="18"
+                   FontAttributes="Bold"
+                   TextColor="#2F3437"
                    HorizontalTextAlignment="Center" />
 
         </VerticalStackLayout>
@@ -48,16 +69,22 @@
 
             <Label Text="Lehen oparia"
                    FontSize="18"
-                   FontAttributes="Bold" />
+                   FontAttributes="Bold"
+                   TextColor="#2F3437" />
 
-            <Label x:Name="LehenOpariaLabel" />
+            <Label x:Name="LehenOpariaLabel"
+                   FontSize="16"
+                   TextColor="#555555" />
 
             <Label Text="Bigarren oparia"
                    FontSize="18"
                    FontAttributes="Bold"
+                   TextColor="#2F3437"
                    Margin="0,20,0,0" />
 
-            <Label x:Name="BigarrenOpariaLabel" />
+            <Label x:Name="BigarrenOpariaLabel"
+                   FontSize="16"
+                   TextColor="#555555" />
 
         </VerticalStackLayout>
 
@@ -68,13 +95,22 @@
 
             <Button x:Name="AukeratuButton"
                     Text="Aukeratu"
-                    Clicked="AukeratuButton_Clicked" />
+                    Clicked="AukeratuButton_Clicked"
+                    BackgroundColor="#3F7C85"
+                    TextColor="White"
+                    CornerRadius="6" />
 
             <Button Text="Ezabatu"
-                    Clicked="EzabatuButton_Clicked" />
+                    Clicked="EzabatuButton_Clicked"
+                    BackgroundColor="#B85C5C"
+                    TextColor="White"
+                    CornerRadius="6" />
 
             <Button Text="Irten"
-                    Clicked="IrtenButton_Clicked" />
+                    Clicked="IrtenButton_Clicked"
+                    BackgroundColor="#555B66"
+                    TextColor="White"
+                    CornerRadius="6" />
 
         </HorizontalStackLayout>
 
