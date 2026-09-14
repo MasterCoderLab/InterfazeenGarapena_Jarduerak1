@@ -10,29 +10,20 @@
           ColumnSpacing="30"
           RowSpacing="20">
 
+        <!-- Izenburua -->
         <Label Grid.Row="0"
                Grid.ColumnSpan="3"
                Text="Opariak"
                FontSize="28"
                FontAttributes="Bold" />
 
+        <!-- Opari lista -->
         <ListView x:Name="OpariListView"
                   Grid.Row="1"
                   Grid.Column="0"
-                  ItemSelected="OpariListView_ItemSelected">
+                  ItemSelected="OpariListView_ItemSelected" />
 
-            <ListView.ItemsSource>
-                <x:Array Type="{x:Type x:String}">
-                    <x:String>Erlojua</x:String>
-                    <x:String>Aurikularrak</x:String>
-                    <x:String>Bozgorailuak</x:String>
-                    <x:String>Eramangarria</x:String>
-                    <x:String>Bizikleta elektrikoa</x:String>
-                </x:Array>
-            </ListView.ItemsSource>
-
-        </ListView>
-
+        <!-- Aukeratutako opariaren irudia -->
         <VerticalStackLayout Grid.Row="1"
                              Grid.Column="1"
                              HorizontalOptions="Center"
@@ -50,6 +41,7 @@
 
         </VerticalStackLayout>
 
+        <!-- Lehen eta bigarren opariak -->
         <VerticalStackLayout Grid.Row="1"
                              Grid.Column="2"
                              Spacing="10">
@@ -69,6 +61,7 @@
 
         </VerticalStackLayout>
 
+        <!-- Botoiak -->
         <HorizontalStackLayout Grid.Row="2"
                                Grid.ColumnSpan="3"
                                Spacing="15">
@@ -77,7 +70,7 @@
                     Text="Aukeratu"
                     Clicked="AukeratuButton_Clicked" />
 
-            <Button Text="Opariak ezabatu"
+            <Button Text="Ezabatu"
                     Clicked="EzabatuButton_Clicked" />
 
             <Button Text="Irten"
@@ -87,4 +80,4 @@
 
     </Grid>
 
-</ContentPage>  
+</ContentPage>
