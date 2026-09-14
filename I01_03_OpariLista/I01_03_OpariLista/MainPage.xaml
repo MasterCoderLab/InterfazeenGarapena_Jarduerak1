@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="I01_03_OpariLista.MainPage">
+
+    <Grid Padding="30"
+          RowDefinitions="Auto,*,Auto"
+          ColumnDefinitions="250,*,250"
+          ColumnSpacing="30"
+          RowSpacing="20">
+
+        <Label Grid.Row="0"
+               Grid.ColumnSpan="3"
+               Text="Opariak"
+               FontSize="28"
+               FontAttributes="Bold" />
+
+        <ListView x:Name="OpariListView"
+                  Grid.Row="1"
+                  Grid.Column="0"
+                  ItemSelected="OpariListView_ItemSelected">
+
+            <ListView.ItemsSource>
+                <x:Array Type="{x:Type x:String}">
+                    <x:String>Erlojua</x:String>
+                    <x:String>Aurikularrak</x:String>
+                    <x:String>Bozgorailuak</x:String>
+                    <x:String>Eramangarria</x:String>
+                    <x:String>Bizikleta elektrikoa</x:String>
+                </x:Array>
+            </ListView.ItemsSource>
+
+        </ListView>
+
+        <VerticalStackLayout Grid.Row="1"
+                             Grid.Column="1"
+                             HorizontalOptions="Center"
+                             VerticalOptions="Center"
+                             Spacing="15">
+
+            <Image x:Name="OpariImage"
+                   WidthRequest="300"
+                   HeightRequest="250"
+                   Aspect="AspectFit" />
+
+            <Label x:Name="AukeratutakoOpariaLabel"
+                   FontSize="18"
+                   HorizontalTextAlignment="Center" />
+
+        </VerticalStackLayout>
+
+        <VerticalStackLayout Grid.Row="1"
+                             Grid.Column="2"
+                             Spacing="10">
+
+            <Label Text="Lehen oparia"
+                   FontSize="18"
+                   FontAttributes="Bold" />
+
+            <Label x:Name="LehenOpariaLabel" />
+
+            <Label Text="Bigarren oparia"
+                   FontSize="18"
+                   FontAttributes="Bold"
+                   Margin="0,20,0,0" />
+
+            <Label x:Name="BigarrenOpariaLabel" />
+
+        </VerticalStackLayout>
+
+        <HorizontalStackLayout Grid.Row="2"
+                               Grid.ColumnSpan="3"
+                               Spacing="15">
+
+            <Button x:Name="AukeratuButton"
+                    Text="Aukeratu"
+                    Clicked="AukeratuButton_Clicked" />
+
+            <Button Text="Opariak ezabatu"
+                    Clicked="EzabatuButton_Clicked" />
+
+            <Button Text="Irten"
+                    Clicked="IrtenButton_Clicked" />
+
+        </HorizontalStackLayout>
+
+    </Grid>
+
+</ContentPage>  

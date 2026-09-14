@@ -1,0 +1,151 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="I01_04_KiroldegikoKuota.MainPage"
+             Title="Kiroldegi txartela"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="LightGray">
+
+    <Grid Padding="30"
+          RowDefinitions="Auto,*,Auto"
+          ColumnDefinitions="*,*,*"
+          ColumnSpacing="40"
+          RowSpacing="25">
+
+        <!-- KATEGORIA -->
+        <VerticalStackLayout Grid.Row="0"
+                             Grid.Column="0"
+                             Spacing="15">
+
+            <Label Text="Kategoria"
+                   FontSize="22"
+                   FontAttributes="Bold"
+                   TextColor="Black" />
+
+            <RadioButton x:Name="UmeakRadio"
+                         Content="Umeak"
+                         TextColor="Black"
+                         GroupName="Kategoria" />
+
+            <RadioButton x:Name="FamiliaRadio"
+                         Content="Familia"
+                         TextColor="Black"
+                         GroupName="Kategoria" />
+
+            <RadioButton x:Name="JubilatuakRadio"
+                         Content="Jubilatuak"
+                         TextColor="Black"
+                         GroupName="Kategoria" />
+
+        </VerticalStackLayout>
+
+
+        <!-- MOTA -->
+        <VerticalStackLayout Grid.Row="0"
+                             Grid.Column="1"
+                             Spacing="15">
+
+            <Label Text="Mota"
+                   FontSize="22"
+                   FontAttributes="Bold"
+                   TextColor="Black" />
+
+            <HorizontalStackLayout Spacing="10">
+
+                <CheckBox x:Name="DesgaitasunaCheck" />
+
+                <Label Text="Desgaitasuna"
+                       TextColor="Black"
+                       VerticalOptions="Center" />
+
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout Spacing="10">
+
+                <CheckBox x:Name="FamiliaUgariaCheck" />
+
+                <Label Text="Familia ugaria"
+                       TextColor="Black"
+                       VerticalOptions="Center" />
+
+            </HorizontalStackLayout>
+
+        </VerticalStackLayout>
+
+
+        <!-- IRAUPENA -->
+        <VerticalStackLayout Grid.Row="0"
+                             Grid.Column="2"
+                             Spacing="15">
+
+            <Label Text="Iraupena"
+                   FontSize="22"
+                   FontAttributes="Bold"
+                   TextColor="Black" />
+
+            <Picker x:Name="IraupenaPicker"
+                    TextColor="Black"
+                    BackgroundColor="White">
+
+                <Picker.Items>
+                    <x:String>Urtekoa</x:String>
+                    <x:String>Hilabetekoa</x:String>
+                    <x:String>2 astekoa</x:String>
+                    <x:String>Astebetekoa</x:String>
+                    <x:String>Egunekoa</x:String>
+                </Picker.Items>
+
+            </Picker>
+
+        </VerticalStackLayout>
+
+
+        <!-- PREZIOA -->
+        <VerticalStackLayout Grid.Row="1"
+                             Grid.ColumnSpan="3"
+                             HorizontalOptions="Center"
+                             VerticalOptions="Center"
+                             Spacing="10">
+
+            <Label Text="Kuota"
+                   FontSize="18"
+                   TextColor="Black"
+                   HorizontalTextAlignment="Center" />
+
+            <Label x:Name="PrezioaLabel"
+                   Text="198,00 €"
+                   FontSize="36"
+                   FontAttributes="Bold"
+                   TextColor="Black"
+                   HorizontalTextAlignment="Center" />
+
+        </VerticalStackLayout>
+
+
+        <!-- BOTOIAK -->
+        <HorizontalStackLayout Grid.Row="2"
+                               Grid.ColumnSpan="3"
+                               HorizontalOptions="Start"
+                               Spacing="15">
+
+            <Button Text="Kalkulatu"
+                    BackgroundColor="Green"
+                    TextColor="White"
+                    Clicked="KalkulatuButton_Clicked" />
+
+            <Button Text="Garbitu"
+                    BackgroundColor="DarkRed"
+                    TextColor="White"
+                    Clicked="GarbituButton_Clicked" />
+
+            <Button Text="Irten"
+                    BackgroundColor="Black"
+                    TextColor="White"
+                    Clicked="IrtenButton_Clicked" />
+
+        </HorizontalStackLayout>
+
+    </Grid>
+
+</ContentPage>

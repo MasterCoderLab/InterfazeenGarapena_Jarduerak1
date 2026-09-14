@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="I01_01_GorputzMasarenIndizea.MainPage">
+
+    <Grid
+    Padding="30"
+    RowDefinitions="Auto,Auto,Auto,Auto,*,Auto"
+    ColumnDefinitions="120,200,Auto"
+    RowSpacing="25"
+    ColumnSpacing="15">
+
+        <!-- Izenburua -->
+        <Label
+        Grid.Row="0"
+        Grid.ColumnSpan="3"
+        Text="GMK"
+        FontSize="30"
+        FontAttributes="Bold" />
+
+        <!-- Altuera -->
+        <Label
+        Grid.Row="1"
+        Grid.Column="0"
+        Text="Altuera"
+        VerticalOptions="Center" />
+
+        <Entry
+        x:Name="AltueraEntry"
+        Grid.Row="1"
+        Grid.Column="1"
+        Placeholder="cm"
+        Keyboard="Numeric" />
+
+        <!-- Pisua -->
+        <Label
+        Grid.Row="2"
+        Grid.Column="0"
+        Text="Pisua"
+        VerticalOptions="Center" />
+
+        <Entry
+        x:Name="PisuaEntry"
+        Grid.Row="2"
+        Grid.Column="1"
+        Placeholder="kg"
+        Keyboard="Numeric" />
+
+        <!-- GMK-ren emaitza -->
+        <Label
+        Grid.Row="3"
+        Grid.Column="0"
+        Text="GMK"
+        VerticalOptions="Center" />
+
+        <Entry
+        x:Name="GmkEntry"
+        Grid.Row="3"
+        Grid.Column="1"
+        IsReadOnly="True" />
+
+        <!-- GMK kalkulatzeko botoia -->
+        <Button
+        Grid.Row="3"
+        Grid.Column="2"
+        Text="Kalkulatu"
+        Clicked="OnKalkulatuClicked" />
+
+        <!-- Aplikaziotik irteteko botoia -->
+        <Button
+        Grid.Row="5"
+        Grid.Column="2"
+        Text="Irten"
+        Clicked="OnIrtenClicked"
+        BackgroundColor="#F3E4C8"   />
+
+        <!-- Irudia -->
+        <Image
+        Grid.Row="4"
+        Grid.Column="0"
+        Grid.ColumnSpan="2"
+        Source="dotnet_bot.png"
+        HeightRequest="220"
+        Aspect="AspectFit"
+        HorizontalOptions="Center" />
+
+    </Grid>
+
+</ContentPage>
