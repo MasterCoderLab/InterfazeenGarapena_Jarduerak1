@@ -3,11 +3,11 @@
     public partial class MainPage : ContentPage
     {
         // Ausazko zenbakiak sortzeko objektua
-        Random rnd = new Random();
+        private Random rnd = new Random();
 
         // Bi batugaiak gordetzeko aldagaiak
-        int batugaia1;
-        int batugaia2;
+        private int batugaia1;
+        private int batugaia2;
 
         public MainPage()
         {
