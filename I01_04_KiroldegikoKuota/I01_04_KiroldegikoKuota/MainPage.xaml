@@ -26,17 +26,20 @@
             <RadioButton x:Name="UmeakRadio"
                          Content="Umeak"
                          TextColor="Black"
-                         GroupName="Kategoria" />
+                         GroupName="Kategoria"
+                         CheckedChanged="Kategoria_Changed" />
 
             <RadioButton x:Name="FamiliaRadio"
                          Content="Familia"
                          TextColor="Black"
-                         GroupName="Kategoria" />
+                         GroupName="Kategoria"
+                         CheckedChanged="Kategoria_Changed" />
 
             <RadioButton x:Name="JubilatuakRadio"
                          Content="Jubilatuak"
                          TextColor="Black"
-                         GroupName="Kategoria" />
+                         GroupName="Kategoria"
+                         CheckedChanged="Kategoria_Changed" />
 
         </VerticalStackLayout>
 
@@ -53,7 +56,8 @@
 
             <HorizontalStackLayout Spacing="10">
 
-                <CheckBox x:Name="DesgaitasunaCheck" />
+                <CheckBox x:Name="DesgaitasunaCheck"
+                          CheckedChanged="Deskontua_Changed" />
 
                 <Label Text="Desgaitasuna"
                        TextColor="Black"
@@ -63,7 +67,8 @@
 
             <HorizontalStackLayout Spacing="10">
 
-                <CheckBox x:Name="FamiliaUgariaCheck" />
+                <CheckBox x:Name="FamiliaUgariaCheck"
+                          CheckedChanged="Deskontua_Changed" />
 
                 <Label Text="Familia ugaria"
                        TextColor="Black"
@@ -86,7 +91,8 @@
 
             <Picker x:Name="IraupenaPicker"
                     TextColor="Black"
-                    BackgroundColor="White">
+                    BackgroundColor="White"
+                    SelectedIndexChanged="IraupenaPicker_SelectedIndexChanged">
 
                 <Picker.Items>
                     <x:String>Urtekoa</x:String>

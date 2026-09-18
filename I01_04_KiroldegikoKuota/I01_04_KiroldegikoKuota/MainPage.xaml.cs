@@ -10,16 +10,6 @@ public partial class MainPage : ContentPage
         EguneratuPrezioa();
     }
 
-    protected override void OnAppearing()
-    {
-        base.OnAppearing();
-
-        if (Window != null)
-        {
-            Window.Title = "Kiroldegi txartela";
-        }
-    }
-
 
     // Hasierako balioak ezartzen ditu
     private void EzarriDefektuzkoBalioak()
@@ -39,7 +29,6 @@ public partial class MainPage : ContentPage
     {
         decimal hilabetekoPrezioa;
 
-
         // KATEGORIA
         if (UmeakRadio.IsChecked)
         {
@@ -51,21 +40,35 @@ public partial class MainPage : ContentPage
         }
         else
         {
-            // Jubilatuak
             hilabetekoPrezioa = 198m;
         }
 
 
         // IRAUPENA
-        decimal prezioa = IraupenaPicker.SelectedIndex switch
+        decimal prezioa = 0m;
+
+        switch (IraupenaPicker.SelectedIndex)
         {
-            0 => hilabetekoPrezioa * 10m,      // Urtekoa
-            1 => hilabetekoPrezioa,            // Hilabetekoa
-            2 => hilabetekoPrezioa * 0.60m,    // 2 astekoa
-            3 => hilabetekoPrezioa * 0.35m,    // Astebetekoa
-            4 => hilabetekoPrezioa * 0.08m,    // Egunekoa
-            _ => 0m
-        };
+            case 0:
+                prezioa = hilabetekoPrezioa * 10m;
+                break;
+
+            case 1:
+                prezioa = hilabetekoPrezioa;
+                break;
+
+            case 2:
+                prezioa = hilabetekoPrezioa * 0.60m;
+                break;
+
+            case 3:
+                prezioa = hilabetekoPrezioa * 0.35m;
+                break;
+
+            case 4:
+                prezioa = hilabetekoPrezioa * 0.08m;
+                break;
+        }
 
 
         // DESKONTUAK
@@ -73,14 +76,13 @@ public partial class MainPage : ContentPage
 
         if (DesgaitasunaCheck.IsChecked)
         {
-            deskontua += 0.50m;
+            deskontua = deskontua + 0.50m;
         }
 
         if (FamiliaUgariaCheck.IsChecked)
         {
-            deskontua += 0.25m;
+            deskontua = deskontua + 0.25m;
         }
-
 
         prezioa = prezioa * (1m - deskontua);
 
@@ -98,55 +100,54 @@ public partial class MainPage : ContentPage
 
 
     // RadioButton bat aldatzean
-    private void Kategoria_Changed(
-        object? sender,
-        CheckedChangedEventArgs e)
+    private void Kategoria_Changed(object? sender, CheckedChangedEventArgs e)
     {
         EguneratuPrezioa();
     }
 
 
     // CheckBox bat aldatzean
-    private void Deskontua_Changed(
-        object? sender,
-        CheckedChangedEventArgs e)
+    private void Deskontua_Changed(object? sender, CheckedChangedEventArgs e)
     {
         EguneratuPrezioa();
     }
 
 
     // Iraupena aldatzean
-    private void IraupenaPicker_SelectedIndexChanged(
-        object? sender,
-        EventArgs e)
+    private void IraupenaPicker_SelectedIndexChanged(object? sender, EventArgs e)
     {
         EguneratuPrezioa();
     }
 
 
-    // Kalkulatu botoia
-    private void KalkulatuButton_Clicked(
-        object? sender,
-        EventArgs e)
+    // Kalkulatu botoia sakatzean
+    private async void KalkulatuButton_Clicked(object? sender, EventArgs e)
     {
-        EguneratuPrezioa();
+        decimal prezioa = KalkulatuKuota();
+        string emaitza = $"{prezioa:F2} €";
+
+        // Prezioa bera bada, kalkulua berriro egiten dela erakusten du
+        if (PrezioaLabel.Text == emaitza)
+        {
+            PrezioaLabel.Text = "Kalkulatzen...";
+
+            await Task.Delay(300);
+        }
+
+        PrezioaLabel.Text = emaitza;
     }
 
 
-    // Garbitu botoia
-    private void GarbituButton_Clicked(
-        object? sender,
-        EventArgs e)
+    // Garbitu botoia sakatzean
+    private void GarbituButton_Clicked(object? sender, EventArgs e)
     {
         EzarriDefektuzkoBalioak();
         EguneratuPrezioa();
     }
 
 
-    // Irten botoia
-    private void IrtenButton_Clicked(
-        object? sender,
-        EventArgs e)
+    // Irten botoia sakatzean
+    private void IrtenButton_Clicked(object? sender, EventArgs e)
     {
         if (Window != null)
         {
