@@ -1,0 +1,165 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="I01_05_DeskontuakDituenFaktura.MainPage"
+    Title="Deskontuak"
+    Shell.NavBarIsVisible="False">
+
+    <Grid Padding="30"
+          RowDefinitions="*,Auto"
+          ColumnDefinitions="*,*"
+          ColumnSpacing="50"
+          RowSpacing="25">
+
+        <!-- EZKERREKO DATUAK -->
+        <Grid Grid.Row="0"
+              Grid.Column="0"
+              RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto"
+              ColumnDefinitions="Auto,*"
+              RowSpacing="15"
+              ColumnSpacing="15">
+
+            <!-- KANTITATEA -->
+            <Label Grid.Row="0"
+                   Grid.Column="0"
+                   Text="Kantitatea"
+                   VerticalOptions="Center" />
+
+            <Entry x:Name="KantitateaEntry"
+                   Grid.Row="0"
+                   Grid.Column="1"
+                   Text="0"
+                   Keyboard="Numeric"
+                   HorizontalTextAlignment="End"
+                   TextChanged="Datuak_TextChanged" />
+
+            <!-- PREZIOA -->
+            <Label Grid.Row="1"
+                   Grid.Column="0"
+                   Text="Prezioa"
+                   VerticalOptions="Center" />
+
+            <Entry x:Name="PrezioaEntry"
+                   Grid.Row="1"
+                   Grid.Column="1"
+                   Text="0"
+                   Keyboard="Numeric"
+                   HorizontalTextAlignment="End"
+                   TextChanged="Datuak_TextChanged" />
+
+            <!-- DENERA -->
+            <Label Grid.Row="2"
+                   Grid.Column="0"
+                   Text="Denera"
+                   VerticalOptions="Center" />
+
+            <Entry x:Name="DeneraEntry"
+                   Grid.Row="2"
+                   Grid.Column="1"
+                   IsReadOnly="True"
+                   BackgroundColor="#20B2AA"
+                   TextColor="Black"
+                   HorizontalTextAlignment="End" />
+
+            <!-- DESKONTUA -->
+            <Label Grid.Row="3"
+                   Grid.Column="0"
+                   Text="Deskontua (%)"
+                   VerticalOptions="Center" />
+
+            <Entry x:Name="DeskontuaEntry"
+                   Grid.Row="3"
+                   Grid.Column="1"
+                   IsReadOnly="True"
+                   HorizontalTextAlignment="End" />
+
+            <!-- BEZ -->
+            <Label Grid.Row="4"
+                   Grid.Column="0"
+                   Text="BEZ (%)"
+                   VerticalOptions="Center" />
+
+            <Entry x:Name="BezEntry"
+                   Grid.Row="4"
+                   Grid.Column="1"
+                   Text="21"
+                   Keyboard="Numeric"
+                   HorizontalTextAlignment="End"
+                   TextChanged="Datuak_TextChanged" />
+
+            <!-- ORDAINTZEKOA -->
+            <Label Grid.Row="5"
+                   Grid.Column="0"
+                   Text="Ordaintzekoa denera"
+                   VerticalOptions="Center" />
+
+            <Entry x:Name="OrdaintzekoaEntry"
+                   Grid.Row="5"
+                   Grid.Column="1"
+                   IsReadOnly="True"
+                   BackgroundColor="#20B2AA"
+                   TextColor="Black"
+                   HorizontalTextAlignment="End" />
+
+        </Grid>
+
+        <!-- ESKUINEKO EMAITZAK -->
+        <Grid Grid.Row="0"
+              Grid.Column="1"
+              RowDefinitions="Auto,Auto"
+              ColumnDefinitions="Auto,*"
+              RowSpacing="15"
+              ColumnSpacing="15"
+              VerticalOptions="Center">
+
+            <Label Grid.Row="0"
+                   Grid.Column="0"
+                   Text="Deskontua denera"
+                   VerticalOptions="Center" />
+
+            <Entry x:Name="DeskontuaDeneraEntry"
+                   Grid.Row="0"
+                   Grid.Column="1"
+                   IsReadOnly="True"
+                   BackgroundColor="#20B2AA"
+                   TextColor="Black"
+                   HorizontalTextAlignment="End" />
+
+            <Label Grid.Row="1"
+                   Grid.Column="0"
+                   Text="BEZ denera"
+                   VerticalOptions="Center" />
+
+            <Entry x:Name="BezDeneraEntry"
+                   Grid.Row="1"
+                   Grid.Column="1"
+                   IsReadOnly="True"
+                   BackgroundColor="#20B2AA"
+                   TextColor="Black"
+                   HorizontalTextAlignment="End" />
+
+        </Grid>
+
+        <!-- BOTOIAK -->
+        <HorizontalStackLayout Grid.Row="1"
+                               Grid.ColumnSpan="2"
+                               HorizontalOptions="Center"
+                               Spacing="15">
+
+            <Button Text="Kalkulatu"
+                    BackgroundColor="Green"
+                    TextColor="White"
+                    Clicked="KalkulatuButton_Clicked" />
+
+            <Button Text="Irten"
+                    BackgroundColor="Black"
+                    TextColor="White"
+                    Clicked="IrtenButton_Clicked" />
+
+        </HorizontalStackLayout>
+
+    </Grid>
+
+</ContentPage>
