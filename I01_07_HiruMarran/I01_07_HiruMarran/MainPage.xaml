@@ -1,0 +1,166 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="I01_07_HiruMarran.MainPage"
+    Title="Hiru marran"
+    BackgroundColor="#F8E8D0"
+    Shell.NavBarIsVisible="False">
+
+    <Grid Padding="30"
+          RowDefinitions="Auto,*,Auto"
+          ColumnDefinitions="*,Auto"
+          RowSpacing="25"
+          ColumnSpacing="40">
+
+        <!-- TXANDA -->
+        <HorizontalStackLayout Grid.Row="0"
+                               Grid.ColumnSpan="2"
+                               HorizontalOptions="Center"
+                               Spacing="10">
+
+            <Label x:Name="TxandaIkurraLabel"
+                   Text="❌"
+                   FontSize="30" />
+
+            <Label x:Name="TxandaLabel"
+                   Text="jokalariaren txanda"
+                   FontSize="28"
+                   TextColor="Black"
+                   VerticalOptions="Center" />
+
+        </HorizontalStackLayout>
+
+
+        <!-- TAULA -->
+        <Grid Grid.Row="1"
+              Grid.Column="0"
+              RowDefinitions="100,100,100"
+              ColumnDefinitions="100,100,100"
+              RowSpacing="5"
+              ColumnSpacing="5"
+              HorizontalOptions="Center"
+              VerticalOptions="Center">
+
+            <ImageButton x:Name="Casilla00"
+                         Grid.Row="0"
+                         Grid.Column="0"
+                         CommandParameter="0,0"
+                         BackgroundColor="#E5C99A"
+                         Clicked="Casilla_Clicked" />
+
+            <ImageButton x:Name="Casilla01"
+                         Grid.Row="0"
+                         Grid.Column="1"
+                         CommandParameter="0,1"
+                         BackgroundColor="#E5C99A"
+                         Clicked="Casilla_Clicked" />
+
+            <ImageButton x:Name="Casilla02"
+                         Grid.Row="0"
+                         Grid.Column="2"
+                         CommandParameter="0,2"
+                         BackgroundColor="#E5C99A"
+                         Clicked="Casilla_Clicked" />
+
+
+            <ImageButton x:Name="Casilla10"
+                         Grid.Row="1"
+                         Grid.Column="0"
+                         CommandParameter="1,0"
+                         BackgroundColor="#E5C99A"
+                         Clicked="Casilla_Clicked" />
+
+            <ImageButton x:Name="Casilla11"
+                         Grid.Row="1"
+                         Grid.Column="1"
+                         CommandParameter="1,1"
+                         BackgroundColor="#E5C99A"
+                         Clicked="Casilla_Clicked" />
+
+            <ImageButton x:Name="Casilla12"
+                         Grid.Row="1"
+                         Grid.Column="2"
+                         CommandParameter="1,2"
+                         BackgroundColor="#E5C99A"
+                         Clicked="Casilla_Clicked" />
+
+
+            <ImageButton x:Name="Casilla20"
+                         Grid.Row="2"
+                         Grid.Column="0"
+                         CommandParameter="2,0"
+                         BackgroundColor="#E5C99A"
+                         Clicked="Casilla_Clicked" />
+
+            <ImageButton x:Name="Casilla21"
+                         Grid.Row="2"
+                         Grid.Column="1"
+                         CommandParameter="2,1"
+                         BackgroundColor="#E5C99A"
+                         Clicked="Casilla_Clicked" />
+
+            <ImageButton x:Name="Casilla22"
+                         Grid.Row="2"
+                         Grid.Column="2"
+                         CommandParameter="2,2"
+                         BackgroundColor="#E5C99A"
+                         Clicked="Casilla_Clicked" />
+
+        </Grid>
+
+
+        <!-- EMAITZAK -->
+        <VerticalStackLayout Grid.Row="1"
+                             Grid.Column="1"
+                             VerticalOptions="Center"
+                             Spacing="10">
+
+            <Label Text="Emaitzak"
+                   FontSize="20"
+                   TextColor="Black" />
+
+            <HorizontalStackLayout Spacing="10">
+                <Label Text="❌"
+                       FontSize="20" />
+
+                <Label Text="irabazitako partidak:"
+                       TextColor="Black"
+                       VerticalOptions="Center" />
+
+                <Label x:Name="XIrabaziLabel"
+                       Text="0"
+                       FontSize="20"
+                       TextColor="Black" />
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout Spacing="10">
+                <Label Text="⭕"
+                       FontSize="20" />
+
+                <Label Text="irabazitako partidak:"
+                       TextColor="Black"
+                       VerticalOptions="Center" />
+
+                <Label x:Name="OIrabaziLabel"
+                       Text="0"
+                       FontSize="20"
+                       TextColor="Black" />
+            </HorizontalStackLayout>
+
+        </VerticalStackLayout>
+
+
+        <!-- BERRIRO HASI -->
+        <Button Grid.Row="2"
+                Grid.ColumnSpan="2"
+                Text="↻  Berriro hasi"
+                HorizontalOptions="Center"
+                BackgroundColor="#A8A88A"
+                TextColor="White"
+                Clicked="BerriroHasi_Clicked" />
+
+    </Grid>
+
+</ContentPage>
