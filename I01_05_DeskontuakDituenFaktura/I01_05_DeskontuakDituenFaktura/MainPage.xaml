@@ -5,6 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="I01_05_DeskontuakDituenFaktura.MainPage"
     Title="Deskontuak"
+    BackgroundColor="White"
     Shell.NavBarIsVisible="False">
 
     <Grid Padding="30"
@@ -25,6 +26,7 @@
             <Label Grid.Row="0"
                    Grid.Column="0"
                    Text="Kantitatea"
+                   TextColor="Black"
                    VerticalOptions="Center" />
 
             <Entry x:Name="KantitateaEntry"
@@ -32,6 +34,8 @@
                    Grid.Column="1"
                    Text="0"
                    Keyboard="Numeric"
+                   BackgroundColor="White"
+                   TextColor="Black"
                    HorizontalTextAlignment="End"
                    TextChanged="Datuak_TextChanged" />
 
@@ -39,6 +43,7 @@
             <Label Grid.Row="1"
                    Grid.Column="0"
                    Text="Prezioa"
+                   TextColor="Black"
                    VerticalOptions="Center" />
 
             <Entry x:Name="PrezioaEntry"
@@ -46,6 +51,8 @@
                    Grid.Column="1"
                    Text="0"
                    Keyboard="Numeric"
+                   BackgroundColor="White"
+                   TextColor="Black"
                    HorizontalTextAlignment="End"
                    TextChanged="Datuak_TextChanged" />
 
@@ -53,6 +60,7 @@
             <Label Grid.Row="2"
                    Grid.Column="0"
                    Text="Denera"
+                   TextColor="Black"
                    VerticalOptions="Center" />
 
             <Entry x:Name="DeneraEntry"
@@ -67,18 +75,22 @@
             <Label Grid.Row="3"
                    Grid.Column="0"
                    Text="Deskontua (%)"
+                   TextColor="Black"
                    VerticalOptions="Center" />
 
             <Entry x:Name="DeskontuaEntry"
                    Grid.Row="3"
                    Grid.Column="1"
                    IsReadOnly="True"
+                   BackgroundColor="White"
+                   TextColor="Black"
                    HorizontalTextAlignment="End" />
 
             <!-- BEZ -->
             <Label Grid.Row="4"
                    Grid.Column="0"
                    Text="BEZ (%)"
+                   TextColor="Black"
                    VerticalOptions="Center" />
 
             <Entry x:Name="BezEntry"
@@ -86,6 +98,8 @@
                    Grid.Column="1"
                    Text="21"
                    Keyboard="Numeric"
+                   BackgroundColor="White"
+                   TextColor="Black"
                    HorizontalTextAlignment="End"
                    TextChanged="Datuak_TextChanged" />
 
@@ -93,6 +107,7 @@
             <Label Grid.Row="5"
                    Grid.Column="0"
                    Text="Ordaintzekoa denera"
+                   TextColor="Black"
                    VerticalOptions="Center" />
 
             <Entry x:Name="OrdaintzekoaEntry"
@@ -117,6 +132,7 @@
             <Label Grid.Row="0"
                    Grid.Column="0"
                    Text="Deskontua denera"
+                   TextColor="Black"
                    VerticalOptions="Center" />
 
             <Entry x:Name="DeskontuaDeneraEntry"
@@ -130,6 +146,7 @@
             <Label Grid.Row="1"
                    Grid.Column="0"
                    Text="BEZ denera"
+                   TextColor="Black"
                    VerticalOptions="Center" />
 
             <Entry x:Name="BezDeneraEntry"
@@ -148,7 +165,8 @@
                                HorizontalOptions="Center"
                                Spacing="15">
 
-            <Button Text="Kalkulatu"
+            <Button x:Name="KalkulatuButton"
+                    Text="Kalkulatu"
                     BackgroundColor="Green"
                     TextColor="White"
                     Clicked="KalkulatuButton_Clicked" />

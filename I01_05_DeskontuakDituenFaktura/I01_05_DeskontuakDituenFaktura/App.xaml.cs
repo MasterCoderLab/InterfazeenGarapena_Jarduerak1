@@ -11,7 +11,11 @@ namespace I01_05_DeskontuakDituenFaktura
 
         protected override Window CreateWindow(IActivationState? activationState)
         {
-            return new Window(new AppShell());
+            Window window = new Window(new AppShell());
+
+            window.Title = "Deskontuak";
+
+            return window;
         }
     }
 }

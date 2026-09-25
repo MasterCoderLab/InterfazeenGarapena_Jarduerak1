@@ -108,11 +108,19 @@ public partial class MainPage : ContentPage
 
 
     // Kalkulatu botoia
-    private void KalkulatuButton_Clicked(
+    private async void KalkulatuButton_Clicked(
         object? sender,
         EventArgs e)
     {
+        KalkulatuButton.Text = "Kalkulatzen...";
+        KalkulatuButton.IsEnabled = false;
+
+        await Task.Delay(400);
+
         KalkulatuFaktura();
+
+        KalkulatuButton.Text = "Kalkulatu";
+        KalkulatuButton.IsEnabled = true;
     }
 
 

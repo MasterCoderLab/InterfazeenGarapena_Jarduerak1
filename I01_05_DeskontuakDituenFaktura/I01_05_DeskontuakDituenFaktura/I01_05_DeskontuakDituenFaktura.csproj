@@ -28,7 +28,7 @@
 		<MauiXamlInflator>SourceGen</MauiXamlInflator>
 
 		<!-- Display name -->
-		<ApplicationTitle>I01_05_DeskontuakDituenFaktura</ApplicationTitle>
+		<ApplicationTitle>Deskontuak</ApplicationTitle>
 
 		<!-- App Identifier -->
 		<ApplicationId>com.companyname.i01_05_deskontuakdituenfaktura</ApplicationId>
