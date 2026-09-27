@@ -30,7 +30,8 @@ public partial class MainPage : ContentPage
     /// <summary>
     /// Taulako laukiren bat sakatzen denean jokaldia kudeatzen du.
     /// Laukia hutsik dagoen egiaztatzen du, jokalariaren ikurra jartzen du,
-    /// irabazlerik dagoen begiratzen du eta hurrengo txanda prestatzen du.
+    /// irabazlerik edo berdinketarik dagoen begiratzen du
+    /// eta hurrengo txanda prestatzen du.
     /// </summary>
     /// <param name="sender">Sakatu den ImageButton objektua.</param>
     /// <param name="e">Klik gertaeraren datuak.</param>
@@ -103,7 +104,34 @@ public partial class MainPage : ContentPage
             }
 
 
-            // Irabazlerik ez badago, hurrengo jokalariaren txanda prestatzen da.
+            // Irabazlerik ez badago eta taula beteta badago, berdinketa dago.
+            if (TaulaBeteta())
+            {
+                bool berriro = await DisplayAlert(
+                    "Partida amaitu da",
+                    "Berdinketa izan da.\n\nBeste partidarik jolastu nahi?",
+                    "Bai",
+                    "Ez");
+
+
+                if (berriro)
+                {
+                    PartidaBerria();
+                }
+                else
+                {
+                    if (Window != null)
+                    {
+                        Application.Current?.CloseWindow(Window);
+                    }
+                }
+
+                return;
+            }
+
+
+            // Irabazlerik edo berdinketarik ez badago,
+            // hurrengo jokalariaren txanda prestatzen da.
             if (jokalaria == "X")
             {
                 jokalaria = "O";
@@ -172,6 +200,31 @@ public partial class MainPage : ContentPage
 
 
         return false;
+    }
+
+
+    /// <summary>
+    /// Taulako lauki guztiak beteta dauden egiaztatzen du.
+    /// Metodo hau berdinketa gertatu den jakiteko erabiltzen da.
+    /// </summary>
+    /// <returns>
+    /// true taulako lauki guztiak beteta badaude;
+    /// bestela false.
+    /// </returns>
+    private bool TaulaBeteta()
+    {
+        for (int fila = 0; fila < 3; fila++)
+        {
+            for (int columna = 0; columna < 3; columna++)
+            {
+                if (string.IsNullOrEmpty(taula[fila, columna]))
+                {
+                    return false;
+                }
+            }
+        }
+
+        return true;
     }
 
 
