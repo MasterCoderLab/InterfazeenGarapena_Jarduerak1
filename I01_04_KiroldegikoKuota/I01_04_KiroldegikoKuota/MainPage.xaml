@@ -1,98 +1,122 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="I01_04_KiroldegikoKuota.MainPage"
-             Title="Kiroldegi txartela"
-             Shell.NavBarIsVisible="False"
-             BackgroundColor="LightGray">
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="I01_04_KiroldegikoKuota.MainPage"
+    Title="Kiroldegi txartela"
+    Shell.NavBarIsVisible="False"
+    BackgroundColor="LightGray">
 
-    <Grid Padding="30"
-          RowDefinitions="Auto,*,Auto"
-          ColumnDefinitions="*,*,*"
-          ColumnSpacing="40"
-          RowSpacing="25">
+    <!--
+        Grid nagusiak interfazea hiru zutabetan antolatzen du:
+        kategoria, deskontu motak eta iraupena.
+        Beheko errenkadetan prezioa eta botoiak erakusten dira.
+    -->
+    <Grid
+        Padding="30"
+        RowDefinitions="Auto,*,Auto"
+        ColumnDefinitions="*,*,*"
+        ColumnSpacing="40"
+        RowSpacing="25">
 
-        <!-- KATEGORIA -->
-        <VerticalStackLayout Grid.Row="0"
-                             Grid.Column="0"
-                             Spacing="15">
+        <!-- Erabiltzailearen kategoria aukeratzeko atala -->
+        <VerticalStackLayout
+            Grid.Row="0"
+            Grid.Column="0"
+            Spacing="15">
 
-            <Label Text="Kategoria"
-                   FontSize="22"
-                   FontAttributes="Bold"
-                   TextColor="Black" />
+            <Label
+                Text="Kategoria"
+                FontSize="22"
+                FontAttributes="Bold"
+                TextColor="Black" />
 
-            <RadioButton x:Name="UmeakRadio"
-                         Content="Umeak"
-                         TextColor="Black"
-                         GroupName="Kategoria"
-                         CheckedChanged="Kategoria_Changed" />
+            <!-- Umeen kategoria -->
+            <RadioButton
+                x:Name="UmeakRadio"
+                Content="Umeak"
+                TextColor="Black"
+                GroupName="Kategoria"
+                CheckedChanged="Kategoria_Changed" />
 
-            <RadioButton x:Name="FamiliaRadio"
-                         Content="Familia"
-                         TextColor="Black"
-                         GroupName="Kategoria"
-                         CheckedChanged="Kategoria_Changed" />
+            <!-- Familien kategoria -->
+            <RadioButton
+                x:Name="FamiliaRadio"
+                Content="Familia"
+                TextColor="Black"
+                GroupName="Kategoria"
+                CheckedChanged="Kategoria_Changed" />
 
-            <RadioButton x:Name="JubilatuakRadio"
-                         Content="Jubilatuak"
-                         TextColor="Black"
-                         GroupName="Kategoria"
-                         CheckedChanged="Kategoria_Changed" />
-
-        </VerticalStackLayout>
-
-
-        <!-- MOTA -->
-        <VerticalStackLayout Grid.Row="0"
-                             Grid.Column="1"
-                             Spacing="15">
-
-            <Label Text="Mota"
-                   FontSize="22"
-                   FontAttributes="Bold"
-                   TextColor="Black" />
-
-            <HorizontalStackLayout Spacing="10">
-
-                <CheckBox x:Name="DesgaitasunaCheck"
-                          CheckedChanged="Deskontua_Changed" />
-
-                <Label Text="Desgaitasuna"
-                       TextColor="Black"
-                       VerticalOptions="Center" />
-
-            </HorizontalStackLayout>
-
-            <HorizontalStackLayout Spacing="10">
-
-                <CheckBox x:Name="FamiliaUgariaCheck"
-                          CheckedChanged="Deskontua_Changed" />
-
-                <Label Text="Familia ugaria"
-                       TextColor="Black"
-                       VerticalOptions="Center" />
-
-            </HorizontalStackLayout>
+            <!-- Jubilatuen kategoria -->
+            <RadioButton
+                x:Name="JubilatuakRadio"
+                Content="Jubilatuak"
+                TextColor="Black"
+                GroupName="Kategoria"
+                CheckedChanged="Kategoria_Changed" />
 
         </VerticalStackLayout>
 
+        <!-- Deskontu motak aukeratzeko atala -->
+        <VerticalStackLayout
+            Grid.Row="0"
+            Grid.Column="1"
+            Spacing="15">
 
-        <!-- IRAUPENA -->
-        <VerticalStackLayout Grid.Row="0"
-                             Grid.Column="2"
-                             Spacing="15">
+            <Label
+                Text="Mota"
+                FontSize="22"
+                FontAttributes="Bold"
+                TextColor="Black" />
 
-            <Label Text="Iraupena"
-                   FontSize="22"
-                   FontAttributes="Bold"
-                   TextColor="Black" />
+            <!-- Desgaitasunaren araberako deskontua -->
+            <HorizontalStackLayout Spacing="10">
 
-            <Picker x:Name="IraupenaPicker"
+                <CheckBox
+                    x:Name="DesgaitasunaCheck"
+                    CheckedChanged="Deskontua_Changed" />
+
+                <Label
+                    Text="Desgaitasuna"
                     TextColor="Black"
-                    BackgroundColor="White"
-                    SelectedIndexChanged="IraupenaPicker_SelectedIndexChanged">
+                    VerticalOptions="Center" />
+
+            </HorizontalStackLayout>
+
+            <!-- Familia ugariaren araberako deskontua -->
+            <HorizontalStackLayout Spacing="10">
+
+                <CheckBox
+                    x:Name="FamiliaUgariaCheck"
+                    CheckedChanged="Deskontua_Changed" />
+
+                <Label
+                    Text="Familia ugaria"
+                    TextColor="Black"
+                    VerticalOptions="Center" />
+
+            </HorizontalStackLayout>
+
+        </VerticalStackLayout>
+
+        <!-- Kuotaren iraupena aukeratzeko atala -->
+        <VerticalStackLayout
+            Grid.Row="0"
+            Grid.Column="2"
+            Spacing="15">
+
+            <Label
+                Text="Iraupena"
+                FontSize="22"
+                FontAttributes="Bold"
+                TextColor="Black" />
+
+            <Picker
+                x:Name="IraupenaPicker"
+                TextColor="Black"
+                BackgroundColor="White"
+                SelectedIndexChanged="IraupenaPicker_SelectedIndexChanged">
 
                 <Picker.Items>
                     <x:String>Urtekoa</x:String>
@@ -106,49 +130,57 @@
 
         </VerticalStackLayout>
 
+        <!-- Kalkulatutako kuotaren prezioa erakusteko atala -->
+        <VerticalStackLayout
+            Grid.Row="1"
+            Grid.ColumnSpan="3"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
+            Spacing="10">
 
-        <!-- PREZIOA -->
-        <VerticalStackLayout Grid.Row="1"
-                             Grid.ColumnSpan="3"
-                             HorizontalOptions="Center"
-                             VerticalOptions="Center"
-                             Spacing="10">
+            <Label
+                Text="Kuota"
+                FontSize="18"
+                TextColor="Black"
+                HorizontalTextAlignment="Center" />
 
-            <Label Text="Kuota"
-                   FontSize="18"
-                   TextColor="Black"
-                   HorizontalTextAlignment="Center" />
-
-            <Label x:Name="PrezioaLabel"
-                   Text="198,00 €"
-                   FontSize="36"
-                   FontAttributes="Bold"
-                   TextColor="Black"
-                   HorizontalTextAlignment="Center" />
+            <Label
+                x:Name="PrezioaLabel"
+                Text="198,00 €"
+                FontSize="36"
+                FontAttributes="Bold"
+                TextColor="Black"
+                HorizontalTextAlignment="Center" />
 
         </VerticalStackLayout>
 
+        <!-- Kalkulua, garbiketa eta irteera kudeatzeko botoiak -->
+        <HorizontalStackLayout
+            Grid.Row="2"
+            Grid.ColumnSpan="3"
+            HorizontalOptions="Start"
+            Spacing="15">
 
-        <!-- BOTOIAK -->
-        <HorizontalStackLayout Grid.Row="2"
-                               Grid.ColumnSpan="3"
-                               HorizontalOptions="Start"
-                               Spacing="15">
+            <!-- Kuota berriz kalkulatzeko botoia -->
+            <Button
+                Text="Kalkulatu"
+                BackgroundColor="Green"
+                TextColor="White"
+                Clicked="KalkulatuButton_Clicked" />
 
-            <Button Text="Kalkulatu"
-                    BackgroundColor="Green"
-                    TextColor="White"
-                    Clicked="KalkulatuButton_Clicked" />
+            <!-- Interfazea hasierako egoerara itzultzeko botoia -->
+            <Button
+                Text="Garbitu"
+                BackgroundColor="DarkRed"
+                TextColor="White"
+                Clicked="GarbituButton_Clicked" />
 
-            <Button Text="Garbitu"
-                    BackgroundColor="DarkRed"
-                    TextColor="White"
-                    Clicked="GarbituButton_Clicked" />
-
-            <Button Text="Irten"
-                    BackgroundColor="Black"
-                    TextColor="White"
-                    Clicked="IrtenButton_Clicked" />
+            <!-- Aplikaziotik irteteko botoia -->
+            <Button
+                Text="Irten"
+                BackgroundColor="Black"
+                TextColor="White"
+                Clicked="IrtenButton_Clicked" />
 
         </HorizontalStackLayout>
 

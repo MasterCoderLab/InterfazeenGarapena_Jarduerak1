@@ -1,12 +1,17 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
 
-<ResourceDictionary 
+<ResourceDictionary
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
 
+    <!--
+        Aplikazioko kontrolen estilo globalak definitzen dira.
+        Estilo hauek App.xaml fitxategitik kargatzen dira eta
+        aplikazioaren orri guztietan erabil daitezke.
+    -->
 
-    <!-- BOTONES -->
 
+    <!-- Botoi guztien oinarrizko estiloa -->
     <Style TargetType="Button">
 
         <Setter Property="TextColor"
@@ -24,7 +29,7 @@
         <Setter Property="BorderWidth"
                 Value="0" />
 
-        <!-- Ertz zuzenak -->
+        <!-- Botoiek ertz zuzenak izango dituzte. -->
         <Setter Property="CornerRadius"
                 Value="0" />
 
@@ -37,14 +42,19 @@
         <Setter Property="MinimumWidthRequest"
                 Value="44" />
 
+        <!--
+            Botoiaren egoeraren arabera erabiliko den itxura definitzen da.
+        -->
         <Setter Property="VisualStateManager.VisualStateGroups">
 
             <VisualStateGroupList>
 
                 <VisualStateGroup x:Name="CommonStates">
 
+                    <!-- Botoiaren egoera normala -->
                     <VisualState x:Name="Normal" />
 
+                    <!-- Botoia desgaituta dagoenean erabiltzen den estiloa -->
                     <VisualState x:Name="Disabled">
 
                         <VisualState.Setters>
@@ -59,6 +69,7 @@
 
                     </VisualState>
 
+                    <!-- Saguaren erakuslea botoiaren gainean dagoenean -->
                     <VisualState x:Name="PointerOver" />
 
                 </VisualStateGroup>
@@ -70,8 +81,7 @@
     </Style>
 
 
-    <!-- ENTRY -->
-
+    <!-- Testua sartzeko Entry kontrolen estilo globala -->
     <Style TargetType="Entry">
 
         <Setter Property="TextColor"
@@ -98,8 +108,7 @@
     </Style>
 
 
-    <!-- LABEL OROKORRA -->
-
+    <!-- Label kontrol guztien oinarrizko estiloa -->
     <Style TargetType="Label">
 
         <Setter Property="TextColor"
@@ -117,8 +126,7 @@
     </Style>
 
 
-    <!-- IZENBURU NAGUSIA -->
-
+    <!-- Orrietako izenburu nagusietarako estiloa -->
     <Style x:Key="IzenburuaStyle"
            TargetType="Label">
 
@@ -134,8 +142,7 @@
     </Style>
 
 
-    <!-- ATALETAKO IZENBURUAK -->
-
+    <!-- Interfazeko atal desberdinen izenburuetarako estiloa -->
     <Style x:Key="AtalaStyle"
            TargetType="Label">
 
@@ -151,8 +158,7 @@
     </Style>
 
 
-    <!-- IKASLEEN TESTUA -->
-
+    <!-- Ikasleen izenak zerrendetan erakusteko estiloa -->
     <Style x:Key="IkasleTestuaStyle"
            TargetType="Label">
 
@@ -168,8 +174,7 @@
     </Style>
 
 
-    <!-- LISTAKO IKASLE ELEMENTUA -->
-
+    <!-- Ikasleen eta ordezkarien zerrendako elementuen estiloa -->
     <Style x:Key="IkasleElementuaStyle"
            TargetType="Border">
 
@@ -185,12 +190,16 @@
         <Setter Property="Padding"
                 Value="10" />
 
+        <!--
+            Zerrendako elementuaren egoeraren arabera atzeko kolorea aldatzen da.
+        -->
         <Setter Property="VisualStateManager.VisualStateGroups">
 
             <VisualStateGroupList>
 
                 <VisualStateGroup x:Name="CommonStates">
 
+                    <!-- Elementua hautatu gabe dagoenean -->
                     <VisualState x:Name="Normal">
 
                         <VisualState.Setters>
@@ -202,7 +211,7 @@
 
                     </VisualState>
 
-
+                    <!-- Elementua hautatuta dagoenean -->
                     <VisualState x:Name="Selected">
 
                         <VisualState.Setters>
@@ -223,8 +232,7 @@
     </Style>
 
 
-    <!-- BORDER -->
-
+    <!-- Border kontrol guztien oinarrizko estiloa -->
     <Style TargetType="Border">
 
         <Setter Property="Stroke"
@@ -239,8 +247,7 @@
     </Style>
 
 
-    <!-- IMAGE BUTTON -->
-
+    <!-- Irudia duen botoi motaren estilo globala -->
     <Style TargetType="ImageButton">
 
         <Setter Property="Opacity"
@@ -261,14 +268,17 @@
         <Setter Property="MinimumWidthRequest"
                 Value="44" />
 
+        <!-- ImageButton kontrolaren egoera bisualak definitzen dira. -->
         <Setter Property="VisualStateManager.VisualStateGroups">
 
             <VisualStateGroupList>
 
                 <VisualStateGroup x:Name="CommonStates">
 
+                    <!-- Egoera normala -->
                     <VisualState x:Name="Normal" />
 
+                    <!-- Kontrola desgaituta dagoenean gardentasuna handitzen da -->
                     <VisualState x:Name="Disabled">
 
                         <VisualState.Setters>
@@ -280,6 +290,7 @@
 
                     </VisualState>
 
+                    <!-- Saguaren erakuslea kontrolaren gainean dagoenean -->
                     <VisualState x:Name="PointerOver" />
 
                 </VisualStateGroup>
@@ -291,8 +302,7 @@
     </Style>
 
 
-    <!-- CHECKBOX -->
-
+    <!-- CheckBox kontrol guztien estilo globala -->
     <Style TargetType="CheckBox">
 
         <Setter Property="Color"
@@ -307,8 +317,7 @@
     </Style>
 
 
-    <!-- PICKER -->
-
+    <!-- Picker kontrol guztien estilo globala -->
     <Style TargetType="Picker">
 
         <Setter Property="TextColor"
@@ -335,8 +344,7 @@
     </Style>
 
 
-    <!-- RADIOBUTTON -->
-
+    <!-- RadioButton kontrol guztien estilo globala -->
     <Style TargetType="RadioButton">
 
         <Setter Property="BackgroundColor"
@@ -360,8 +368,7 @@
     </Style>
 
 
-    <!-- SWITCH -->
-
+    <!-- Switch kontrol guztien estilo globala -->
     <Style TargetType="Switch">
 
         <Setter Property="OnColor"
@@ -373,8 +380,10 @@
     </Style>
 
 
-    <!-- PAGE -->
-
+    <!--
+        Page motako orri guztien estilo globala.
+        Eratorritako orri motetan ere aplikatzen da.
+    -->
     <Style TargetType="Page"
            ApplyToDerivedTypes="True">
 
@@ -387,8 +396,10 @@
     </Style>
 
 
-    <!-- SHELL -->
-
+    <!--
+        Shell kontrolaren estilo globala.
+        Nabigazio-barraren eta fitxa-barraren kolore nagusiak definitzen ditu.
+    -->
     <Style TargetType="Shell"
            ApplyToDerivedTypes="True">
 
@@ -425,8 +436,7 @@
     </Style>
 
 
-    <!-- NAVIGATION PAGE -->
-
+    <!-- NavigationPage kontrolaren estilo globala -->
     <Style TargetType="NavigationPage">
 
         <Setter Property="BarBackgroundColor"
@@ -441,8 +451,7 @@
     </Style>
 
 
-    <!-- TABBED PAGE -->
-
+    <!-- TabbedPage kontrolaren estilo globala -->
     <Style TargetType="TabbedPage">
 
         <Setter Property="BarBackgroundColor"

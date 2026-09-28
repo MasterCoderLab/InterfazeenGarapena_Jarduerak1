@@ -6,64 +6,91 @@
     x:Class="I01_06_OrdezkariaHautatzea.MainPage"
     Title="Ordezkaria hautatzea">
 
-    <Grid Padding="25"
-          RowDefinitions="Auto,*"
-          RowSpacing="25">
+    <!--
+        Grid nagusiak interfazea bi atal nagusitan banatzen du:
+        goiko aldean ikasle berria gehitzeko eremua,
+        eta beheko aldean ikasleen eta ordezkarien zerrendak.
+    -->
+    <Grid
+        Padding="25"
+        RowDefinitions="Auto,*"
+        RowSpacing="25">
 
-        <!-- IKASLE BERRIA -->
-        <Grid Grid.Row="0"
-              ColumnDefinitions="Auto,*,*,Auto"
-              ColumnSpacing="10">
+        <!-- Ikasle berri bat gehitzeko atala -->
+        <Grid
+            Grid.Row="0"
+            ColumnDefinitions="Auto,*,*,Auto"
+            ColumnSpacing="10">
 
-            <Label Grid.Column="0"
-                   Text="Ikasle berria"
-                   Style="{StaticResource AtalaStyle}"
-                   VerticalOptions="Center" />
+            <!-- Atalaren izenburua -->
+            <Label
+                Grid.Column="0"
+                Text="Ikasle berria"
+                Style="{StaticResource AtalaStyle}"
+                VerticalOptions="Center" />
 
-            <Entry x:Name="IzenaEntry"
-                   Grid.Column="1"
-                   Placeholder="Izena" />
+            <!-- Ikaslearen izena sartzeko eremua -->
+            <Entry
+                x:Name="IzenaEntry"
+                Grid.Column="1"
+                Placeholder="Izena" />
 
-            <Entry x:Name="AbizenaEntry"
-                   Grid.Column="2"
-                   Placeholder="Abizena" />
+            <!-- Ikaslearen abizena sartzeko eremua -->
+            <Entry
+                x:Name="AbizenaEntry"
+                Grid.Column="2"
+                Placeholder="Abizena" />
 
-            <Button x:Name="GehituButton"
-                    Grid.Column="3"
-                    Text="Gehitu"
-                    Clicked="GehituButton_Clicked" />
+            <!-- Ikaslea zerrendara gehitzeko botoia -->
+            <Button
+                x:Name="GehituButton"
+                Grid.Column="3"
+                Text="Gehitu"
+                Clicked="GehituButton_Clicked" />
 
         </Grid>
 
+        <!-- Ikasleen eta ordezkarien zerrendak -->
+        <Grid
+            Grid.Row="1"
+            ColumnDefinitions="*,*"
+            ColumnSpacing="30">
 
-        <!-- BI LISTAK -->
-        <Grid Grid.Row="1"
-              ColumnDefinitions="*,*"
-              ColumnSpacing="30">
+            <!-- Ikasleen zerrendaren atala -->
+            <Grid
+                Grid.Column="0"
+                RowDefinitions="Auto,*,Auto"
+                RowSpacing="15">
 
-            <!-- IKASLEAK -->
-            <Grid Grid.Column="0"
-                  RowDefinitions="Auto,*,Auto"
-                  RowSpacing="15">
+                <!-- Ikasleen atalaren izenburua -->
+                <Label
+                    Grid.Row="0"
+                    Text="Ikasleak"
+                    Style="{StaticResource IzenburuaStyle}" />
 
-                <Label Grid.Row="0"
-                       Text="Ikasleak"
-                       Style="{StaticResource IzenburuaStyle}" />
-
-                <CollectionView x:Name="IkasleakCollection"
-                                Grid.Row="1"
-                                SelectionMode="Single"
-                                SelectionChanged="IkasleakCollection_SelectionChanged">
+                <!--
+                    Ikasle guztiak erakusten dituen CollectionView kontrola.
+                    Elementu bakoitza banaka hauta daiteke.
+                -->
+                <CollectionView
+                    x:Name="IkasleakCollection"
+                    Grid.Row="1"
+                    SelectionMode="Single"
+                    SelectionChanged="IkasleakCollection_SelectionChanged">
 
                     <CollectionView.ItemTemplate>
 
+                        <!-- Ikasle bakoitzaren itxura definitzen duen txantiloia -->
                         <DataTemplate>
 
-                            <Border Style="{StaticResource IkasleElementuaStyle}"
-                                    Margin="0,2">
+                            <Border
+                                Style="{StaticResource IkasleElementuaStyle}"
+                                Margin="0,2">
 
-                                <Label Text="{Binding ErakustekoIzena}"
-                                       Style="{StaticResource IkasleTestuaStyle}" />
+                                <!-- Ikaslearen izen osoa erakusten da -->
+                                <Label
+                                    Text="{Binding ErakustekoIzena}"
+                                    Style="{StaticResource IkasleTestuaStyle}" />
 
                             </Border>
 
@@ -73,61 +100,79 @@
 
                 </CollectionView>
 
+                <!-- Ikasleen zerrenda kudeatzeko botoiak -->
+                <Grid
+                    Grid.Row="2"
+                    ColumnDefinitions="*,*,*"
+                    ColumnSpacing="10">
 
-                <!-- IKASLEEN BOTOIAK -->
-                <Grid Grid.Row="2"
-                      ColumnDefinitions="*,*,*"
-                      ColumnSpacing="10">
+                    <!-- Ikasle bat ausaz aukeratzeko botoia -->
+                    <Button
+                        x:Name="AusazButton"
+                        Grid.Column="0"
+                        Text="Ausaz"
+                        Clicked="AusazButton_Clicked" />
 
-                    <Button x:Name="AusazButton"
-                            Grid.Column="0"
-                            Text="Ausaz"
-                            Clicked="AusazButton_Clicked" />
+                    <!-- Hautatutako ikaslea ordezkari izendatzeko botoia -->
+                    <Button
+                        x:Name="IzendatuButton"
+                        Grid.Column="1"
+                        Text="Izendatu"
+                        IsEnabled="False"
+                        Clicked="IzendatuButton_Clicked" />
 
-                    <Button x:Name="IzendatuButton"
-                            Grid.Column="1"
-                            Text="Izendatu"
-                            IsEnabled="False"
-                            Clicked="IzendatuButton_Clicked" />
-
-                    <Button x:Name="KenduDenakButton"
-                            Grid.Column="2"
-                            Text="Kendu denak"
-                            Clicked="KenduDenakButton_Clicked" />
+                    <!-- Ikasleen zerrenda osoa garbitzeko botoia -->
+                    <Button
+                        x:Name="KenduDenakButton"
+                        Grid.Column="2"
+                        Text="Kendu denak"
+                        Clicked="KenduDenakButton_Clicked" />
 
                 </Grid>
 
             </Grid>
 
+            <!-- Ordezkarien zerrendaren atala -->
+            <Grid
+                Grid.Column="1"
+                RowDefinitions="Auto,*,Auto"
+                RowSpacing="15">
 
-            <!-- ORDEZKARIAK -->
-            <Grid Grid.Column="1"
-                  RowDefinitions="Auto,*,Auto"
-                  RowSpacing="15">
+                <!-- Ordezkarien atalaren izenburua -->
+                <Label
+                    Grid.Row="0"
+                    Text="Ordezkariak"
+                    Style="{StaticResource IzenburuaStyle}" />
 
-                <Label Grid.Row="0"
-                       Text="Ordezkariak"
-                       Style="{StaticResource IzenburuaStyle}" />
+                <!-- Ordezkarien zerrenda eta ordena aldatzeko botoiak -->
+                <Grid
+                    Grid.Row="1"
+                    ColumnDefinitions="*,Auto"
+                    ColumnSpacing="10">
 
-
-                <Grid Grid.Row="1"
-                      ColumnDefinitions="*,Auto"
-                      ColumnSpacing="10">
-
-                    <CollectionView x:Name="OrdezkariakCollection"
-                                    Grid.Column="0"
-                                    SelectionMode="Single"
-                                    SelectionChanged="OrdezkariakCollection_SelectionChanged">
+                    <!--
+                        Ordezkari gisa izendatutako ikasleak erakusten dituen CollectionView kontrola.
+                        Elementu bakoitza banaka hauta daiteke.
+                    -->
+                    <CollectionView
+                        x:Name="OrdezkariakCollection"
+                        Grid.Column="0"
+                        SelectionMode="Single"
+                        SelectionChanged="OrdezkariakCollection_SelectionChanged">
 
                         <CollectionView.ItemTemplate>
 
+                            <!-- Ordezkari bakoitzaren itxura definitzen duen txantiloia -->
                             <DataTemplate>
 
-                                <Border Style="{StaticResource IkasleElementuaStyle}"
-                                        Margin="0,2">
+                                <Border
+                                    Style="{StaticResource IkasleElementuaStyle}"
+                                    Margin="0,2">
 
-                                    <Label Text="{Binding ErakustekoIzena}"
-                                           Style="{StaticResource IkasleTestuaStyle}" />
+                                    <!-- Ordezkariaren izen osoa erakusten da -->
+                                    <Label
+                                        Text="{Binding ErakustekoIzena}"
+                                        Style="{StaticResource IkasleTestuaStyle}" />
 
                                 </Border>
 
@@ -137,43 +182,51 @@
 
                     </CollectionView>
 
+                    <!-- Hautatutako ordezkariaren ordena aldatzeko botoiak -->
+                    <VerticalStackLayout
+                        Grid.Column="1"
+                        Spacing="10"
+                        VerticalOptions="Center">
 
-                    <!-- ORDENA ALDATZEKO BOTOIAK -->
-                    <VerticalStackLayout Grid.Column="1"
-                                         Spacing="10"
-                                         VerticalOptions="Center">
+                        <!-- Hautatutako ordezkaria posizio bat gora mugitzeko botoia -->
+                        <Button
+                            x:Name="GoraButton"
+                            Text="↑"
+                            IsEnabled="False"
+                            Clicked="GoraButton_Clicked" />
 
-                        <Button x:Name="GoraButton"
-                                Text="↑"
-                                IsEnabled="False"
-                                Clicked="GoraButton_Clicked" />
-
-                        <Button x:Name="BeheraButton"
-                                Text="↓"
-                                IsEnabled="False"
-                                Clicked="BeheraButton_Clicked" />
+                        <!-- Hautatutako ordezkaria posizio bat behera mugitzeko botoia -->
+                        <Button
+                            x:Name="BeheraButton"
+                            Text="↓"
+                            IsEnabled="False"
+                            Clicked="BeheraButton_Clicked" />
 
                     </VerticalStackLayout>
 
                 </Grid>
 
+                <!-- Ordezkarien zerrenda kudeatzeko botoiak -->
+                <Grid
+                    Grid.Row="2"
+                    ColumnDefinitions="*,*"
+                    ColumnSpacing="10">
 
-                <!-- ORDEZKARIEN BOTOIAK -->
-                <Grid Grid.Row="2"
-                      ColumnDefinitions="*,*"
-                      ColumnSpacing="10">
+                    <!-- Hautatutako ordezkaria zerrendatik kentzeko botoia -->
+                    <Button
+                        x:Name="KenduButton"
+                        Grid.Column="0"
+                        Text="Kendu"
+                        IsEnabled="False"
+                        Clicked="KenduButton_Clicked" />
 
-                    <Button x:Name="KenduButton"
-                            Grid.Column="0"
-                            Text="Kendu"
-                            IsEnabled="False"
-                            Clicked="KenduButton_Clicked" />
-
-                    <Button x:Name="HustuButton"
-                            Grid.Column="1"
-                            Text="Hustu"
-                            IsEnabled="False"
-                            Clicked="HustuButton_Clicked" />
+                    <!-- Ordezkarien zerrenda osoa garbitzeko botoia -->
+                    <Button
+                        x:Name="HustuButton"
+                        Grid.Column="1"
+                        Text="Hustu"
+                        IsEnabled="False"
+                        Clicked="HustuButton_Clicked" />
 
                 </Grid>
 

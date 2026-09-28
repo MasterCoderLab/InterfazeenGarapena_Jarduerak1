@@ -1,14 +1,34 @@
-﻿<?xml version = "1.0" encoding = "UTF-8" ?>
-<Application xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:local="clr-namespace:I01_06_OrdezkariaHautatzea"
-             x:Class="I01_06_OrdezkariaHautatzea.App">
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+
+<Application
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:I01_06_OrdezkariaHautatzea"
+    x:Class="I01_06_OrdezkariaHautatzea.App">
+
+    <!--
+        Aplikazio osoan erabiliko diren baliabide globalak definitzen dira.
+        Baliabide hauek orri guztietatik erabil daitezke.
+    -->
     <Application.Resources>
+
         <ResourceDictionary>
+
+            <!--
+                Kolore eta estilo globalak beste XAML fitxategietatik kargatzen dira.
+            -->
             <ResourceDictionary.MergedDictionaries>
+
+                <!-- Aplikazioan erabiliko diren kolore globalak -->
                 <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
+
+                <!-- Kontrolen eta testuen estilo globalak -->
                 <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
+
             </ResourceDictionary.MergedDictionaries>
+
         </ResourceDictionary>
+
     </Application.Resources>
+
 </Application>

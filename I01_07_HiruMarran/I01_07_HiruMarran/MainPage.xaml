@@ -8,158 +8,193 @@
     BackgroundColor="#F8E8D0"
     Shell.NavBarIsVisible="False">
 
-    <Grid Padding="30"
-          RowDefinitions="Auto,*,Auto"
-          ColumnDefinitions="*,Auto"
-          RowSpacing="25"
-          ColumnSpacing="40">
+    <!--
+        Grid nagusiak interfazea hiru ataletan antolatzen du:
+        goiko aldean jokalariaren txanda,
+        erdian joko-taula eta emaitzak,
+        eta beheko aldean partida berrabiarazteko botoia.
+    -->
+    <Grid
+        Padding="30"
+        RowDefinitions="Auto,*,Auto"
+        ColumnDefinitions="*,Auto"
+        RowSpacing="25"
+        ColumnSpacing="40">
 
-        <!-- TXANDA -->
-        <HorizontalStackLayout Grid.Row="0"
-                               Grid.ColumnSpan="2"
-                               HorizontalOptions="Center"
-                               Spacing="10">
+        <!-- Uneko jokalariaren txanda erakusteko atala -->
+        <HorizontalStackLayout
+            Grid.Row="0"
+            Grid.ColumnSpan="2"
+            HorizontalOptions="Center"
+            Spacing="10">
 
-            <Label x:Name="TxandaIkurraLabel"
-                   Text="❌"
-                   FontSize="30" />
+            <!-- Uneko jokalariaren ikurra -->
+            <Label
+                x:Name="TxandaIkurraLabel"
+                Text="❌"
+                FontSize="30" />
 
-            <Label x:Name="TxandaLabel"
-                   Text="jokalariaren txanda"
-                   FontSize="28"
-                   TextColor="Black"
-                   VerticalOptions="Center" />
+            <!-- Txandaren azalpen-testua -->
+            <Label
+                x:Name="TxandaLabel"
+                Text="jokalariaren txanda"
+                FontSize="28"
+                TextColor="Black"
+                VerticalOptions="Center" />
 
         </HorizontalStackLayout>
 
+        <!-- Hiru marran jokoaren 3x3 taula -->
+        <Grid
+            Grid.Row="1"
+            Grid.Column="0"
+            RowDefinitions="100,100,100"
+            ColumnDefinitions="100,100,100"
+            RowSpacing="5"
+            ColumnSpacing="5"
+            HorizontalOptions="Center"
+            VerticalOptions="Center">
 
-        <!-- TAULA -->
-        <Grid Grid.Row="1"
-              Grid.Column="0"
-              RowDefinitions="100,100,100"
-              ColumnDefinitions="100,100,100"
-              RowSpacing="5"
-              ColumnSpacing="5"
-              HorizontalOptions="Center"
-              VerticalOptions="Center">
+            <!-- Lehenengo errenkadako laukiak -->
+            <ImageButton
+                x:Name="Casilla00"
+                Grid.Row="0"
+                Grid.Column="0"
+                CommandParameter="0,0"
+                BackgroundColor="#E5C99A"
+                Clicked="Casilla_Clicked" />
 
-            <ImageButton x:Name="Casilla00"
-                         Grid.Row="0"
-                         Grid.Column="0"
-                         CommandParameter="0,0"
-                         BackgroundColor="#E5C99A"
-                         Clicked="Casilla_Clicked" />
+            <ImageButton
+                x:Name="Casilla01"
+                Grid.Row="0"
+                Grid.Column="1"
+                CommandParameter="0,1"
+                BackgroundColor="#E5C99A"
+                Clicked="Casilla_Clicked" />
 
-            <ImageButton x:Name="Casilla01"
-                         Grid.Row="0"
-                         Grid.Column="1"
-                         CommandParameter="0,1"
-                         BackgroundColor="#E5C99A"
-                         Clicked="Casilla_Clicked" />
+            <ImageButton
+                x:Name="Casilla02"
+                Grid.Row="0"
+                Grid.Column="2"
+                CommandParameter="0,2"
+                BackgroundColor="#E5C99A"
+                Clicked="Casilla_Clicked" />
 
-            <ImageButton x:Name="Casilla02"
-                         Grid.Row="0"
-                         Grid.Column="2"
-                         CommandParameter="0,2"
-                         BackgroundColor="#E5C99A"
-                         Clicked="Casilla_Clicked" />
+            <!-- Bigarren errenkadako laukiak -->
+            <ImageButton
+                x:Name="Casilla10"
+                Grid.Row="1"
+                Grid.Column="0"
+                CommandParameter="1,0"
+                BackgroundColor="#E5C99A"
+                Clicked="Casilla_Clicked" />
 
+            <ImageButton
+                x:Name="Casilla11"
+                Grid.Row="1"
+                Grid.Column="1"
+                CommandParameter="1,1"
+                BackgroundColor="#E5C99A"
+                Clicked="Casilla_Clicked" />
 
-            <ImageButton x:Name="Casilla10"
-                         Grid.Row="1"
-                         Grid.Column="0"
-                         CommandParameter="1,0"
-                         BackgroundColor="#E5C99A"
-                         Clicked="Casilla_Clicked" />
+            <ImageButton
+                x:Name="Casilla12"
+                Grid.Row="1"
+                Grid.Column="2"
+                CommandParameter="1,2"
+                BackgroundColor="#E5C99A"
+                Clicked="Casilla_Clicked" />
 
-            <ImageButton x:Name="Casilla11"
-                         Grid.Row="1"
-                         Grid.Column="1"
-                         CommandParameter="1,1"
-                         BackgroundColor="#E5C99A"
-                         Clicked="Casilla_Clicked" />
+            <!-- Hirugarren errenkadako laukiak -->
+            <ImageButton
+                x:Name="Casilla20"
+                Grid.Row="2"
+                Grid.Column="0"
+                CommandParameter="2,0"
+                BackgroundColor="#E5C99A"
+                Clicked="Casilla_Clicked" />
 
-            <ImageButton x:Name="Casilla12"
-                         Grid.Row="1"
-                         Grid.Column="2"
-                         CommandParameter="1,2"
-                         BackgroundColor="#E5C99A"
-                         Clicked="Casilla_Clicked" />
+            <ImageButton
+                x:Name="Casilla21"
+                Grid.Row="2"
+                Grid.Column="1"
+                CommandParameter="2,1"
+                BackgroundColor="#E5C99A"
+                Clicked="Casilla_Clicked" />
 
-
-            <ImageButton x:Name="Casilla20"
-                         Grid.Row="2"
-                         Grid.Column="0"
-                         CommandParameter="2,0"
-                         BackgroundColor="#E5C99A"
-                         Clicked="Casilla_Clicked" />
-
-            <ImageButton x:Name="Casilla21"
-                         Grid.Row="2"
-                         Grid.Column="1"
-                         CommandParameter="2,1"
-                         BackgroundColor="#E5C99A"
-                         Clicked="Casilla_Clicked" />
-
-            <ImageButton x:Name="Casilla22"
-                         Grid.Row="2"
-                         Grid.Column="2"
-                         CommandParameter="2,2"
-                         BackgroundColor="#E5C99A"
-                         Clicked="Casilla_Clicked" />
+            <ImageButton
+                x:Name="Casilla22"
+                Grid.Row="2"
+                Grid.Column="2"
+                CommandParameter="2,2"
+                BackgroundColor="#E5C99A"
+                Clicked="Casilla_Clicked" />
 
         </Grid>
 
+        <!-- Jokalariek irabazitako partida kopuruak erakusteko atala -->
+        <VerticalStackLayout
+            Grid.Row="1"
+            Grid.Column="1"
+            VerticalOptions="Center"
+            Spacing="10">
 
-        <!-- EMAITZAK -->
-        <VerticalStackLayout Grid.Row="1"
-                             Grid.Column="1"
-                             VerticalOptions="Center"
-                             Spacing="10">
+            <Label
+                Text="Emaitzak"
+                FontSize="20"
+                TextColor="Black" />
 
-            <Label Text="Emaitzak"
-                   FontSize="20"
-                   TextColor="Black" />
-
+            <!-- X jokalariaren emaitza -->
             <HorizontalStackLayout Spacing="10">
-                <Label Text="❌"
-                       FontSize="20" />
 
-                <Label Text="irabazitako partidak:"
-                       TextColor="Black"
-                       VerticalOptions="Center" />
+                <Label
+                    Text="❌"
+                    FontSize="20" />
 
-                <Label x:Name="XIrabaziLabel"
-                       Text="0"
-                       FontSize="20"
-                       TextColor="Black" />
+                <Label
+                    Text="irabazitako partidak:"
+                    TextColor="Black"
+                    VerticalOptions="Center" />
+
+                <Label
+                    x:Name="XIrabaziLabel"
+                    Text="0"
+                    FontSize="20"
+                    TextColor="Black" />
+
             </HorizontalStackLayout>
 
+            <!-- O jokalariaren emaitza -->
             <HorizontalStackLayout Spacing="10">
-                <Label Text="⭕"
-                       FontSize="20" />
 
-                <Label Text="irabazitako partidak:"
-                       TextColor="Black"
-                       VerticalOptions="Center" />
+                <Label
+                    Text="⭕"
+                    FontSize="20" />
 
-                <Label x:Name="OIrabaziLabel"
-                       Text="0"
-                       FontSize="20"
-                       TextColor="Black" />
+                <Label
+                    Text="irabazitako partidak:"
+                    TextColor="Black"
+                    VerticalOptions="Center" />
+
+                <Label
+                    x:Name="OIrabaziLabel"
+                    Text="0"
+                    FontSize="20"
+                    TextColor="Black" />
+
             </HorizontalStackLayout>
 
         </VerticalStackLayout>
 
-
-        <!-- BERRIRO HASI -->
-        <Button Grid.Row="2"
-                Grid.ColumnSpan="2"
-                Text="↻  Berriro hasi"
-                HorizontalOptions="Center"
-                BackgroundColor="#A8A88A"
-                TextColor="White"
-                Clicked="BerriroHasi_Clicked" />
+        <!-- Uneko partida berrabiarazteko botoia -->
+        <Button
+            Grid.Row="2"
+            Grid.ColumnSpan="2"
+            Text="↻  Berriro hasi"
+            HorizontalOptions="Center"
+            BackgroundColor="#A8A88A"
+            TextColor="White"
+            Clicked="BerriroHasi_Clicked" />
 
     </Grid>
 
