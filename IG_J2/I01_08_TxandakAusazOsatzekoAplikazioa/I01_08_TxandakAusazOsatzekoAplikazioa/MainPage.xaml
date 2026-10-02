@@ -1,0 +1,486 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="I01_08_TxandakAusazOsatzekoAplikazioa.MainPage"
+    Title="Txandak ausaz osatzeko aplikazioa"
+    BackgroundColor="#F4F7FB"
+    Shell.NavBarIsVisible="False">
+
+    <!--
+        Aplikazioaren pantaila nagusia.
+        Pantaila bi zutabetan banatzen da:
+        ezkerrean aplikazioaren kontrolak daude eta
+        eskuinean ausaz ateratako ikasleen zerrenda.
+    -->
+    <Grid
+        Padding="22"
+        ColumnDefinitions="0.82*,1.18*"
+        ColumnSpacing="20">
+
+        <!-- ====================================================== -->
+        <!-- EZKERREKO ZUTABEA: APLIKAZIOAREN KONTROLAK             -->
+        <!-- ====================================================== -->
+
+        <Grid
+            Grid.Column="0"
+            RowDefinitions="Auto,Auto,Auto,*"
+            RowSpacing="14">
+
+            <!-- ================================================== -->
+            <!-- 1. IKASLEEN IZENA DUEN FITXATEGIA KARGATU         -->
+            <!-- ================================================== -->
+
+            <Border
+                Grid.Row="0"
+                Padding="20,16"
+                BackgroundColor="White"
+                Stroke="#DCE5F2"
+                StrokeThickness="1">
+
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="14" />
+                </Border.StrokeShape>
+
+                <VerticalStackLayout Spacing="12">
+
+                    <!-- Atalaren izenburua. -->
+                    <Label
+                        Text="1. Izenak kargatu"
+                        FontSize="21"
+                        FontAttributes="Bold"
+                        TextColor="#163A70" />
+
+                    <Grid
+                        ColumnDefinitions="1.15*,0.85*"
+                        ColumnSpacing="16">
+
+                        <!--
+                            Erabiltzaileak ikasleen izenak dituen
+                            testu-fitxategia aukeratzeko botoia.
+                        -->
+                        <Button
+                            x:Name="KargatuBtn"
+                            Grid.Column="0"
+                            Text="Kargatu izen-zerrenda"
+                            FontSize="16"
+                            HeightRequest="52"
+                            CornerRadius="10"
+                            BackgroundColor="#146EF5"
+                            TextColor="White"
+                            HorizontalOptions="Fill"
+                            Clicked="OnKargatuClicked" />
+
+                        <!--
+                            Aukeratutako fitxategiaren izena
+                            erabiltzaileari erakusten zaio.
+                        -->
+                        <VerticalStackLayout
+                            Grid.Column="1"
+                            Spacing="2"
+                            VerticalOptions="Center">
+
+                            <Label
+                                Text="Fitxategia:"
+                                FontSize="13"
+                                TextColor="#667085" />
+
+                            <Label
+                                x:Name="FitxategiaLabel"
+                                Text="Ez da fitxategirik kargatu"
+                                FontSize="14"
+                                FontAttributes="Bold"
+                                TextColor="#1F2937"
+                                LineBreakMode="TailTruncation" />
+
+                        </VerticalStackLayout>
+
+                    </Grid>
+
+                    <!-- Erabiltzailearentzako laguntza-mezua. -->
+                    <Border
+                        Padding="10"
+                        BackgroundColor="#EFF6FF"
+                        StrokeThickness="0">
+
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="8" />
+                        </Border.StrokeShape>
+
+                        <Label
+                            Text="Testu-fitxategian ikasleen izenak lerro banatan egon behar dira."
+                            FontSize="13"
+                            TextColor="#395473" />
+
+                    </Border>
+
+                </VerticalStackLayout>
+
+            </Border>
+
+
+            <!-- ================================================== -->
+            <!-- 2. AUSAZ ATERATAKO AZKEN IKASLEA                  -->
+            <!-- ================================================== -->
+
+            <Border
+                Grid.Row="1"
+                Padding="20,16"
+                BackgroundColor="White"
+                Stroke="#DCE5F2"
+                StrokeThickness="1">
+
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="14" />
+                </Border.StrokeShape>
+
+                <VerticalStackLayout Spacing="10">
+
+                    <!-- Atalaren izenburua. -->
+                    <Label
+                        Text="2. Uneko ikaslea"
+                        FontSize="21"
+                        FontAttributes="Bold"
+                        TextColor="#163A70" />
+
+                    <Label
+                        Text="Ateratako azken izena:"
+                        HorizontalTextAlignment="Center"
+                        FontSize="13"
+                        TextColor="#667085" />
+
+                    <!--
+                        Zozketan ateratako azken ikaslearen izena
+                        modu nabarmenean erakusten da.
+                    -->
+                    <Border
+                        Padding="12"
+                        HeightRequest="82"
+                        BackgroundColor="#F8FBFF"
+                        Stroke="#2F80ED"
+                        StrokeThickness="2">
+
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="10" />
+                        </Border.StrokeShape>
+
+                        <Label
+                            x:Name="UnekoIkasleaLabel"
+                            Text="---"
+                            FontSize="30"
+                            FontAttributes="Bold"
+                            TextColor="#163A70"
+                            HorizontalTextAlignment="Center"
+                            VerticalTextAlignment="Center" />
+
+                    </Border>
+
+                </VerticalStackLayout>
+
+            </Border>
+
+
+            <!-- ================================================== -->
+            <!-- 3. HURRENGO IKASLEA AUSAZ ATERA                  -->
+            <!-- ================================================== -->
+
+            <Border
+                Grid.Row="2"
+                Padding="20,16"
+                BackgroundColor="White"
+                Stroke="#DCE5F2"
+                StrokeThickness="1">
+
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="14" />
+                </Border.StrokeShape>
+
+                <VerticalStackLayout Spacing="10">
+
+                    <!-- Atalaren izenburua. -->
+                    <Label
+                        Text="3. Ausaz atera hurrengoa"
+                        FontSize="21"
+                        FontAttributes="Bold"
+                        TextColor="#163A70" />
+
+                    <!--
+                        Ikasle bat ausaz aukeratzen du.
+                        Fitxategia kargatu arte botoia desgaituta dago.
+                    -->
+                    <Button
+                        x:Name="HurrengoaBtn"
+                        Text="Hurrengo izena atera"
+                        FontSize="17"
+                        FontAttributes="Bold"
+                        HeightRequest="52"
+                        CornerRadius="10"
+                        BackgroundColor="#18A957"
+                        TextColor="White"
+                        HorizontalOptions="Fill"
+                        IsEnabled="False"
+                        Clicked="OnHurrengoaClicked" />
+
+                </VerticalStackLayout>
+
+            </Border>
+
+
+            <!-- ================================================== -->
+            <!-- 4. KONTAGAILUAK ETA AZKEN AUKERAK                 -->
+            <!-- ================================================== -->
+
+            <Border
+                Grid.Row="3"
+                Padding="20,16"
+                BackgroundColor="White"
+                Stroke="#DCE5F2"
+                StrokeThickness="1">
+
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="14" />
+                </Border.StrokeShape>
+
+                <Grid
+                    RowDefinitions="Auto,*,Auto"
+                    RowSpacing="14">
+
+                    <!-- Atalaren izenburua. -->
+                    <Label
+                        Grid.Row="0"
+                        Text="4. Aukerak"
+                        FontSize="21"
+                        FontAttributes="Bold"
+                        TextColor="#163A70" />
+
+
+                    <!--
+                        Zozketaren egoerari buruzko hiru kontagailuak:
+                        guztira, ateratakoak eta falta direnak.
+                    -->
+                    <Grid
+                        Grid.Row="1"
+                        ColumnDefinitions="*,*,*"
+                        ColumnSpacing="10"
+                        VerticalOptions="Center">
+
+                        <!-- IKASLE GUZTIAK -->
+                        <Border
+                            Grid.Column="0"
+                            Padding="10"
+                            BackgroundColor="#EAF3FF"
+                            StrokeThickness="0">
+
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="10" />
+                            </Border.StrokeShape>
+
+                            <VerticalStackLayout
+                                Spacing="2"
+                                VerticalOptions="Center">
+
+                                <Label
+                                    Text="Guztira"
+                                    FontSize="13"
+                                    TextColor="#36506D"
+                                    HorizontalTextAlignment="Center" />
+
+                                <Label
+                                    x:Name="GuztiraLabel"
+                                    Text="0"
+                                    FontSize="24"
+                                    FontAttributes="Bold"
+                                    TextColor="#163A70"
+                                    HorizontalTextAlignment="Center" />
+
+                            </VerticalStackLayout>
+
+                        </Border>
+
+
+                        <!-- ATERATAKO IKASLEAK -->
+                        <Border
+                            Grid.Column="1"
+                            Padding="10"
+                            BackgroundColor="#EAF8EE"
+                            StrokeThickness="0">
+
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="10" />
+                            </Border.StrokeShape>
+
+                            <VerticalStackLayout
+                                Spacing="2"
+                                VerticalOptions="Center">
+
+                                <Label
+                                    Text="Atera direnak"
+                                    FontSize="13"
+                                    TextColor="#365844"
+                                    HorizontalTextAlignment="Center" />
+
+                                <Label
+                                    x:Name="AteraDirenakLabel"
+                                    Text="0"
+                                    FontSize="24"
+                                    FontAttributes="Bold"
+                                    TextColor="#176B35"
+                                    HorizontalTextAlignment="Center" />
+
+                            </VerticalStackLayout>
+
+                        </Border>
+
+
+                        <!-- FALTA DIREN IKASLEAK -->
+                        <Border
+                            Grid.Column="2"
+                            Padding="10"
+                            BackgroundColor="#FFF6D8"
+                            StrokeThickness="0">
+
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="10" />
+                            </Border.StrokeShape>
+
+                            <VerticalStackLayout
+                                Spacing="2"
+                                VerticalOptions="Center">
+
+                                <Label
+                                    Text="Falta direnak"
+                                    FontSize="13"
+                                    TextColor="#695B2C"
+                                    HorizontalTextAlignment="Center" />
+
+                                <Label
+                                    x:Name="FaltaDirenakLabel"
+                                    Text="0"
+                                    FontSize="24"
+                                    FontAttributes="Bold"
+                                    TextColor="#806800"
+                                    HorizontalTextAlignment="Center" />
+
+                            </VerticalStackLayout>
+
+                        </Border>
+
+                    </Grid>
+
+
+                    <!--
+                        Zozketaren emaitza gordetzeko eta
+                        zozketa berrabiarazteko botoiak.
+                    -->
+                    <Grid
+                        Grid.Row="2"
+                        ColumnDefinitions="2*,*"
+                        ColumnSpacing="10">
+
+                        <!--
+                            Zozketa amaitzean emaitza testu-fitxategi
+                            batean gordetzeko botoia.
+                        -->
+                        <Button
+                            x:Name="GordeBtn"
+                            Grid.Column="0"
+                            Text="Emaitza fitxategian gorde"
+                            HeightRequest="48"
+                            CornerRadius="10"
+                            BackgroundColor="#334155"
+                            TextColor="White"
+                            IsEnabled="False"
+                            Clicked="OnGordeClicked" />
+
+                        <!--
+                            Uneko zozketa ezabatu eta hasieratik
+                            berrabiarazteko botoia.
+                        -->
+                        <Button
+                            x:Name="GarbituBtn"
+                            Grid.Column="1"
+                            Text="Garbitu"
+                            HeightRequest="48"
+                            CornerRadius="10"
+                            BackgroundColor="#E5484D"
+                            TextColor="White"
+                            IsEnabled="False"
+                            Clicked="OnGarbituClicked" />
+
+                    </Grid>
+
+                </Grid>
+
+            </Border>
+
+        </Grid>
+
+
+        <!-- ====================================================== -->
+        <!-- ESKUINEKO ZUTABEA: ATERATAKO IKASLEEN ZERRENDA         -->
+        <!-- ====================================================== -->
+
+        <Border
+            Grid.Column="1"
+            Padding="20"
+            BackgroundColor="White"
+            Stroke="#DCE5F2"
+            StrokeThickness="1">
+
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="14" />
+            </Border.StrokeShape>
+
+            <Grid
+                RowDefinitions="Auto,*"
+                RowSpacing="12">
+
+                <!-- Zerrendaren izenburua. -->
+                <Label
+                    Grid.Row="0"
+                    Text="Atera diren ikasleak (ordenan)"
+                    FontSize="22"
+                    FontAttributes="Bold"
+                    TextColor="#163A70" />
+
+                <!--
+                    Ateratako ikasleak ordenan erakusteko eremua.
+                    Ikasle berriak C# kodearen bidez gehitzen dira.
+                -->
+                <Border
+                    Grid.Row="1"
+                    Padding="12"
+                    BackgroundColor="#FBFCFE"
+                    Stroke="#E1E7F0"
+                    StrokeThickness="1">
+
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="10" />
+                    </Border.StrokeShape>
+
+                    <ScrollView>
+
+                        <VerticalStackLayout
+                            x:Name="AteratakoenZerrenda"
+                            Spacing="8">
+
+                            <!-- Hasierako egoeraren laguntza-mezua. -->
+                            <Label
+                                Text="Oraindik ez da ikaslerik atera."
+                                TextColor="#777777"
+                                FontSize="15" />
+
+                        </VerticalStackLayout>
+
+                    </ScrollView>
+
+                </Border>
+
+            </Grid>
+
+        </Border>
+
+    </Grid>
+
+</ContentPage>
