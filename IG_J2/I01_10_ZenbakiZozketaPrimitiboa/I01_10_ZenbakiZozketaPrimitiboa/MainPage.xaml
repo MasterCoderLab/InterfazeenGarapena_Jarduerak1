@@ -1,0 +1,556 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="I01_10_ZenbakiZozketaPrimitiboa.MainPage"
+    BackgroundColor="#F4F7FB"
+    Shell.NavBarIsVisible="False">
+
+    <!--
+        Zenbaki-zozketaren aplikazioaren pantaila nagusia.
+
+        Ezkerrean 1etik 49ra arteko zenbakiak hautatzeko
+        CheckBox kontrolak erakusten dira.
+
+        Eskuinean zozketaren sei zenbaki sarituak,
+        erabiltzailearen emaitza, sari-taula eta
+        aplikazioaren kontrol-botoiak daude.
+    -->
+    <Grid
+        Padding="25"
+        ColumnDefinitions="1.35*,0.65*"
+        ColumnSpacing="20">
+
+
+        <!-- ====================================================== -->
+        <!-- EZKERREKO EREMUA: ZENBAKIEN HAUTAKETA                  -->
+        <!-- ====================================================== -->
+
+        <Border
+            Grid.Column="0"
+            Padding="20"
+            BackgroundColor="White"
+            Stroke="#DCE5F2"
+            StrokeThickness="1">
+
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="14" />
+            </Border.StrokeShape>
+
+            <Grid
+                RowDefinitions="Auto,Auto,*"
+                RowSpacing="15">
+
+
+                <!-- Aplikazioaren atal nagusiaren izenburua. -->
+                <Label
+                    Grid.Row="0"
+                    Text="Aukeratu zure 6 zenbakiak"
+                    FontSize="24"
+                    FontAttributes="Bold"
+                    TextColor="#163A70" />
+
+
+                <!--
+                    Hautatutako zenbakien egoera eta
+                    hautatutako zenbaki kopurua erakusten dira.
+                -->
+                <Grid
+                    Grid.Row="1"
+                    ColumnDefinitions="*,Auto"
+                    ColumnSpacing="10">
+
+                    <Label
+                        x:Name="EgoeraLabel"
+                        Text="Hautatu 6 zenbaki."
+                        FontSize="14"
+                        TextColor="#667085"
+                        VerticalTextAlignment="Center" />
+
+                    <Border
+                        Grid.Column="1"
+                        Padding="14,7"
+                        BackgroundColor="#EAF3FF"
+                        StrokeThickness="0">
+
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="10" />
+                        </Border.StrokeShape>
+
+                        <Label
+                            x:Name="HautatutakoakLabel"
+                            Text="0 / 6"
+                            FontSize="15"
+                            FontAttributes="Bold"
+                            TextColor="#163A70"
+                            HorizontalTextAlignment="Center"
+                            VerticalTextAlignment="Center" />
+
+                    </Border>
+
+                </Grid>
+
+
+                <!--
+                    49 CheckBox kontrolak C# kodetik
+                    dinamikoki sortu eta Grid honetan kokatzen dira.
+                -->
+                <ScrollView
+                    Grid.Row="2"
+                    VerticalScrollBarVisibility="Default">
+
+                    <Grid
+                        x:Name="ZenbakiakGrid"
+                        RowSpacing="7"
+                        ColumnSpacing="7" />
+
+                </ScrollView>
+
+            </Grid>
+
+        </Border>
+
+
+        <!-- ====================================================== -->
+        <!-- ESKUINEKO EREMUA                                       -->
+        <!-- ====================================================== -->
+
+        <Grid
+            Grid.Column="1"
+            RowDefinitions="Auto,Auto,*,Auto"
+            RowSpacing="15">
+
+
+            <!-- ================================================== -->
+            <!-- ZENBAKI SARITUAK                                   -->
+            <!-- ================================================== -->
+
+            <Border
+                Grid.Row="0"
+                Padding="18"
+                BackgroundColor="White"
+                Stroke="#DCE5F2"
+                StrokeThickness="1">
+
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="14" />
+                </Border.StrokeShape>
+
+                <VerticalStackLayout Spacing="14">
+
+                    <Label
+                        Text="Zenbaki sarituak"
+                        FontSize="21"
+                        FontAttributes="Bold"
+                        TextColor="#163A70" />
+
+                    <!--
+                        Zozketan ausaz sortutako sei zenbaki sarituak
+                        hemen erakusten dira.
+
+                        Kontrolen x:Name balioak mantentzen dira
+                        C# kodea aldatu behar ez izateko.
+                    -->
+                    <Grid
+                        ColumnDefinitions="*,*,*"
+                        RowDefinitions="Auto,Auto"
+                        ColumnSpacing="9"
+                        RowSpacing="9">
+
+
+                        <!-- LEHEN ZENBAKI SARITUA -->
+                        <Border
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            HeightRequest="50"
+                            BackgroundColor="#EAF3FF"
+                            Stroke="#CFE0F5"
+                            StrokeThickness="1">
+
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="12" />
+                            </Border.StrokeShape>
+
+                            <Label
+                                x:Name="Zenbaki1Entry"
+                                Text=""
+                                FontSize="21"
+                                FontAttributes="Bold"
+                                TextColor="#163A70"
+                                HorizontalTextAlignment="Center"
+                                VerticalTextAlignment="Center" />
+
+                        </Border>
+
+
+                        <!-- BIGARREN ZENBAKI SARITUA -->
+                        <Border
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            HeightRequest="50"
+                            BackgroundColor="#EAF3FF"
+                            Stroke="#CFE0F5"
+                            StrokeThickness="1">
+
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="12" />
+                            </Border.StrokeShape>
+
+                            <Label
+                                x:Name="Zenbaki2Entry"
+                                Text=""
+                                FontSize="21"
+                                FontAttributes="Bold"
+                                TextColor="#163A70"
+                                HorizontalTextAlignment="Center"
+                                VerticalTextAlignment="Center" />
+
+                        </Border>
+
+
+                        <!-- HIRUGARREN ZENBAKI SARITUA -->
+                        <Border
+                            Grid.Row="0"
+                            Grid.Column="2"
+                            HeightRequest="50"
+                            BackgroundColor="#EAF3FF"
+                            Stroke="#CFE0F5"
+                            StrokeThickness="1">
+
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="12" />
+                            </Border.StrokeShape>
+
+                            <Label
+                                x:Name="Zenbaki3Entry"
+                                Text=""
+                                FontSize="21"
+                                FontAttributes="Bold"
+                                TextColor="#163A70"
+                                HorizontalTextAlignment="Center"
+                                VerticalTextAlignment="Center" />
+
+                        </Border>
+
+
+                        <!-- LAUGARREN ZENBAKI SARITUA -->
+                        <Border
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            HeightRequest="50"
+                            BackgroundColor="#EAF3FF"
+                            Stroke="#CFE0F5"
+                            StrokeThickness="1">
+
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="12" />
+                            </Border.StrokeShape>
+
+                            <Label
+                                x:Name="Zenbaki4Entry"
+                                Text=""
+                                FontSize="21"
+                                FontAttributes="Bold"
+                                TextColor="#163A70"
+                                HorizontalTextAlignment="Center"
+                                VerticalTextAlignment="Center" />
+
+                        </Border>
+
+
+                        <!-- BOSGARREN ZENBAKI SARITUA -->
+                        <Border
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            HeightRequest="50"
+                            BackgroundColor="#EAF3FF"
+                            Stroke="#CFE0F5"
+                            StrokeThickness="1">
+
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="12" />
+                            </Border.StrokeShape>
+
+                            <Label
+                                x:Name="Zenbaki5Entry"
+                                Text=""
+                                FontSize="21"
+                                FontAttributes="Bold"
+                                TextColor="#163A70"
+                                HorizontalTextAlignment="Center"
+                                VerticalTextAlignment="Center" />
+
+                        </Border>
+
+
+                        <!-- SEIGARREN ZENBAKI SARITUA -->
+                        <Border
+                            Grid.Row="1"
+                            Grid.Column="2"
+                            HeightRequest="50"
+                            BackgroundColor="#EAF3FF"
+                            Stroke="#CFE0F5"
+                            StrokeThickness="1">
+
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="12" />
+                            </Border.StrokeShape>
+
+                            <Label
+                                x:Name="Zenbaki6Entry"
+                                Text=""
+                                FontSize="21"
+                                FontAttributes="Bold"
+                                TextColor="#163A70"
+                                HorizontalTextAlignment="Center"
+                                VerticalTextAlignment="Center" />
+
+                        </Border>
+
+                    </Grid>
+
+                </VerticalStackLayout>
+
+            </Border>
+
+
+            <!-- ================================================== -->
+            <!-- EMAITZA                                            -->
+            <!-- ================================================== -->
+
+            <Border
+                Grid.Row="1"
+                Padding="18"
+                BackgroundColor="White"
+                Stroke="#DCE5F2"
+                StrokeThickness="1">
+
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="14" />
+                </Border.StrokeShape>
+
+                <VerticalStackLayout Spacing="12">
+
+                    <Label
+                        Text="Emaitza"
+                        FontSize="21"
+                        FontAttributes="Bold"
+                        TextColor="#163A70" />
+
+
+                    <!--
+                        Erabiltzaileak asmatutako zenbaki kopurua
+                        eta lortutako saria hemen erakusten dira.
+                    -->
+                    <Border
+                        Padding="14"
+                        MinimumHeightRequest="54"
+                        BackgroundColor="#F8FAFC"
+                        Stroke="#E1E7F0"
+                        StrokeThickness="1">
+
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="10" />
+                        </Border.StrokeShape>
+
+                        <Label
+                            x:Name="EmaitzaEntry"
+                            Text="Zozketaren zain..."
+                            FontSize="15"
+                            FontAttributes="Bold"
+                            TextColor="#36506D"
+                            VerticalTextAlignment="Center"
+                            LineBreakMode="WordWrap" />
+
+                    </Border>
+
+                </VerticalStackLayout>
+
+            </Border>
+
+
+            <!-- ================================================== -->
+            <!-- SARIAK                                             -->
+            <!-- ================================================== -->
+
+            <Border
+                Grid.Row="2"
+                Padding="18"
+                BackgroundColor="#F8FBFF"
+                Stroke="#DCE5F2"
+                StrokeThickness="1">
+
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="14" />
+                </Border.StrokeShape>
+
+                <VerticalStackLayout
+                    Spacing="9"
+                    VerticalOptions="Center">
+
+                    <Label
+                        Text="Sariak"
+                        FontSize="19"
+                        FontAttributes="Bold"
+                        TextColor="#163A70" />
+
+
+                    <Grid
+                        ColumnDefinitions="Auto,*"
+                        RowDefinitions="Auto,Auto,Auto,Auto,Auto"
+                        ColumnSpacing="10"
+                        RowSpacing="7">
+
+                        <Label
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Text="6 asmatu"
+                            FontAttributes="Bold"
+                            TextColor="#163A70" />
+
+                        <Label
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            Text="1.000.000 €"
+                            HorizontalTextAlignment="End"
+                            TextColor="#176B35" />
+
+
+                        <Label
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            Text="5 asmatu"
+                            FontAttributes="Bold"
+                            TextColor="#163A70" />
+
+                        <Label
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            Text="1.000 €"
+                            HorizontalTextAlignment="End"
+                            TextColor="#176B35" />
+
+
+                        <Label
+                            Grid.Row="2"
+                            Grid.Column="0"
+                            Text="4 asmatu"
+                            FontAttributes="Bold"
+                            TextColor="#163A70" />
+
+                        <Label
+                            Grid.Row="2"
+                            Grid.Column="1"
+                            Text="50 €"
+                            HorizontalTextAlignment="End"
+                            TextColor="#176B35" />
+
+
+                        <Label
+                            Grid.Row="3"
+                            Grid.Column="0"
+                            Text="3 asmatu"
+                            FontAttributes="Bold"
+                            TextColor="#163A70" />
+
+                        <Label
+                            Grid.Row="3"
+                            Grid.Column="1"
+                            Text="8 €"
+                            HorizontalTextAlignment="End"
+                            TextColor="#176B35" />
+
+
+                        <Label
+                            Grid.Row="4"
+                            Grid.Column="0"
+                            Text="0-2 asmatu"
+                            FontAttributes="Bold"
+                            TextColor="#667085" />
+
+                        <Label
+                            Grid.Row="4"
+                            Grid.Column="1"
+                            Text="Saririk ez"
+                            HorizontalTextAlignment="End"
+                            TextColor="#667085" />
+
+                    </Grid>
+
+                </VerticalStackLayout>
+
+            </Border>
+
+
+            <!-- ================================================== -->
+            <!-- BOTOIAK                                            -->
+            <!-- ================================================== -->
+
+            <Grid
+                Grid.Row="3"
+                RowDefinitions="Auto,Auto"
+                ColumnDefinitions="*,*"
+                RowSpacing="10"
+                ColumnSpacing="10">
+
+                <!--
+                    Zozketa botoia sei zenbaki hautatutakoan
+                    soilik aktibatzen da.
+                -->
+                <Button
+                    x:Name="ZozketaBtn"
+                    Grid.Row="0"
+                    Grid.ColumnSpan="2"
+                    Text="Zozketa"
+                    HeightRequest="54"
+                    CornerRadius="10"
+                    FontSize="17"
+                    FontAttributes="Bold"
+                    BackgroundColor="#18A957"
+                    TextColor="White"
+                    IsEnabled="False"
+                    Clicked="OnZozketaClicked" />
+
+
+                <!--
+                    Berria botoiak aplikazioa hasierako
+                    egoerara itzultzen du.
+                -->
+                <Button
+                    x:Name="BerriaBtn"
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Text="Berria"
+                    HeightRequest="50"
+                    CornerRadius="10"
+                    FontSize="15"
+                    FontAttributes="Bold"
+                    BackgroundColor="#146EF5"
+                    TextColor="White"
+                    IsEnabled="False"
+                    Clicked="OnBerriaClicked" />
+
+
+                <!--
+                    Irten botoiak aplikazioaren leihoa ixten du.
+                -->
+                <Button
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Text="Irten"
+                    HeightRequest="50"
+                    CornerRadius="10"
+                    FontSize="15"
+                    FontAttributes="Bold"
+                    BackgroundColor="#111827"
+                    TextColor="White"
+                    Clicked="OnIrtenClicked" />
+
+            </Grid>
+
+        </Grid>
+
+    </Grid>
+
+</ContentPage>
