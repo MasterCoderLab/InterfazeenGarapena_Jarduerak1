@@ -166,32 +166,43 @@ public partial class MainPage : ContentPage
 
     /// <summary>
     /// Aurreko gelaren irudira mugitzen da.
-    /// Lehenengo gelan badago, ez du posizioa aldatzen.
+    ///
+    /// CarouselView kontrolaren aurreko elementura ScrollTo bidez
+    /// mugitzen da, Windows plataforman Position zuzenean aldatzean
+    /// gerta daitekeen atzera-saltoa saihesteko.
     /// </summary>
     /// <param name="sender">
     /// Gertaera sortu duen Aurrekoa botoia.
     /// </param>
     /// <param name="e">
-    /// Klik-gertaeraren informazioa.
+    /// Klik-gertaerari buruzko informazioa.
     /// </param>
     private void OnAurrekoaClicked(
         object? sender,
         EventArgs e)
     {
-        int posizioBerria =
-            GelakCarousel.Position - 1;
+        // Erabiltzailearen ekintzak 10 segundoko
+        // inaktibitate-kontagailua berrabiarazten du.
+        BerrabiaraziInaktibitateTenporizadorea();
 
-        if (posizioBerria < 0)
+        int unekoPosizioa =
+            GelakCarousel.Position;
+
+        // Lehenengo irudian bagaude, ezin da gehiago atzera egin.
+        if (unekoPosizioa <= 0)
         {
             return;
         }
 
-        GelakCarousel.Position =
-            posizioBerria;
+        int aurrekoPosizioa =
+            unekoPosizioa - 1;
 
-        EguneratuCarouselKontrolak();
-
-        BerrabiaraziInaktibitateTenporizadorea();
+        // CarouselView kontrola aurreko irudira mugitzen da.
+        // Ez dugu Position zuzenean aldatzen.
+        GelakCarousel.ScrollTo(
+            aurrekoPosizioa,
+            position: ScrollToPosition.Center,
+            animate: false);
     }
 
     /// <summary>
