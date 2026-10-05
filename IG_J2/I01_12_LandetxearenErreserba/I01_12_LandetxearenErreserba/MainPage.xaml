@@ -1,0 +1,556 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="I01_12_LandetxearenErreserba.MainPage"
+    BackgroundColor="#F4F7FB"
+    Shell.NavBarIsVisible="False">
+
+    <!--
+        Landetxearen erreserba kudeatzeko pantaila nagusia.
+
+        Ezkerrean lau gelaren irudiak CarouselView kontrolaren bidez
+        erakusten dira.
+
+        Erdian gehigarriak eta prezioen kalkulua daude.
+
+        Eskuinean erreserbatu nahi den data aukeratu eta
+        aurretik erreserbatutako asteak erakusten dira.
+    -->
+    <Grid
+        Padding="25"
+        RowDefinitions="Auto,*"
+        RowSpacing="18">
+
+        <!-- ====================================================== -->
+        <!-- IZENBURUA                                              -->
+        <!-- ====================================================== -->
+
+        <VerticalStackLayout
+            Grid.Row="0"
+            Spacing="4">
+
+            <Label
+                Text="Landetxearen erreserba"
+                FontSize="30"
+                FontAttributes="Bold"
+                TextColor="#163A70" />
+
+            <Label
+                Text="Aukeratu gela, gehigarriak eta erreserbatu nahi duzun astea."
+                FontSize="14"
+                TextColor="#667085" />
+
+        </VerticalStackLayout>
+
+
+        <!-- ====================================================== -->
+        <!-- EDUKI NAGUSIA                                         -->
+        <!-- ====================================================== -->
+
+        <Grid
+            Grid.Row="1"
+            ColumnDefinitions="1.05*,0.95*,0.90*"
+            ColumnSpacing="18">
+
+
+            <!-- ================================================== -->
+            <!-- GELAK / CAROUSELVIEW                               -->
+            <!-- ================================================== -->
+
+            <Border
+                Grid.Column="0"
+                Padding="18"
+                BackgroundColor="White"
+                Stroke="#DCE5F2"
+                StrokeThickness="1">
+
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="14" />
+                </Border.StrokeShape>
+
+                <Grid
+                    RowDefinitions="Auto,*,Auto,Auto"
+                    RowSpacing="10">
+
+                    <!-- Uneko gelaren izena. -->
+                    <Label
+                        x:Name="GelaLabel"
+                        Grid.Row="0"
+                        Text="Gela 01"
+                        FontSize="22"
+                        FontAttributes="Bold"
+                        TextColor="#163A70"
+                        HorizontalTextAlignment="Center" />
+
+
+                    <!--
+                        Aurreko botoia + CarouselView + hurrengo botoia.
+                    -->
+                    <Grid
+                        Grid.Row="1"
+                        ColumnDefinitions="Auto,*,Auto"
+                        ColumnSpacing="12"
+                        VerticalOptions="Center">
+
+
+                        <!-- Aurreko gelara joateko botoia. -->
+                        <Button
+                            x:Name="AurrekoaBtn"
+                            Grid.Column="0"
+                            Text="‹"
+                            WidthRequest="50"
+                            HeightRequest="86"
+                            FontSize="34"
+                            FontAttributes="Bold"
+                            CornerRadius="14"
+                            BackgroundColor="#EAF3FF"
+                            TextColor="#163A70"
+                            Clicked="OnAurrekoaClicked" />
+
+
+                        <!-- Irudiak erakusteko eremua. -->
+                        <Border
+                            Grid.Column="1"
+                            HeightRequest="350"
+                            Padding="8"
+                            BackgroundColor="#F8FAFC"
+                            Stroke="#DCE5F2"
+                            StrokeThickness="1">
+
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="14" />
+                            </Border.StrokeShape>
+
+                            <!--
+                                Landetxearen lau irudiak hemen erakusten dira.
+                            -->
+                            <CarouselView
+                                x:Name="GelakCarousel"
+                                Position="0"
+                                IsBounceEnabled="False"
+                                IsSwipeEnabled="True"
+                                Loop="False"
+                                PositionChanged="OnCarouselPositionChanged">
+
+                                <CarouselView.ItemTemplate>
+
+                                    <DataTemplate>
+
+                                        <Grid Padding="5">
+
+                                            <Image
+                                                Source="{Binding .}"
+                                                Aspect="AspectFit"
+                                                HorizontalOptions="Fill"
+                                                VerticalOptions="Fill" />
+
+                                        </Grid>
+
+                                    </DataTemplate>
+
+                                </CarouselView.ItemTemplate>
+
+                            </CarouselView>
+
+                        </Border>
+
+
+                        <!-- Hurrengo gelara joateko botoia. -->
+                        <Button
+                            x:Name="HurrengoaBtn"
+                            Grid.Column="2"
+                            Text="›"
+                            WidthRequest="50"
+                            HeightRequest="86"
+                            FontSize="34"
+                            FontAttributes="Bold"
+                            CornerRadius="14"
+                            BackgroundColor="#EAF3FF"
+                            TextColor="#163A70"
+                            Clicked="OnHurrengoaClicked" />
+
+                    </Grid>
+
+
+                    <!--
+                        Uneko irudiaren posizioa erakusten duten puntuak.
+                    -->
+                    <IndicatorView
+                        x:Name="GelaIndicator"
+                        Grid.Row="2"
+                        IndicatorColor="#D0D5DD"
+                        SelectedIndicatorColor="#163A70"
+                        IndicatorSize="9"
+                        IndicatorsShape="Circle"
+                        HorizontalOptions="Center" />
+
+
+                    <Label
+                        Grid.Row="3"
+                        Text="4 irudi erabilgarri"
+                        FontSize="13"
+                        TextColor="#667085"
+                        HorizontalTextAlignment="Center" />
+
+                </Grid>
+
+            </Border>
+
+
+            <!-- ================================================== -->
+            <!-- GEHIGARRIAK ETA PREZIOAK                           -->
+            <!-- ================================================== -->
+
+            <Border
+                Grid.Column="1"
+                Padding="18"
+                BackgroundColor="White"
+                Stroke="#DCE5F2"
+                StrokeThickness="1">
+
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="14" />
+                </Border.StrokeShape>
+
+                <Grid
+                    RowDefinitions="Auto,Auto,*"
+                    RowSpacing="18">
+
+
+                    <Label
+                        Grid.Row="0"
+                        Text="Gehigarriak"
+                        FontSize="22"
+                        FontAttributes="Bold"
+                        TextColor="#163A70" />
+
+
+                    <!-- ========================================== -->
+                    <!-- GEHIGARRIAK                                -->
+                    <!-- ========================================== -->
+
+                    <VerticalStackLayout
+                        Grid.Row="1"
+                        Spacing="14">
+
+                        <!-- Aireportuko joan-etorria. -->
+                        <HorizontalStackLayout Spacing="10">
+
+                            <CheckBox
+                                x:Name="AireportuaCheckBox"
+                                CheckedChanged="OnGehigarriaChanged" />
+
+                            <Label
+                                Text="Aireportuko joan-etorria (+25 €)"
+                                TextColor="#344054"
+                                VerticalTextAlignment="Center" />
+
+                        </HorizontalStackLayout>
+
+
+                        <!-- Gidaria duen txangoa. -->
+                        <HorizontalStackLayout Spacing="10">
+
+                            <CheckBox
+                                x:Name="GidariaCheckBox"
+                                CheckedChanged="OnGehigarriaChanged" />
+
+                            <Label
+                                Text="Gidaria duen txangoa (+150 €)"
+                                TextColor="#344054"
+                                VerticalTextAlignment="Center" />
+
+                        </HorizontalStackLayout>
+
+
+                        <!-- Haurtzaindegi zerbitzua. -->
+                        <HorizontalStackLayout Spacing="10">
+
+                            <CheckBox
+                                x:Name="HaurtzaindegiaCheckBox"
+                                CheckedChanged="OnGehigarriaChanged" />
+
+                            <Label
+                                Text="Haurtzaindegia (+40 €/egun)"
+                                TextColor="#344054"
+                                VerticalTextAlignment="Center" />
+
+                        </HorizontalStackLayout>
+
+                    </VerticalStackLayout>
+
+
+                    <!-- ========================================== -->
+                    <!-- PREZIOEN LABURPENA                          -->
+                    <!-- ========================================== -->
+
+                    <Border
+                        Grid.Row="2"
+                        Padding="18"
+                        BackgroundColor="#F8FBFF"
+                        Stroke="#DCE5F2"
+                        StrokeThickness="1"
+                        VerticalOptions="Fill">
+
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="12" />
+                        </Border.StrokeShape>
+
+                        <Grid
+                            RowDefinitions="Auto,Auto,Auto"
+                            ColumnDefinitions="*,110"
+                            RowSpacing="20"
+                            ColumnSpacing="15"
+                            VerticalOptions="Center">
+
+
+                            <!-- Egonaldiaren prezioa. -->
+                            <Label
+                                Grid.Row="0"
+                                Grid.Column="0"
+                                Text="Egonaldiaren prezioa"
+                                TextColor="#344054"
+                                VerticalTextAlignment="Center" />
+
+                            <Label
+                                x:Name="EgonaldiarenPrezioaEntry"
+                                Grid.Row="0"
+                                Grid.Column="1"
+                                Text="300 €"
+                                TextColor="#344054"
+                                HorizontalTextAlignment="End"
+                                VerticalTextAlignment="Center" />
+
+
+                            <!-- Gehigarrien prezioa. -->
+                            <Label
+                                Grid.Row="1"
+                                Grid.Column="0"
+                                Text="Gehigarrien prezioa"
+                                TextColor="#344054"
+                                VerticalTextAlignment="Center" />
+
+                            <Label
+                                x:Name="GehigarrienPrezioaEntry"
+                                Grid.Row="1"
+                                Grid.Column="1"
+                                Text="0 €"
+                                TextColor="#344054"
+                                HorizontalTextAlignment="End"
+                                VerticalTextAlignment="Center" />
+
+
+                            <!-- Guztizko prezioa. -->
+                            <Label
+                                Grid.Row="2"
+                                Grid.Column="0"
+                                Text="Guztizkoa"
+                                FontSize="17"
+                                FontAttributes="Bold"
+                                TextColor="#163A70"
+                                VerticalTextAlignment="Center" />
+
+                            <Label
+                                x:Name="GuztizkoaEntry"
+                                Grid.Row="2"
+                                Grid.Column="1"
+                                Text="300 €"
+                                FontSize="18"
+                                FontAttributes="Bold"
+                                TextColor="#176B35"
+                                HorizontalTextAlignment="End"
+                                VerticalTextAlignment="Center" />
+
+                        </Grid>
+
+                    </Border>
+
+                </Grid>
+
+            </Border>
+
+
+            <!-- ================================================== -->
+            <!-- ERRESERBA                                         -->
+            <!-- ================================================== -->
+
+            <Border
+                Grid.Column="2"
+                Padding="18"
+                BackgroundColor="White"
+                Stroke="#DCE5F2"
+                StrokeThickness="1">
+
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="14" />
+                </Border.StrokeShape>
+
+                <Grid
+                    RowDefinitions="Auto,Auto,Auto,Auto,*,Auto"
+                    RowSpacing="13">
+
+
+                    <Label
+                        Grid.Row="0"
+                        Text="Erreserba"
+                        FontSize="22"
+                        FontAttributes="Bold"
+                        TextColor="#163A70" />
+
+
+                    <!-- ========================================== -->
+                    <!-- DATA                                       -->
+                    <!-- ========================================== -->
+
+                    <Label
+                        Grid.Row="1"
+                        Text="Aukeratu asteko data"
+                        FontSize="14"
+                        FontAttributes="Bold"
+                        TextColor="#344054" />
+
+
+                    <!--
+                        Hasierako data gaurko eguna izango da.
+                        Hautatutako datari dagokion astelehena
+                        gordeko da erreserba egitean.
+                    -->
+                    <Border
+                        Grid.Row="2"
+                        Padding="8"
+                        BackgroundColor="#F8FAFC"
+                        Stroke="#DCE5F2"
+                        StrokeThickness="1">
+
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="10" />
+                        </Border.StrokeShape>
+
+                        <DatePicker
+                            x:Name="AsteaDatePicker"
+                            Format="dd/MM/yyyy"
+                            HeightRequest="46"
+                            BackgroundColor="Transparent"
+                            TextColor="#163A70"
+                            HorizontalOptions="Fill"
+                            DateSelected="OnDateSelected" />
+
+                    </Border>
+
+
+                    <!-- Erreserba egiteko botoia. -->
+                    <Button
+                        x:Name="ErreserbaBtn"
+                        Grid.Row="3"
+                        Text="Erreserba egin"
+                        HeightRequest="50"
+                        CornerRadius="10"
+                        BackgroundColor="#18A957"
+                        TextColor="White"
+                        FontAttributes="Bold"
+                        Clicked="OnErreserbaClicked" />
+
+
+                    <!-- ========================================== -->
+                    <!-- ERRESERBATUTAKO ASTEAK                      -->
+                    <!-- ========================================== -->
+
+                    <Grid
+                        Grid.Row="4"
+                        RowDefinitions="Auto,*"
+                        RowSpacing="8">
+
+                        <Label
+                            Grid.Row="0"
+                            Text="Erreserbatutako asteak"
+                            FontSize="17"
+                            FontAttributes="Bold"
+                            TextColor="#163A70" />
+
+
+                        <Border
+                            Grid.Row="1"
+                            Padding="10"
+                            BackgroundColor="#F8FAFC"
+                            Stroke="#E1E7F0"
+                            StrokeThickness="1">
+
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="10" />
+                            </Border.StrokeShape>
+
+                            <CollectionView
+                                x:Name="ErreserbakCollectionView">
+
+                                <!--
+                                    Hasieran ez dago erreserbarik.
+                                -->
+                                <CollectionView.EmptyView>
+
+                                    <Grid Padding="10">
+
+                                        <Label
+                                            Text="Oraindik ez dago erreserbarik."
+                                            TextColor="#667085"
+                                            HorizontalTextAlignment="Center"
+                                            VerticalTextAlignment="Center" />
+
+                                    </Grid>
+
+                                </CollectionView.EmptyView>
+
+
+                                <CollectionView.ItemTemplate>
+
+                                    <DataTemplate>
+
+                                        <Border
+                                            Margin="0,3"
+                                            Padding="8"
+                                            BackgroundColor="White"
+                                            Stroke="#E1E7F0">
+
+                                            <Border.StrokeShape>
+                                                <RoundRectangle CornerRadius="7" />
+                                            </Border.StrokeShape>
+
+                                            <Label
+                                                Text="{Binding .}"
+                                                FontSize="14"
+                                                TextColor="#344054" />
+
+                                        </Border>
+
+                                    </DataTemplate>
+
+                                </CollectionView.ItemTemplate>
+
+                            </CollectionView>
+
+                        </Border>
+
+                    </Grid>
+
+
+                    <!-- Aplikazioa ixteko botoia. -->
+                    <Button
+                        Grid.Row="5"
+                        Text="Irten"
+                        HeightRequest="48"
+                        CornerRadius="10"
+                        BackgroundColor="#111827"
+                        TextColor="White"
+                        FontAttributes="Bold"
+                        Clicked="OnIrtenClicked" />
+
+                </Grid>
+
+            </Border>
+
+        </Grid>
+
+    </Grid>
+
+</ContentPage>
