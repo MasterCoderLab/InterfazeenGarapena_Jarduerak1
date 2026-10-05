@@ -1,0 +1,418 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="I01_11_HarriaPaperaGuraize.MainPage"
+    BackgroundColor="#F4F7FB"
+    Shell.NavBarIsVisible="False">
+
+    <!--
+        Harria, papera eta guraize jokoaren pantaila nagusia.
+
+        Ezkerrean jokalariaren hiru aukerak daude.
+        Eskuinean makinak ausaz egindako aukera erakusten da.
+        Behealdean bi jokalarien puntuazioak eta Irten botoia daude.
+    -->
+    <Grid
+        Padding="25"
+        RowDefinitions="Auto,*,Auto"
+        RowSpacing="18">
+
+        <!-- ====================================================== -->
+        <!-- IZENBURUA                                              -->
+        <!-- ====================================================== -->
+
+        <VerticalStackLayout
+            Grid.Row="0"
+            Spacing="4">
+
+            <Label
+                Text="Harria, papera, guraize"
+                FontSize="30"
+                FontAttributes="Bold"
+                TextColor="#163A70" />
+
+            <Label
+                Text="Aukeratu irudi bat. Lehenengo 10 puntura iristen denak irabaziko du."
+                FontSize="14"
+                TextColor="#667085" />
+
+        </VerticalStackLayout>
+
+
+        <!-- ====================================================== -->
+        <!-- JOKOAREN EDUKI NAGUSIA                                 -->
+        <!-- ====================================================== -->
+
+        <Grid
+            Grid.Row="1"
+            ColumnDefinitions="1.4*,0.8*"
+            ColumnSpacing="20">
+
+
+            <!-- ================================================== -->
+            <!-- JOKALARIAREN AUKERAK                               -->
+            <!-- ================================================== -->
+
+            <Border
+                Grid.Column="0"
+                Padding="20"
+                BackgroundColor="White"
+                Stroke="#DCE5F2"
+                StrokeThickness="1">
+
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="14" />
+                </Border.StrokeShape>
+
+                <Grid
+                    RowDefinitions="Auto,*"
+                    RowSpacing="14">
+
+                    <Label
+                        Grid.Row="0"
+                        Text="Zure aukera"
+                        FontSize="22"
+                        FontAttributes="Bold"
+                        TextColor="#163A70"
+                        HorizontalTextAlignment="Center" />
+
+
+                    <!--
+                        Jokalariaren hiru aukerak.
+                        Irudiak AspectFit erabiliz erakusten dira,
+                        irudi osoa moztu gabe ikus dadin.
+                    -->
+                    <Grid
+                        Grid.Row="1"
+                        ColumnDefinitions="*,*,*"
+                        ColumnSpacing="15"
+                        VerticalOptions="Center">
+
+
+                        <!-- ====================================== -->
+                        <!-- HARRIA                                 -->
+                        <!-- ====================================== -->
+
+                        <Border
+                            Grid.Column="0"
+                            Padding="10"
+                            BackgroundColor="#F8FAFC"
+                            Stroke="#E1E7F0"
+                            StrokeThickness="1">
+
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="14" />
+                            </Border.StrokeShape>
+
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer
+                                    Tapped="OnHarriaTapped" />
+                            </Border.GestureRecognizers>
+
+                            <VerticalStackLayout
+                                Spacing="5"
+                                HorizontalOptions="Center"
+                                VerticalOptions="Center">
+
+                                <Image
+                                    Source="harria.png"
+                                    WidthRequest="78"
+                                    HeightRequest="78"
+                                    Aspect="AspectFit"
+                                    HorizontalOptions="Center"
+                                    VerticalOptions="Center"
+                                    InputTransparent="True" />
+
+                                <Label
+                                    Text="Harria"
+                                    FontSize="14"
+                                    FontAttributes="Bold"
+                                    TextColor="#163A70"
+                                    HorizontalTextAlignment="Center"
+                                    InputTransparent="True" />
+
+                            </VerticalStackLayout>
+
+                        </Border>
+
+
+                        <!-- ====================================== -->
+                        <!-- PAPERA                                 -->
+                        <!-- ====================================== -->
+
+                        <Border
+                            Grid.Column="1"
+                            Padding="10"
+                            BackgroundColor="#F8FAFC"
+                            Stroke="#E1E7F0"
+                            StrokeThickness="1">
+
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="14" />
+                            </Border.StrokeShape>
+
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer
+                                    Tapped="OnPaperaTapped" />
+                            </Border.GestureRecognizers>
+
+                            <VerticalStackLayout
+                                Spacing="5"
+                                HorizontalOptions="Center"
+                                VerticalOptions="Center">
+
+                                <Image
+                                    Source="papera.png"
+                                    WidthRequest="78"
+                                    HeightRequest="78"
+                                    Aspect="AspectFit"
+                                    HorizontalOptions="Center"
+                                    VerticalOptions="Center"
+                                    InputTransparent="True" />
+
+                                <Label
+                                    Text="Papera"
+                                    FontSize="14"
+                                    FontAttributes="Bold"
+                                    TextColor="#163A70"
+                                    HorizontalTextAlignment="Center"
+                                    InputTransparent="True" />
+
+                            </VerticalStackLayout>
+
+                        </Border>
+
+
+                        <!-- ====================================== -->
+                        <!-- GURAIZEAK                              -->
+                        <!-- ====================================== -->
+
+                        <Border
+                            Grid.Column="2"
+                            Padding="10"
+                            BackgroundColor="#F8FAFC"
+                            Stroke="#E1E7F0"
+                            StrokeThickness="1">
+
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="14" />
+                            </Border.StrokeShape>
+
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer
+                                    Tapped="OnGuraizeakTapped" />
+                            </Border.GestureRecognizers>
+
+                            <VerticalStackLayout
+                                Spacing="5"
+                                HorizontalOptions="Center"
+                                VerticalOptions="Center">
+
+                                <Image
+                                    Source="guraizeak.png"
+                                    WidthRequest="78"
+                                    HeightRequest="78"
+                                    Aspect="AspectFit"
+                                    HorizontalOptions="Center"
+                                    VerticalOptions="Center"
+                                    InputTransparent="True" />
+
+                                <Label
+                                    Text="Guraizeak"
+                                    FontSize="14"
+                                    FontAttributes="Bold"
+                                    TextColor="#163A70"
+                                    HorizontalTextAlignment="Center"
+                                    InputTransparent="True" />
+
+                            </VerticalStackLayout>
+
+                        </Border>
+
+                    </Grid>
+
+                </Grid>
+
+            </Border>
+
+
+            <!-- ================================================== -->
+            <!-- MAKINAREN AUKERA                                  -->
+            <!-- ================================================== -->
+
+            <Border
+                Grid.Column="1"
+                Padding="20"
+                BackgroundColor="White"
+                Stroke="#DCE5F2"
+                StrokeThickness="1">
+
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="14" />
+                </Border.StrokeShape>
+
+                <Grid
+                    RowDefinitions="Auto,*"
+                    RowSpacing="14">
+
+                    <Label
+                        Grid.Row="0"
+                        Text="Makina"
+                        FontSize="22"
+                        FontAttributes="Bold"
+                        TextColor="#163A70"
+                        HorizontalTextAlignment="Center" />
+
+                    <!--
+                        Makinaren azken aukera erakusteko eremua.
+                        Irudiaren tamaina mugatuta dago, aukera
+                        edozein dela ere irudi osoa ikus dadin.
+                    -->
+                    <Border
+                        Grid.Row="1"
+                        Padding="12"
+                        BackgroundColor="#F8FBFF"
+                        Stroke="#2F80ED"
+                        StrokeThickness="2"
+                        VerticalOptions="Center">
+
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="16" />
+                        </Border.StrokeShape>
+
+                        <VerticalStackLayout
+                            Spacing="5"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center">
+
+                            <Image
+                                x:Name="MakinaIrudia"
+                                WidthRequest="92"
+                                HeightRequest="92"
+                                Aspect="AspectFit"
+                                HorizontalOptions="Center"
+                                VerticalOptions="Center"
+                                IsVisible="False" />
+
+                            <Label
+                                x:Name="MakinaHasieraLabel"
+                                Text="?"
+                                FontSize="58"
+                                FontAttributes="Bold"
+                                TextColor="#8A96A8"
+                                HorizontalTextAlignment="Center" />
+
+                            <Label
+                                x:Name="MakinaAukeraLabel"
+                                Text="Aukeraren zain"
+                                FontSize="14"
+                                FontAttributes="Bold"
+                                TextColor="#163A70"
+                                HorizontalTextAlignment="Center" />
+
+                        </VerticalStackLayout>
+
+                    </Border>
+
+                </Grid>
+
+            </Border>
+
+        </Grid>
+
+
+        <!-- ====================================================== -->
+        <!-- PUNTUAZIOA ETA IRTEN BOTOIA                            -->
+        <!-- ====================================================== -->
+
+        <Grid
+            Grid.Row="2"
+            ColumnDefinitions="*,*,1.2*"
+            ColumnSpacing="15">
+
+            <!-- JOKALARIAREN PUNTUAK -->
+            <Border
+                Grid.Column="0"
+                Padding="12"
+                BackgroundColor="#EAF3FF"
+                StrokeThickness="0">
+
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="12" />
+                </Border.StrokeShape>
+
+                <VerticalStackLayout Spacing="2">
+
+                    <Label
+                        Text="Zure puntuak"
+                        FontSize="14"
+                        TextColor="#36506D"
+                        HorizontalTextAlignment="Center" />
+
+                    <Label
+                        x:Name="JokalariaPuntuakLabel"
+                        Text="0"
+                        FontSize="27"
+                        FontAttributes="Bold"
+                        TextColor="#163A70"
+                        HorizontalTextAlignment="Center" />
+
+                </VerticalStackLayout>
+
+            </Border>
+
+
+            <!-- MAKINAREN PUNTUAK -->
+            <Border
+                Grid.Column="1"
+                Padding="12"
+                BackgroundColor="#FFF3E6"
+                StrokeThickness="0">
+
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="12" />
+                </Border.StrokeShape>
+
+                <VerticalStackLayout Spacing="2">
+
+                    <Label
+                        Text="Makinaren puntuak"
+                        FontSize="14"
+                        TextColor="#76502E"
+                        HorizontalTextAlignment="Center" />
+
+                    <Label
+                        x:Name="MakinaPuntuakLabel"
+                        Text="0"
+                        FontSize="27"
+                        FontAttributes="Bold"
+                        TextColor="#A55300"
+                        HorizontalTextAlignment="Center" />
+
+                </VerticalStackLayout>
+
+            </Border>
+
+
+            <!--
+                Aplikazioaren leihoa ixten duen botoia.
+            -->
+            <Button
+                Grid.Column="2"
+                Text="Irten"
+                FontSize="17"
+                FontAttributes="Bold"
+                HeightRequest="65"
+                CornerRadius="12"
+                BackgroundColor="#111827"
+                TextColor="White"
+                VerticalOptions="Center"
+                Clicked="OnIrtenClicked" />
+
+        </Grid>
+
+    </Grid>
+
+</ContentPage>
