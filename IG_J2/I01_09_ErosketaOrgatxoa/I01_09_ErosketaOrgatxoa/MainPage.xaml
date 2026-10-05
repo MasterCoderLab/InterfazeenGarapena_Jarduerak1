@@ -1,0 +1,635 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="I01_09_ErosketaOrgatxoa.MainPage"
+    BackgroundColor="#F4F7FB"
+    Shell.NavBarIsVisible="False">
+
+    <!--
+        Erosketa-orgatxoaren pantaila nagusia.
+        Ezkerrean produktuak, erdian orgatxoa eta
+        eskuinean erosketa-zerrenda erakusten dira.
+    -->
+    <Grid
+        Padding="25"
+        RowDefinitions="Auto,*,Auto"
+        RowSpacing="18">
+
+        <!-- ====================================================== -->
+        <!-- GOIKO IZENBURUA ETA EGOERA-MEZUA                       -->
+        <!-- ====================================================== -->
+
+        <Grid
+            Grid.Row="0"
+            ColumnDefinitions="*,Auto">
+
+            <VerticalStackLayout Spacing="4">
+
+                <Label
+                    Text="Erosketa-orgatxoa"
+                    FontSize="30"
+                    FontAttributes="Bold"
+                    TextColor="#163A70" />
+
+                <Label
+                    Text="Arrastatu produktuak orgatxora erosketaren zerrenda osatzeko."
+                    FontSize="14"
+                    TextColor="#667085" />
+
+            </VerticalStackLayout>
+
+            <!--
+                Erabiltzaileari aplikazioaren azken ekintzaren
+                egoera erakusten dion mezua.
+            -->
+            <Border
+                Grid.Column="1"
+                Padding="18,10"
+                BackgroundColor="#EAF3FF"
+                StrokeThickness="0"
+                VerticalOptions="Center">
+
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="10" />
+                </Border.StrokeShape>
+
+                <Label
+                    x:Name="EgoeraLabel"
+                    Text="Prest"
+                    FontSize="14"
+                    TextColor="#36506D" />
+
+            </Border>
+
+        </Grid>
+
+
+        <!-- ====================================================== -->
+        <!-- EDUKI NAGUSIA                                         -->
+        <!-- ====================================================== -->
+
+        <Grid
+            Grid.Row="1"
+            ColumnDefinitions="1.15*,0.85*,1*"
+            ColumnSpacing="20">
+
+
+            <!-- ================================================== -->
+            <!-- PRODUKTUAK                                        -->
+            <!-- ================================================== -->
+
+            <Border
+                Grid.Column="0"
+                Padding="20"
+                BackgroundColor="White"
+                Stroke="#DCE5F2">
+
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="14" />
+                </Border.StrokeShape>
+
+                <Grid
+                    RowDefinitions="Auto,*"
+                    RowSpacing="14">
+
+                    <Label
+                        Text="Produktuak"
+                        FontSize="22"
+                        FontAttributes="Bold"
+                        TextColor="#163A70" />
+
+                    <!--
+                        Produktuak hiru errenkada eta bi zutabetan
+                        antolatzen dira.
+                    -->
+                    <Grid
+                        Grid.Row="1"
+                        RowDefinitions="*,*,*"
+                        ColumnDefinitions="*,*"
+                        RowSpacing="12"
+                        ColumnSpacing="12">
+
+
+                        <!-- ====================================== -->
+                        <!-- SANDIA                                 -->
+                        <!-- ====================================== -->
+
+                        <Border
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Padding="8"
+                            BackgroundColor="#F8FAFC"
+                            Stroke="#E1E7F0">
+
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="12" />
+                            </Border.StrokeShape>
+
+                            <Border.GestureRecognizers>
+                                <DragGestureRecognizer
+                                    CanDrag="True"
+                                    DragStarting="OnSandiaDragStarting" />
+                            </Border.GestureRecognizers>
+
+                            <VerticalStackLayout
+                                Spacing="2"
+                                HorizontalOptions="Center"
+                                VerticalOptions="Center">
+
+                                <!--
+                                    Irudia AspectFit bidez erakusten da,
+                                    irudi osoa moztu gabe ikus dadin.
+                                -->
+                                <Image
+                                    Source="sandia.png"
+                                    WidthRequest="56"
+                                    HeightRequest="56"
+                                    Aspect="AspectFit"
+                                    HorizontalOptions="Center"
+                                    VerticalOptions="Center"
+                                    InputTransparent="True" />
+
+                                <Label
+                                    Text="Sandia"
+                                    FontSize="13"
+                                    FontAttributes="Bold"
+                                    HorizontalTextAlignment="Center"
+                                    InputTransparent="True" />
+
+                            </VerticalStackLayout>
+
+                        </Border>
+
+
+                        <!-- ====================================== -->
+                        <!-- SAGARRA                                -->
+                        <!-- ====================================== -->
+
+                        <Border
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            Padding="8"
+                            BackgroundColor="#F8FAFC"
+                            Stroke="#E1E7F0">
+
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="12" />
+                            </Border.StrokeShape>
+
+                            <Border.GestureRecognizers>
+                                <DragGestureRecognizer
+                                    CanDrag="True"
+                                    DragStarting="OnSagarraDragStarting" />
+                            </Border.GestureRecognizers>
+
+                            <VerticalStackLayout
+                                Spacing="2"
+                                HorizontalOptions="Center"
+                                VerticalOptions="Center">
+
+                                <Image
+                                    Source="sagarra.png"
+                                    WidthRequest="56"
+                                    HeightRequest="56"
+                                    Aspect="AspectFit"
+                                    HorizontalOptions="Center"
+                                    VerticalOptions="Center"
+                                    InputTransparent="True" />
+
+                                <Label
+                                    Text="Sagarra"
+                                    FontSize="13"
+                                    FontAttributes="Bold"
+                                    HorizontalTextAlignment="Center"
+                                    InputTransparent="True" />
+
+                            </VerticalStackLayout>
+
+                        </Border>
+
+
+                        <!-- ====================================== -->
+                        <!-- UDAREA                                 -->
+                        <!-- ====================================== -->
+
+                        <Border
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            Padding="8"
+                            BackgroundColor="#F8FAFC"
+                            Stroke="#E1E7F0">
+
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="12" />
+                            </Border.StrokeShape>
+
+                            <Border.GestureRecognizers>
+                                <DragGestureRecognizer
+                                    CanDrag="True"
+                                    DragStarting="OnUdareaDragStarting" />
+                            </Border.GestureRecognizers>
+
+                            <VerticalStackLayout
+                                Spacing="2"
+                                HorizontalOptions="Center"
+                                VerticalOptions="Center">
+
+                                <Image
+                                    Source="udarea.png"
+                                    WidthRequest="56"
+                                    HeightRequest="56"
+                                    Aspect="AspectFit"
+                                    HorizontalOptions="Center"
+                                    VerticalOptions="Center"
+                                    InputTransparent="True" />
+
+                                <Label
+                                    Text="Udarea"
+                                    FontSize="13"
+                                    FontAttributes="Bold"
+                                    HorizontalTextAlignment="Center"
+                                    InputTransparent="True" />
+
+                            </VerticalStackLayout>
+
+                        </Border>
+
+
+                        <!-- ====================================== -->
+                        <!-- LARANJA                                -->
+                        <!-- ====================================== -->
+
+                        <Border
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            Padding="8"
+                            BackgroundColor="#F8FAFC"
+                            Stroke="#E1E7F0">
+
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="12" />
+                            </Border.StrokeShape>
+
+                            <Border.GestureRecognizers>
+                                <DragGestureRecognizer
+                                    CanDrag="True"
+                                    DragStarting="OnLaranjaDragStarting" />
+                            </Border.GestureRecognizers>
+
+                            <VerticalStackLayout
+                                Spacing="2"
+                                HorizontalOptions="Center"
+                                VerticalOptions="Center">
+
+                                <Image
+                                    Source="laranja.png"
+                                    WidthRequest="56"
+                                    HeightRequest="56"
+                                    Aspect="AspectFit"
+                                    HorizontalOptions="Center"
+                                    VerticalOptions="Center"
+                                    InputTransparent="True" />
+
+                                <Label
+                                    Text="Laranja"
+                                    FontSize="13"
+                                    FontAttributes="Bold"
+                                    HorizontalTextAlignment="Center"
+                                    InputTransparent="True" />
+
+                            </VerticalStackLayout>
+
+                        </Border>
+
+
+                        <!-- ====================================== -->
+                        <!-- ANANA                                  -->
+                        <!-- ====================================== -->
+
+                        <Border
+                            Grid.Row="2"
+                            Grid.Column="0"
+                            Padding="8"
+                            BackgroundColor="#F8FAFC"
+                            Stroke="#E1E7F0">
+
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="12" />
+                            </Border.StrokeShape>
+
+                            <Border.GestureRecognizers>
+                                <DragGestureRecognizer
+                                    CanDrag="True"
+                                    DragStarting="OnAnanaDragStarting" />
+                            </Border.GestureRecognizers>
+
+                            <VerticalStackLayout
+                                Spacing="2"
+                                HorizontalOptions="Center"
+                                VerticalOptions="Center">
+
+                                <Image
+                                    Source="anana.png"
+                                    WidthRequest="56"
+                                    HeightRequest="56"
+                                    Aspect="AspectFit"
+                                    HorizontalOptions="Center"
+                                    VerticalOptions="Center"
+                                    InputTransparent="True" />
+
+                                <Label
+                                    Text="Anana"
+                                    FontSize="13"
+                                    FontAttributes="Bold"
+                                    HorizontalTextAlignment="Center"
+                                    InputTransparent="True" />
+
+                            </VerticalStackLayout>
+
+                        </Border>
+
+
+                        <!-- ====================================== -->
+                        <!-- MELOIA                                 -->
+                        <!-- ====================================== -->
+
+                        <Border
+                            Grid.Row="2"
+                            Grid.Column="1"
+                            Padding="8"
+                            BackgroundColor="#F8FAFC"
+                            Stroke="#E1E7F0">
+
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="12" />
+                            </Border.StrokeShape>
+
+                            <Border.GestureRecognizers>
+                                <DragGestureRecognizer
+                                    CanDrag="True"
+                                    DragStarting="OnMeloiaDragStarting" />
+                            </Border.GestureRecognizers>
+
+                            <VerticalStackLayout
+                                Spacing="2"
+                                HorizontalOptions="Center"
+                                VerticalOptions="Center">
+
+                                <Image
+                                    Source="meloia.png"
+                                    WidthRequest="56"
+                                    HeightRequest="56"
+                                    Aspect="AspectFit"
+                                    HorizontalOptions="Center"
+                                    VerticalOptions="Center"
+                                    InputTransparent="True" />
+
+                                <Label
+                                    Text="Meloia"
+                                    FontSize="13"
+                                    FontAttributes="Bold"
+                                    HorizontalTextAlignment="Center"
+                                    InputTransparent="True" />
+
+                            </VerticalStackLayout>
+
+                        </Border>
+
+                    </Grid>
+
+                </Grid>
+
+            </Border>
+
+
+            <!-- ================================================== -->
+            <!-- ORGATXOA                                          -->
+            <!-- ================================================== -->
+
+            <Border
+                Grid.Column="1"
+                Padding="20"
+                BackgroundColor="White"
+                Stroke="#DCE5F2">
+
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="14" />
+                </Border.StrokeShape>
+
+                <Grid
+                    RowDefinitions="Auto,*,Auto"
+                    RowSpacing="15">
+
+                    <Label
+                        Text="Orgatxoa"
+                        FontSize="22"
+                        FontAttributes="Bold"
+                        TextColor="#163A70"
+                        HorizontalTextAlignment="Center" />
+
+                    <!--
+                        Produktuak eremu honetan askatzen dira.
+                        DropGestureRecognizer-ek C# kodeko
+                        OnOrgatxoaDrop metodoa exekutatzen du.
+                    -->
+                    <Border
+                        Grid.Row="1"
+                        Padding="20"
+                        BackgroundColor="#F8FBFF"
+                        Stroke="#2F80ED"
+                        StrokeThickness="2"
+                        VerticalOptions="Center">
+
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="18" />
+                        </Border.StrokeShape>
+
+                        <Border.GestureRecognizers>
+                            <DropGestureRecognizer
+                                AllowDrop="True"
+                                Drop="OnOrgatxoaDrop" />
+                        </Border.GestureRecognizers>
+
+                        <VerticalStackLayout
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center"
+                            Spacing="4">
+
+                            <Image
+                                Source="orgatxoa.png"
+                                WidthRequest="140"
+                                HeightRequest="140"
+                                Aspect="AspectFit"
+                                HorizontalOptions="Center"
+                                VerticalOptions="Center"
+                                InputTransparent="True" />
+
+                            <Label
+                                Text="Askatu produktua hemen"
+                                FontSize="16"
+                                FontAttributes="Bold"
+                                TextColor="#2F80ED"
+                                HorizontalTextAlignment="Center"
+                                InputTransparent="True" />
+
+                        </VerticalStackLayout>
+
+                    </Border>
+
+                    <Label
+                        Grid.Row="2"
+                        Text="Produktu bera berriro gehituz gero, kopurua handituko da."
+                        FontSize="13"
+                        TextColor="#667085"
+                        HorizontalTextAlignment="Center" />
+
+                </Grid>
+
+            </Border>
+
+
+            <!-- ================================================== -->
+            <!-- EROSKETA-ZERRENDA                                 -->
+            <!-- ================================================== -->
+
+            <Border
+                Grid.Column="2"
+                Padding="20"
+                BackgroundColor="White"
+                Stroke="#DCE5F2">
+
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="14" />
+                </Border.StrokeShape>
+
+                <Grid
+                    RowDefinitions="Auto,Auto,*"
+                    RowSpacing="12">
+
+                    <Label
+                        Text="Erosketa-zerrenda"
+                        FontSize="22"
+                        FontAttributes="Bold"
+                        TextColor="#163A70" />
+
+                    <!--
+                        Orgatxoan dauden produktu-unitate guztien
+                        kopurua erakusten da.
+                    -->
+                    <Border
+                        Grid.Row="1"
+                        Padding="10"
+                        BackgroundColor="#EAF3FF"
+                        StrokeThickness="0">
+
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="8" />
+                        </Border.StrokeShape>
+
+                        <Grid ColumnDefinitions="*,Auto">
+
+                            <Label
+                                Text="Produktuak guztira:"
+                                TextColor="#36506D" />
+
+                            <Label
+                                x:Name="GuztiraLabel"
+                                Grid.Column="1"
+                                Text="0"
+                                FontAttributes="Bold"
+                                TextColor="#163A70" />
+
+                        </Grid>
+
+                    </Border>
+
+                    <!--
+                        C# kodeak orgatxoko produktuen
+                        lerro grafikoak hemen sortzen ditu.
+                    -->
+                    <ScrollView Grid.Row="2">
+
+                        <VerticalStackLayout
+                            x:Name="ErosketaZerrendaLayout"
+                            Spacing="8">
+
+                            <Label
+                                Text="Orgatxoa hutsik dago."
+                                TextColor="#777777"
+                                HorizontalTextAlignment="Center"
+                                Margin="0,20,0,0" />
+
+                        </VerticalStackLayout>
+
+                    </ScrollView>
+
+                </Grid>
+
+            </Border>
+
+        </Grid>
+
+
+        <!-- ====================================================== -->
+        <!-- BEHEKO BOTOIAK                                        -->
+        <!-- ====================================================== -->
+
+        <Grid
+            Grid.Row="2"
+            ColumnDefinitions="*,*,*"
+            ColumnSpacing="14">
+
+            <!--
+                Erabiltzaileak egindako azken produktu-gehiketa
+                desegiten du.
+            -->
+            <Button
+                x:Name="DeseginBtn"
+                Grid.Column="0"
+                Text="Desegin"
+                HeightRequest="50"
+                CornerRadius="10"
+                FontSize="16"
+                FontAttributes="Bold"
+                BackgroundColor="#334155"
+                TextColor="White"
+                IsEnabled="False"
+                Clicked="OnDeseginClicked" />
+
+            <!--
+                Erosketa-zerrenda guztiz husten du.
+            -->
+            <Button
+                x:Name="ItzuliBtn"
+                Grid.Column="1"
+                Text="Itzuli"
+                HeightRequest="50"
+                CornerRadius="10"
+                FontSize="16"
+                FontAttributes="Bold"
+                BackgroundColor="#E5484D"
+                TextColor="White"
+                IsEnabled="False"
+                Clicked="OnItzuliClicked" />
+
+            <!--
+                Aplikazioaren leihoa ixten du.
+            -->
+            <Button
+                Grid.Column="2"
+                Text="Irten"
+                HeightRequest="50"
+                CornerRadius="10"
+                FontSize="16"
+                FontAttributes="Bold"
+                BackgroundColor="#111827"
+                TextColor="White"
+                Clicked="OnIrtenClicked" />
+
+        </Grid>
+
+    </Grid>
+
+</ContentPage>
