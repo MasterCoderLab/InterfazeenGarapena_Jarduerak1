@@ -454,13 +454,15 @@ public partial class MainPage : ContentPage
             astelehena);
 
 
-        // Pantailan erakusteko data-formatua sortzen da.
-        string asteTestua =
-            FormateatuDataEuskaraz(
-                astelehena);
+        // Erreserbatutako asteko lehen eta azken egunak kalkulatzen dira.
+        // Astea astelehenetik igandera doa.
+        DateTime igandea = astelehena.AddDays(6);
 
-        erreserbenTestuak.Add(
-            asteTestua);
+        // Bi datak erakusten dira erreserben zerrendan.
+        string asteTestua =
+        $"{astelehena:dd/MM/yyyy} - {igandea:dd/MM/yyyy}";
+
+        erreserbenTestuak.Add(asteTestua);
 
 
         await DisplayAlertAsync(
