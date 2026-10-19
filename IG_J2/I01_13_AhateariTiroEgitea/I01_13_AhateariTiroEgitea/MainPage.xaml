@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="I01_13_AhateariTiroEgitea.MainPage"
+    Shell.NavBarIsVisible="False"
+    BackgroundColor="#10251D">
+
+    <Grid Padding="16,12"
+          RowDefinitions="Auto,*,Auto"
+          RowSpacing="12">
+
+        <!-- Jokoaren goiburua. -->
+        <Grid Grid.Row="0" ColumnDefinitions="*,Auto">
+            <VerticalStackLayout Spacing="2">
+                <Label Text="AHATEARI TIRO"
+                       FontSize="26"
+                       FontAttributes="Bold"
+                       TextColor="#F9F2D6"/>
+
+                <Label Text="Ahate azkarrak, motelak eta oztopoak"
+                       FontSize="12"
+                       TextColor="#A7C8AE"/>
+            </VerticalStackLayout>
+
+            <Label Grid.Column="1"
+                   Text="DAM · I01.13"
+                   TextColor="#D5E6D2"
+                   VerticalOptions="Center"/>
+        </Grid>
+
+        <!-- GraphicsView erabiliz marraztuko dugu jokoaren eszena. -->
+        <Border Grid.Row="1"
+                Stroke="#557A60"
+                StrokeThickness="2"
+                StrokeShape="RoundRectangle 15">
+
+            <Grid>
+                <GraphicsView
+                    x:Name="JokoEremua"
+                    BackgroundColor="#A6D9EA"
+                    StartInteraction="JokoEremua_Ukituta"
+                    MoveHoverInteraction="JokoEremua_SaguaMugituta"
+                    DragInteraction="JokoEremua_SaguaMugituta" />
+
+                <!-- Jolasa hasi aurreko argibidea. -->
+                <Border x:Name="MezuPanela"
+                        BackgroundColor="#D910251D"
+                        Stroke="#B8D9B4"
+                        StrokeShape="RoundRectangle 14"
+                        Padding="22"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        InputTransparent="True">
+
+                    <VerticalStackLayout Spacing="9">
+                        <Label x:Name="MezuIzenburua"
+                               Text="PREST TIRO EGITEKO?"
+                               FontSize="23"
+                               FontAttributes="Bold"
+                               TextColor="White"
+                               HorizontalTextAlignment="Center"/>
+
+                        <Label x:Name="MezuAzalpena"
+                               Text="Sakatu Hasi eta harrapatu ahateak!"
+                               FontSize="13"
+                               TextColor="#E7F4E4"
+                               HorizontalTextAlignment="Center"/>
+                    </VerticalStackLayout>
+                </Border>
+            </Grid>
+        </Border>
+
+        <!-- Denbora, puntuaketa eta jokoaren kontrolak. -->
+        <Grid Grid.Row="2"
+              ColumnDefinitions="Auto,Auto,*,Auto,Auto,Auto"
+              ColumnSpacing="12">
+
+            <Border BackgroundColor="#19392B"
+                    StrokeShape="RoundRectangle 10"
+                    Padding="14,9">
+                <HorizontalStackLayout Spacing="9">
+                    <Label Text="DENBORA"
+                           TextColor="#BDD4C4"
+                           FontSize="12"/>
+                    <Label x:Name="DenboraLabel"
+                           Text="0:20"
+                           FontAttributes="Bold"
+                           FontSize="16"
+                           TextColor="White"/>
+                </HorizontalStackLayout>
+            </Border>
+
+            <Border Grid.Column="1"
+                    BackgroundColor="#19392B"
+                    StrokeShape="RoundRectangle 10"
+                    Padding="14,9">
+                <HorizontalStackLayout Spacing="9">
+                    <Label Text="PUNTUAK"
+                           TextColor="#BDD4C4"
+                           FontSize="12"/>
+                    <Label x:Name="PuntuakLabel"
+                           Text="0"
+                           FontAttributes="Bold"
+                           FontSize="16"
+                           TextColor="#FFE083"/>
+                </HorizontalStackLayout>
+            </Border>
+
+            <Label Grid.Column="2"
+                   x:Name="EgoeraLabel"
+                   Text="Hasi jolasteko"
+                   TextColor="#C0D5C7"
+                   VerticalOptions="Center"
+                   HorizontalTextAlignment="Center"
+                   FontSize="12"/>
+
+            <Button Grid.Column="3"
+                    x:Name="HasiBotoia"
+                    Text="Hasi"
+                    BackgroundColor="#159447"
+                    TextColor="White"
+                    FontAttributes="Bold"
+                    Clicked="HasiBotoia_Clicked"/>
+
+            <Button Grid.Column="4"
+                    Text="Berrabiarazi"
+                    BackgroundColor="#D99B24"
+                    TextColor="#15211A"
+                    Clicked="BerrabiaraziBotoia_Clicked"/>
+
+            <Button Grid.Column="5"
+                    Text="Irten"
+                    BackgroundColor="#AF3434"
+                    TextColor="White"
+                    Clicked="IrtenBotoia_Clicked"/>
+        </Grid>
+
+    </Grid>
+</ContentPage>

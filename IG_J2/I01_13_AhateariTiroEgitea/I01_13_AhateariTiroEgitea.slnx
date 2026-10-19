@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="I01_13_AhateariTiroEgitea/I01_13_AhateariTiroEgitea.csproj">
+    <Deploy Solution="Debug|*" />
+  </Project>
+</Solution>
