@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 
 <ContentPage
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
@@ -16,7 +16,7 @@
         Erdian gehigarriak eta prezioen kalkulua daude.
 
         Eskuinean erreserbatu nahi den data aukeratu eta
-        aurretik erreserbatutako asteak erakusten dira.
+        aurretik erreserbatutako epeak erakusten dira.
     -->
     <Grid
         Padding="25"
@@ -38,7 +38,7 @@
                 TextColor="#163A70" />
 
             <Label
-                Text="Aukeratu gela, gehigarriak eta erreserbatu nahi duzun astea."
+                Text="Aukeratu gela, gehigarriak eta egonaldiaren hasiera- eta amaiera-datak."
                 FontSize="14"
                 TextColor="#667085" />
 
@@ -258,7 +258,7 @@
                                 CheckedChanged="OnGehigarriaChanged" />
 
                             <Label
-                                Text="Gidaria duen txangoa (+150 €)"
+                                Text="Bisita gidatu paketea (+150 €)"
                                 TextColor="#344054"
                                 VerticalTextAlignment="Center" />
 
@@ -388,7 +388,7 @@
                 </Border.StrokeShape>
 
                 <Grid
-                    RowDefinitions="Auto,Auto,Auto,Auto,*,Auto"
+                    RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,*,Auto"
                     RowSpacing="13">
 
 
@@ -406,16 +406,15 @@
 
                     <Label
                         Grid.Row="1"
-                        Text="Aukeratu asteko data"
+                        Text="Hasiera-data"
                         FontSize="14"
                         FontAttributes="Bold"
                         TextColor="#344054" />
 
 
                     <!--
-                        Hasierako data gaurko eguna izango da.
-                        Hautatutako datari dagokion astelehena
-                        gordeko da erreserba egitean.
+                        Hasierako data erabiltzaileak aukeratzen du.
+                        Bi datak erreserban sartzen dira.
                     -->
                     <Border
                         Grid.Row="2"
@@ -429,7 +428,38 @@
                         </Border.StrokeShape>
 
                         <DatePicker
-                            x:Name="AsteaDatePicker"
+                            x:Name="HasieraDatePicker"
+                            Format="dd/MM/yyyy"
+                            HeightRequest="46"
+                            BackgroundColor="Transparent"
+                            TextColor="#163A70"
+                            HorizontalOptions="Fill"
+                            DateSelected="OnDateSelected" />
+
+                    </Border>
+
+
+                    <!-- Erreserbaren amaiera-data. -->
+                    <Label
+                        Grid.Row="3"
+                        Text="Amaiera-data"
+                        FontSize="14"
+                        FontAttributes="Bold"
+                        TextColor="#344054" />
+
+                    <Border
+                        Grid.Row="4"
+                        Padding="8"
+                        BackgroundColor="#F8FAFC"
+                        Stroke="#DCE5F2"
+                        StrokeThickness="1">
+
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="10" />
+                        </Border.StrokeShape>
+
+                        <DatePicker
+                            x:Name="AmaieraDatePicker"
                             Format="dd/MM/yyyy"
                             HeightRequest="46"
                             BackgroundColor="Transparent"
@@ -443,7 +473,7 @@
                     <!-- Erreserba egiteko botoia. -->
                     <Button
                         x:Name="ErreserbaBtn"
-                        Grid.Row="3"
+                        Grid.Row="5"
                         Text="Erreserba egin"
                         HeightRequest="50"
                         CornerRadius="10"
@@ -458,13 +488,13 @@
                     <!-- ========================================== -->
 
                     <Grid
-                        Grid.Row="4"
+                        Grid.Row="6"
                         RowDefinitions="Auto,*"
                         RowSpacing="8">
 
                         <Label
                             Grid.Row="0"
-                            Text="Erreserbatutako asteak"
+                            Text="Erreserbatutako epeak"
                             FontSize="17"
                             FontAttributes="Bold"
                             TextColor="#163A70" />
@@ -536,7 +566,7 @@
 
                     <!-- Aplikazioa ixteko botoia. -->
                     <Button
-                        Grid.Row="5"
+                        Grid.Row="7"
                         Text="Irten"
                         HeightRequest="48"
                         CornerRadius="10"

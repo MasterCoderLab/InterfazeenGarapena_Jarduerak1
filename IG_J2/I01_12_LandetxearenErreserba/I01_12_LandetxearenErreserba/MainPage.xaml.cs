@@ -1,4 +1,4 @@
-﻿using System.Collections.ObjectModel;
+using System.Collections.ObjectModel;
 using Microsoft.Maui.Dispatching;
 
 namespace I01_12_LandetxearenErreserba;
@@ -9,11 +9,10 @@ namespace I01_12_LandetxearenErreserba;
 /// Aplikazioak lau gelaren irudiak CarouselView kontrolaren bidez
 /// erakusten ditu.
 ///
-/// Erabiltzaileak aste bateko erreserba egin dezake eta
-/// aukeratutako gehigarrien arabera prezioa automatikoki
-/// kalkulatzen da.
+/// Erabiltzaileak hasiera- eta amaiera-datak aukeratzen ditu.
+/// Egonaldiaren egunen arabera prezioa automatikoki kalkulatzen da.
 ///
-/// Aste bera ezin da bi aldiz erreserbatu.
+/// Aurrez erreserbatutako epeekin ezin da datarik gainjarri.
 ///
 /// Erabiltzaileak 10 segundoz aplikazioarekin elkarreragiten ez badu,
 /// CarouselView kontrolak ausaz beste irudi bat erakusten du.
@@ -25,7 +24,7 @@ public partial class MainPage : ContentPage
     // ============================================================
 
     /// <summary>
-    /// Landetxea aste oso baterako erreserbatzeko prezioa.
+    /// Landetxearen erreferentziako tarifa: 300 euro 7 eguneko.
     /// </summary>
     private const decimal ASTEKO_PREZIOA = 300m;
 
@@ -45,7 +44,7 @@ public partial class MainPage : ContentPage
     private const decimal HAURTZAINDegia_EGUNEKO_PREZIOA = 40m;
 
     /// <summary>
-    /// Aste osoko erreserbaren egun kopurua.
+    /// Asteko tarifaren erreferentziako egun kopurua.
     /// </summary>
     private const int ASTEKO_EGUNAK = 7;
 
@@ -67,13 +66,14 @@ public partial class MainPage : ContentPage
         };
 
     /// <summary>
-    /// Dagoeneko erreserbatutako asteetako astelehenak gordetzen ditu.
+    /// Erreserbatutako epeen hasiera- eta amaiera-datak gordetzen ditu.
+    /// Azken eguna ere erreserbaren barruan dago.
     /// </summary>
-    private readonly HashSet<DateTime> erreserbatutakoAsteak =
+    private readonly List<(DateTime Hasiera, DateTime Amaiera)> erreserbatutakoEpeak =
         new();
 
     /// <summary>
-    /// Erreserbatutako asteak pantailan erakusteko
+    /// Erreserbatutako epeak pantailan erakusteko
     /// testu-zerrenda behagarria.
     /// </summary>
     private readonly ObservableCollection<string> erreserbenTestuak =
@@ -302,46 +302,55 @@ public partial class MainPage : ContentPage
     /// erreserbaren guztizko prezioa kalkulatzen ditu.
     ///
     /// Tarifak:
-    /// 300 euro astea.
+    /// 300 euro 7 eguneko (egun kopuruari proportzionalki).
     /// 25 euro aireportuko joan-etorria.
     /// 150 euro gidaria duen txangoa.
     /// 40 euro eguneko haurtzaindegia.
     /// </summary>
     private void KalkulatuPrezioak()
     {
+        DateTime hasiera = HasieraDatePicker.Date ?? DateTime.Today;
+        DateTime amaiera = AmaieraDatePicker.Date ?? DateTime.Today.AddDays(6);
+
+        // Bi egunak barne hartzen dira: urriak 1-3 = 3 egun.
+        int egunKopurua = (amaiera.Date - hasiera.Date).Days + 1;
+
+        if (egunKopurua <= 0)
+        {
+            EgonaldiarenPrezioaEntry.Text = "Data okerrak";
+            GehigarrienPrezioaEntry.Text = "—";
+            GuztizkoaEntry.Text = "—";
+            return;
+        }
+
+        // Asteko 300 euroak hautatutako egun kopuruaren arabera doitzen dira.
+        decimal egonaldiarenPrezioa = Math.Round(
+            ASTEKO_PREZIOA * egunKopurua / ASTEKO_EGUNAK,
+            2,
+            MidpointRounding.AwayFromZero);
+
         decimal gehigarriak = 0m;
 
         if (AireportuaCheckBox.IsChecked)
         {
-            gehigarriak +=
-                AIREPORTUA_PREZIOA;
+            gehigarriak += AIREPORTUA_PREZIOA;
         }
 
         if (GidariaCheckBox.IsChecked)
         {
-            gehigarriak +=
-                GIDARIA_PREZIOA;
+            gehigarriak += GIDARIA_PREZIOA;
         }
 
         if (HaurtzaindegiaCheckBox.IsChecked)
         {
-            gehigarriak +=
-                HAURTZAINDegia_EGUNEKO_PREZIOA
-                * ASTEKO_EGUNAK;
+            gehigarriak += HAURTZAINDegia_EGUNEKO_PREZIOA * egunKopurua;
         }
 
-        decimal guztira =
-            ASTEKO_PREZIOA
-            + gehigarriak;
+        decimal guztira = egonaldiarenPrezioa + gehigarriak;
 
-        EgonaldiarenPrezioaEntry.Text =
-            $"{ASTEKO_PREZIOA:N0} €";
-
-        GehigarrienPrezioaEntry.Text =
-            $"{gehigarriak:N0} €";
-
-        GuztizkoaEntry.Text =
-            $"{guztira:N0} €";
+        EgonaldiarenPrezioaEntry.Text = $"{egonaldiarenPrezioa:N2} €";
+        GehigarrienPrezioaEntry.Text = $"{gehigarriak:N2} €";
+        GuztizkoaEntry.Text = $"{guztira:N2} €";
     }
 
 
@@ -350,48 +359,27 @@ public partial class MainPage : ContentPage
     // ============================================================
 
     /// <summary>
-    /// DatePicker kontrolaren hasierako data gaurko egunera ezartzen du.
+    /// Hasiera gaur ezartzen du eta amaiera zazpi eguneko
+    /// egonaldi baten azken egunean (gaur + 6 egun).
     /// </summary>
     private void PrestatuHasierakoData()
     {
-        AsteaDatePicker.Date =
-            DateTime.Today;
+        HasieraDatePicker.Date = DateTime.Today;
+        AmaieraDatePicker.Date = DateTime.Today.AddDays(6);
     }
 
     /// <summary>
-    /// Erabiltzaileak data berri bat aukeratzen duenean
-    /// inaktibitate-kontagailua berrabiarazten du.
+    /// Hasiera edo amaiera aldatzean prezioak eguneratzen ditu,
+    /// eta erabiltzailearen inaktibitate-denbora berrabiarazten du.
     /// </summary>
-    /// <param name="sender">
-    /// Data aldatu duen DatePicker kontrola.
-    /// </param>
-    /// <param name="e">
-    /// Aurreko eta data berriaren informazioa.
-    /// </param>
+    /// <param name="sender">Aldatutako DatePicker kontrola.</param>
+    /// <param name="e">Aurreko eta data berriaren informazioa.</param>
     private void OnDateSelected(
         object? sender,
         DateChangedEventArgs e)
     {
+        KalkulatuPrezioak();
         BerrabiaraziInaktibitateTenporizadorea();
-    }
-
-    /// <summary>
-    /// Hautatutako datari dagokion asteko astelehena kalkulatzen du.
-    /// </summary>
-    /// <param name="data">
-    /// Erabiltzaileak hautatutako data.
-    /// </param>
-    /// <returns>
-    /// Hautatutako asteko astelehena.
-    /// </returns>
-    private DateTime KalkulatuAstekoAstelehena(
-        DateTime data)
-    {
-        int diferentzia =
-            ((int)data.DayOfWeek + 6) % 7;
-
-        return data.Date.AddDays(
-            -diferentzia);
     }
 
 
@@ -410,64 +398,51 @@ public partial class MainPage : ContentPage
     }
 
     /// <summary>
-    /// Hautatutako astearen erreserba egiten saiatzen da.
-    ///
-    /// Astea libre badago gordetzen du.
-    /// Aurretik erreserbatuta badago errore-mezua erakusten du.
+    /// Aukeratutako hasiera- eta amaiera-daten erreserba egiten du.
+    /// Data tartea okerra bada edo beste erreserba batekin
+    /// gainjartzen bada, ez du erreserba gordetzen.
     /// </summary>
-    /// <param name="sender">
-    /// Erreserba egin botoia.
-    /// </param>
-    /// <param name="e">
-    /// Klik-gertaeraren informazioa.
-    /// </param>
+    /// <param name="sender">Erreserba egin botoia.</param>
+    /// <param name="e">Klik-gertaeraren informazioa.</param>
     private async void OnErreserbaClicked(
         object? sender,
         EventArgs e)
     {
         BerrabiaraziInaktibitateTenporizadorea();
 
-        // DatePicker kontrolaren data nullable izan daiteke.
-        DateTime hautatutakoData =
-            AsteaDatePicker.Date
-            ?? DateTime.Today;
+        DateTime hasiera = (HasieraDatePicker.Date ?? DateTime.Today).Date;
+        DateTime amaiera = (AmaieraDatePicker.Date ?? DateTime.Today).Date;
 
-        DateTime astelehena =
-            KalkulatuAstekoAstelehena(
-                hautatutakoData);
-
-
-        // Astea aurretik erreserbatuta dagoen egiaztatzen da.
-        if (erreserbatutakoAsteak.Contains(astelehena))
+        if (amaiera < hasiera)
         {
             await DisplayAlertAsync(
                 "Erreserba",
-                "Aste horretan ezin da erreserba egin.",
+                "Amaiera-data ezin da hasiera-data baino lehenagokoa izan.",
                 "Ados");
-
             return;
         }
 
+        // Bi tarte gainjartzen dira hasiera beste tartearen
+        // amaiera baino lehenago eta amaiera beste hasieraren
+        // ondoren daudenean (mugako egunak barne).
+        bool gainjartzenDa = erreserbatutakoEpeak.Any(epea =>
+            hasiera <= epea.Amaiera && amaiera >= epea.Hasiera);
 
-        // Aste berria gordetzen da.
-        erreserbatutakoAsteak.Add(
-            astelehena);
+        if (gainjartzenDa)
+        {
+            await DisplayAlertAsync(
+                "Erreserba",
+                "Epe horretan dagoeneko badago erreserba bat.",
+                "Ados");
+            return;
+        }
 
-
-        // Erreserbatutako asteko lehen eta azken egunak kalkulatzen dira.
-        // Astea astelehenetik igandera doa.
-        DateTime igandea = astelehena.AddDays(6);
-
-        // Bi datak erakusten dira erreserben zerrendan.
-        string asteTestua =
-        $"{astelehena:dd/MM/yyyy} - {igandea:dd/MM/yyyy}";
-
-        erreserbenTestuak.Add(asteTestua);
-
+        erreserbatutakoEpeak.Add((hasiera, amaiera));
+        erreserbenTestuak.Add($"{hasiera:dd/MM/yyyy} - {amaiera:dd/MM/yyyy}");
 
         await DisplayAlertAsync(
             "Erreserba",
-            "Adierazitako astean egindako erreserba.",
+            "Aukeratutako epea behar bezala erreserbatu da.",
             "Ados");
     }
 
