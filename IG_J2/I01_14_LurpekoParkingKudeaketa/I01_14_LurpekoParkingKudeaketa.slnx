@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="I01_14_LurpekoParkingKudeaketa/I01_14_LurpekoParkingKudeaketa.csproj">
+    <Deploy Solution="Debug|*" />
+  </Project>
+</Solution>
