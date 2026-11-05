@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:testuak="clr-namespace:I01_14_LurpekoParkingKudeaketa.Resources.Strings"
+             x:Class="I01_14_LurpekoParkingKudeaketa.Pantailak.AparkalekuaPage"
+             Title="{x:Static testuak:AppResources.ParkingTab}"
+             BackgroundColor="#F3F6FA">
+    <Grid x:Name="DiseinuNagusia" Padding="18" RowDefinitions="Auto,Auto,*,Auto" RowSpacing="12">
+        <VerticalStackLayout Grid.Row="0" Spacing="3">
+            <Label x:Name="Izenburua" Text="{x:Static testuak:AppResources.ParkingStatusTitle}" FontSize="25"
+                   FontAttributes="Bold" TextColor="#15263C" />
+            <Label x:Name="PlazaKopurua" Text="{x:Static testuak:AppResources.LoadingSpaces}"
+                   FontSize="13" TextColor="#52677F" />
+        </VerticalStackLayout>
+
+        <VerticalStackLayout Grid.Row="1" Spacing="8">
+            <Grid x:Name="IragazkiSarea" RowDefinitions="Auto,Auto,Auto"
+                  ColumnDefinitions="*,*,*" ColumnSpacing="8">
+                <VerticalStackLayout x:Name="SolairuIragazkiaMultzoa" Grid.Column="0" Spacing="2">
+                    <Label Text="{x:Static testuak:AppResources.Floor}"
+                           FontSize="12" TextColor="#52677F" />
+                    <Picker x:Name="SolairuIragazkia"
+                            Title="{x:Static testuak:AppResources.Floor}"
+                            TitleColor="#52677F" TextColor="#15263C"
+                            SelectedIndexChanged="IragazkiakAldatuta" />
+                </VerticalStackLayout>
+                <VerticalStackLayout x:Name="EgoeraIragazkiaMultzoa" Grid.Column="1" Spacing="2">
+                    <Label Text="{x:Static testuak:AppResources.Status}"
+                           FontSize="12" TextColor="#52677F" />
+                    <Picker x:Name="EgoeraIragazkia"
+                            Title="{x:Static testuak:AppResources.Status}"
+                            TitleColor="#52677F" TextColor="#15263C"
+                            SelectedIndexChanged="IragazkiakAldatuta" />
+                </VerticalStackLayout>
+                <VerticalStackLayout x:Name="MotaIragazkiaMultzoa" Grid.Column="2" Spacing="2">
+                    <Label Text="{x:Static testuak:AppResources.Type}"
+                           FontSize="12" TextColor="#52677F" />
+                    <Picker x:Name="MotaIragazkia"
+                            Title="{x:Static testuak:AppResources.Type}"
+                            TitleColor="#52677F" TextColor="#15263C"
+                            SelectedIndexChanged="IragazkiakAldatuta" />
+                </VerticalStackLayout>
+            </Grid>
+            <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
+                <Label Text="{x:Static testuak:AppResources.OnlyFree}" VerticalOptions="Center"
+                       TextColor="#15263C" />
+                <Switch x:Name="LibreakBakarrik" Grid.Column="1"
+                        Toggled="LibreakBakarrikAldatuta" />
+            </Grid>
+        </VerticalStackLayout>
+
+        <CollectionView x:Name="PlazaZerrenda" Grid.Row="2"
+                        SelectionMode="Single" SelectionChanged="PlazaHautatua"
+                        EmptyView="{x:Static testuak:AppResources.NoSpaces}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Border Margin="0,4" Padding="12" BackgroundColor="White"
+                            Stroke="#DCE4EC" StrokeThickness="1"
+                            StrokeShape="RoundRectangle 12">
+                        <Grid ColumnDefinitions="65,*,Auto" ColumnSpacing="12">
+                            <Label Text="{Binding Zenbakia}" FontSize="18"
+                                   FontAttributes="Bold" TextColor="#15263C"
+                                   VerticalOptions="Center" />
+                            <VerticalStackLayout Grid.Column="1" Spacing="2">
+                                <Label Text="{Binding MotaIzena}" FontSize="14"
+                                       TextColor="#15263C" />
+                                <Label Text="{Binding SolairuIzena}"
+                                       TextColor="#52677F" FontSize="12" />
+                            </VerticalStackLayout>
+                            <Label Grid.Column="2" Text="{Binding EgoeraIzena}"
+                                   VerticalOptions="Center" TextColor="#255A8A"
+                                   FontAttributes="Bold" FontSize="12" />
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <Border Grid.Row="3" Padding="14" BackgroundColor="White"
+                Stroke="#DCE4EC" StrokeShape="RoundRectangle 12">
+            <VerticalStackLayout Spacing="6">
+                <Label Text="{x:Static testuak:AppResources.SpaceDetailsTitle}" FontSize="17"
+                       FontAttributes="Bold" TextColor="#15263C" />
+                <Label x:Name="PlazaXehetasunak" Text="{x:Static testuak:AppResources.SelectSpace}"
+                       TextColor="#334155" FontSize="13" />
+                <Label x:Name="IbilgailuXehetasunak" Text=""
+                       TextColor="#334155" FontSize="13" />
+                <Button x:Name="IbilgailuaIkusiBotoia" Text="{x:Static testuak:AppResources.ShowVehicle}"
+                        Clicked="IbilgailuaIkusi" IsEnabled="False"
+                        BackgroundColor="#1F5586" TextColor="White" />
+            </VerticalStackLayout>
+        </Border>
+    </Grid>
+</ContentPage>

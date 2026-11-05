@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<Shell
-    x:Class="I01_14_LurpekoParkingKudeaketa.AppShell"
-    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:I01_14_LurpekoParkingKudeaketa"
-    Title="I01_14_LurpekoParkingKudeaketa">
-
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
-
+<Shell xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:pantailak="clr-namespace:I01_14_LurpekoParkingKudeaketa.Pantailak"
+       xmlns:testuak="clr-namespace:I01_14_LurpekoParkingKudeaketa.Resources.Strings"
+       x:Class="I01_14_LurpekoParkingKudeaketa.AppShell"
+       Shell.FlyoutBehavior="Disabled"
+       Title="{x:Static testuak:AppResources.AppTitle}">
+    <TabBar Route="nagusia">
+        <Tab Title="{x:Static testuak:AppResources.ParkingTab}" Route="aparkalekuTab">
+            <ShellContent Title="{x:Static testuak:AppResources.ParkingTab}" Route="aparkalekua"
+                          ContentTemplate="{DataTemplate pantailak:AparkalekuaPage}" />
+        </Tab>
+        <Tab Title="{x:Static testuak:AppResources.VehiclesTab}" Route="ibilgailuTab">
+            <ShellContent Title="{x:Static testuak:AppResources.VehiclesTab}" Route="ibilgailuak"
+                          ContentTemplate="{DataTemplate pantailak:IbilgailuakPage}" />
+        </Tab>
+    </TabBar>
 </Shell>

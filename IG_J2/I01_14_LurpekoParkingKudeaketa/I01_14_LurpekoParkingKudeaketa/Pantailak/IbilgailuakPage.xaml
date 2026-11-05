@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:testuak="clr-namespace:I01_14_LurpekoParkingKudeaketa.Resources.Strings"
+             x:Class="I01_14_LurpekoParkingKudeaketa.Pantailak.IbilgailuakPage"
+             Title="{x:Static testuak:AppResources.VehiclesTab}" BackgroundColor="#F3F6FA">
+    <Grid x:Name="DiseinuNagusia" Padding="18" RowDefinitions="Auto,Auto,*,Auto,200" RowSpacing="10">
+        <Label x:Name="Izenburua" Grid.Row="0" Text="{x:Static testuak:AppResources.VehicleListTitle}" FontSize="25"
+               FontAttributes="Bold" TextColor="#15263C" />
+
+        <SearchBar x:Name="Bilaketa" Grid.Row="1"
+                   Placeholder="{x:Static testuak:AppResources.SearchPlaceholder}"
+                   TextChanged="BilaketaAldatuta" TextColor="#15263C"
+                   PlaceholderColor="#52677F" BackgroundColor="White" />
+
+        <CollectionView x:Name="IbilgailuZerrenda" Grid.Row="2"
+                        SelectionMode="Single" SelectionChanged="IbilgailuaHautatua"
+                        EmptyView="{x:Static testuak:AppResources.NoVehicles}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Border Margin="0,4" Padding="12" BackgroundColor="White"
+                            Stroke="#DCE4EC" StrokeShape="RoundRectangle 12">
+                        <Grid ColumnDefinitions="110,*,Auto" ColumnSpacing="10">
+                            <Label Text="{Binding Matrikula}" FontAttributes="Bold"
+                                   TextColor="#15263C" VerticalOptions="Center" />
+                            <VerticalStackLayout Grid.Column="1" Spacing="2">
+                                <Label Text="{Binding Marka}" TextColor="#15263C" />
+                                <Label Text="{Binding Modeloa}" FontSize="12"
+                                       TextColor="#52677F" />
+                            </VerticalStackLayout>
+                            <Label Grid.Column="2" Text="{Binding Jabea.Izena}"
+                                   VerticalOptions="Center" TextColor="#52677F" />
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <Border Grid.Row="3" Padding="12" Stroke="#DCE4EC"
+                StrokeShape="RoundRectangle 12" BackgroundColor="White">
+            <VerticalStackLayout Spacing="4">
+                <Label Text="{x:Static testuak:AppResources.VehicleCardTitle}" FontAttributes="Bold"
+                       TextColor="#15263C" FontSize="17" />
+                <Label x:Name="IbilgailuXehetasunak" Text="{x:Static testuak:AppResources.SelectVehicle}"
+                       TextColor="#334155" FontSize="13" />
+            </VerticalStackLayout>
+        </Border>
+
+        <Grid Grid.Row="4" RowDefinitions="Auto,*" RowSpacing="6">
+            <Label Text="{x:Static testuak:AppResources.HistoryTitle}" FontAttributes="Bold"
+                   TextColor="#15263C" FontSize="17" />
+            <CollectionView x:Name="HistoriaZerrenda" Grid.Row="1"
+                            EmptyView="{x:Static testuak:AppResources.NoHistory}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Border BackgroundColor="White" Stroke="#DCE4EC"
+                                StrokeShape="RoundRectangle 10"
+                                Padding="10" Margin="0,3">
+                            <Label Text="{Binding .}" FontSize="12"
+                                   TextColor="#334155" />
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
+    </Grid>
+</ContentPage>

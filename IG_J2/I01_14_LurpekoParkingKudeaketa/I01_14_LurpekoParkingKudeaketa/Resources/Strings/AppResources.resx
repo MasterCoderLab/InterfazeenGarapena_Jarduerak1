@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms</value>
+  </resheader>
+  <data name="AppTitle" xml:space="preserve">
+    <value>Lurpeko Parkinga</value>
+  </data>
+  <data name="ParkingTab" xml:space="preserve">
+    <value>Aparkalekua</value>
+  </data>
+  <data name="VehiclesTab" xml:space="preserve">
+    <value>Ibilgailuak</value>
+  </data>
+  <data name="ParkingStatusTitle" xml:space="preserve">
+    <value>Aparkalekuaren egoera</value>
+  </data>
+  <data name="LoadingSpaces" xml:space="preserve">
+    <value>Plazak kargatzen...</value>
+  </data>
+  <data name="All" xml:space="preserve">
+    <value>Guztiak</value>
+  </data>
+  <data name="Floor" xml:space="preserve">
+    <value>Solairua</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>Egoera</value>
+  </data>
+  <data name="Type" xml:space="preserve">
+    <value>Mota</value>
+  </data>
+  <data name="OnlyFree" xml:space="preserve">
+    <value>Libre dauden plazak soilik</value>
+  </data>
+  <data name="NoSpaces" xml:space="preserve">
+    <value>Ez dago iragazki horiekin bat datorren plazarik.</value>
+  </data>
+  <data name="SpaceDetailsTitle" xml:space="preserve">
+    <value>Plazaren xehetasunak</value>
+  </data>
+  <data name="SelectSpace" xml:space="preserve">
+    <value>Hautatu plaza bat.</value>
+  </data>
+  <data name="ShowVehicle" xml:space="preserve">
+    <value>Ibilgailua ikusi</value>
+  </data>
+  <data name="VehicleListTitle" xml:space="preserve">
+    <value>Ibilgailuak</value>
+  </data>
+  <data name="SearchPlaceholder" xml:space="preserve">
+    <value>Matrikula, jabea edo marka...</value>
+  </data>
+  <data name="NoVehicles" xml:space="preserve">
+    <value>Ez da ibilgailurik aurkitu.</value>
+  </data>
+  <data name="VehicleCardTitle" xml:space="preserve">
+    <value>Ibilgailuaren fitxa</value>
+  </data>
+  <data name="SelectVehicle" xml:space="preserve">
+    <value>Hautatu ibilgailu bat.</value>
+  </data>
+  <data name="HistoryTitle" xml:space="preserve">
+    <value>Aparkatzeen historikoa</value>
+  </data>
+  <data name="NoHistory" xml:space="preserve">
+    <value>Ez dago aparkatze-erregistrorik.</value>
+  </data>
+  <data name="SpaceCountFormat" xml:space="preserve">
+    <value>{0} plaza erakusten</value>
+  </data>
+  <data name="FloorFormat" xml:space="preserve">
+    <value>Solairua: {0}</value>
+  </data>
+  <data name="SpaceDetailsFormat" xml:space="preserve">
+    <value>{0} · {1}. solairua · {2} · {3}</value>
+  </data>
+  <data name="NoVehicleInSpace" xml:space="preserve">
+    <value>Ez dago ibilgailurik plaza honetan.</value>
+  </data>
+  <data name="VehicleInSpaceFormat" xml:space="preserve">
+    <value>{0} · {1} {2} · {3}</value>
+  </data>
+  <data name="VehicleDetailsFormat" xml:space="preserve">
+    <value>Matrikula: {0}
+Marka eta modeloa: {1} {2}
+Kolorea: {3}
+Jabea: {4}</value>
+  </data>
+  <data name="HistoryEntryFormat" xml:space="preserve">
+    <value>Plaza: {0}
+Sarrera: {1}
+Irteera: {2}
+Ordainduta: {3}</value>
+  </data>
+  <data name="Active" xml:space="preserve">
+    <value>Aktibo</value>
+  </data>
+  <data name="Available" xml:space="preserve">
+    <value>Libre</value>
+  </data>
+  <data name="Occupied" xml:space="preserve">
+    <value>Okupatuta</value>
+  </data>
+  <data name="Reserved" xml:space="preserve">
+    <value>Erreserbatuta</value>
+  </data>
+  <data name="Maintenance" xml:space="preserve">
+    <value>Mantentze-lanetan</value>
+  </data>
+  <data name="Car" xml:space="preserve">
+    <value>Autoa</value>
+  </data>
+  <data name="Motorcycle" xml:space="preserve">
+    <value>Motorra</value>
+  </data>
+  <data name="Accessible" xml:space="preserve">
+    <value>Mugikortasun urrikoa</value>
+  </data>
+  <data name="Electric" xml:space="preserve">
+    <value>Elektrikoa</value>
+  </data>
+</root>

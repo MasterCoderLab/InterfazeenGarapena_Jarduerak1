@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms</value>
+  </resheader>
+  <data name="AppTitle" xml:space="preserve">
+    <value>Aparcamiento subterráneo</value>
+  </data>
+  <data name="ParkingTab" xml:space="preserve">
+    <value>Aparcamiento</value>
+  </data>
+  <data name="VehiclesTab" xml:space="preserve">
+    <value>Vehículos</value>
+  </data>
+  <data name="ParkingStatusTitle" xml:space="preserve">
+    <value>Estado del aparcamiento</value>
+  </data>
+  <data name="LoadingSpaces" xml:space="preserve">
+    <value>Cargando plazas...</value>
+  </data>
+  <data name="All" xml:space="preserve">
+    <value>Todas</value>
+  </data>
+  <data name="Floor" xml:space="preserve">
+    <value>Planta</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>Estado</value>
+  </data>
+  <data name="Type" xml:space="preserve">
+    <value>Tipo</value>
+  </data>
+  <data name="OnlyFree" xml:space="preserve">
+    <value>Solo plazas libres</value>
+  </data>
+  <data name="NoSpaces" xml:space="preserve">
+    <value>No hay plazas que coincidan con los filtros.</value>
+  </data>
+  <data name="SpaceDetailsTitle" xml:space="preserve">
+    <value>Detalles de la plaza</value>
+  </data>
+  <data name="SelectSpace" xml:space="preserve">
+    <value>Selecciona una plaza.</value>
+  </data>
+  <data name="ShowVehicle" xml:space="preserve">
+    <value>Ver vehículo</value>
+  </data>
+  <data name="VehicleListTitle" xml:space="preserve">
+    <value>Vehículos</value>
+  </data>
+  <data name="SearchPlaceholder" xml:space="preserve">
+    <value>Matrícula, propietario o marca...</value>
+  </data>
+  <data name="NoVehicles" xml:space="preserve">
+    <value>No se han encontrado vehículos.</value>
+  </data>
+  <data name="VehicleCardTitle" xml:space="preserve">
+    <value>Ficha del vehículo</value>
+  </data>
+  <data name="SelectVehicle" xml:space="preserve">
+    <value>Selecciona un vehículo.</value>
+  </data>
+  <data name="HistoryTitle" xml:space="preserve">
+    <value>Historial de estacionamientos</value>
+  </data>
+  <data name="NoHistory" xml:space="preserve">
+    <value>No hay registros de estacionamiento.</value>
+  </data>
+  <data name="SpaceCountFormat" xml:space="preserve">
+    <value>Mostrando {0} plazas</value>
+  </data>
+  <data name="FloorFormat" xml:space="preserve">
+    <value>Planta: {0}</value>
+  </data>
+  <data name="SpaceDetailsFormat" xml:space="preserve">
+    <value>{0} · planta {1} · {2} · {3}</value>
+  </data>
+  <data name="NoVehicleInSpace" xml:space="preserve">
+    <value>No hay ningún vehículo en esta plaza.</value>
+  </data>
+  <data name="VehicleInSpaceFormat" xml:space="preserve">
+    <value>{0} · {1} {2} · {3}</value>
+  </data>
+  <data name="VehicleDetailsFormat" xml:space="preserve">
+    <value>Matrícula: {0}
+Marca y modelo: {1} {2}
+Color: {3}
+Propietario: {4}</value>
+  </data>
+  <data name="HistoryEntryFormat" xml:space="preserve">
+    <value>Plaza: {0}
+Entrada: {1}
+Salida: {2}
+Pagado: {3}</value>
+  </data>
+  <data name="Active" xml:space="preserve">
+    <value>Activo</value>
+  </data>
+  <data name="Available" xml:space="preserve">
+    <value>Libre</value>
+  </data>
+  <data name="Occupied" xml:space="preserve">
+    <value>Ocupada</value>
+  </data>
+  <data name="Reserved" xml:space="preserve">
+    <value>Reservada</value>
+  </data>
+  <data name="Maintenance" xml:space="preserve">
+    <value>En mantenimiento</value>
+  </data>
+  <data name="Car" xml:space="preserve">
+    <value>Coche</value>
+  </data>
+  <data name="Motorcycle" xml:space="preserve">
+    <value>Moto</value>
+  </data>
+  <data name="Accessible" xml:space="preserve">
+    <value>Movilidad reducida</value>
+  </data>
+  <data name="Electric" xml:space="preserve">
+    <value>Eléctrica</value>
+  </data>
+</root>
