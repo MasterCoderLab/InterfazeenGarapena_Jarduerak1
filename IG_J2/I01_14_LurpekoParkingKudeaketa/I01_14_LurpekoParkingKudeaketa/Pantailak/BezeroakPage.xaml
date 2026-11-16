@@ -1,15 +1,78 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage
-    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    x:Class="I01_14_LurpekoParkingKudeaketa.Pantailak.BezeroakPage"
-    Title="Bezeroak">
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="I01_14_LurpekoParkingKudeaketa.Pantailak.BezeroakPage"
+             Title="Bezeroak"
+             BackgroundColor="#F3F6FA">
+    <Grid x:Name="DiseinuNagusia" Padding="18"
+          RowDefinitions="Auto,150,*" RowSpacing="12">
 
-    <VerticalStackLayout Padding="24">
-        <Label
-            Text="Bezeroak"
-            FontSize="24"
-            FontAttributes="Bold" />
-    </VerticalStackLayout>
+        <Label x:Name="Izenburua" Text="Bezeroak"
+               FontSize="25" FontAttributes="Bold" TextColor="#15263C" />
 
+        <Border Grid.Row="1" Padding="8" BackgroundColor="White"
+                Stroke="#DCE4EC" StrokeShape="RoundRectangle 12">
+            <CollectionView x:Name="BezeroZerrenda" SelectionMode="Single"
+                            SelectionChanged="BezeroaHautatua">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="10,8" ColumnDefinitions="*,120" ColumnSpacing="8">
+                            <Label Text="{Binding IzenOsoa}" FontAttributes="Bold"
+                                   TextColor="#15263C" VerticalOptions="Center" />
+                            <Label Grid.Column="1" Text="{Binding Nan}"
+                                   TextColor="#52677F" VerticalOptions="Center"
+                                   HorizontalTextAlignment="End" />
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Border>
+
+        <Grid x:Name="XehetasunSarea" Grid.Row="2"
+              ColumnDefinitions="*,*" RowDefinitions="Auto,Auto" ColumnSpacing="12" RowSpacing="12"
+              VerticalOptions="Start">
+            <Border x:Name="BezeroFitxa" Grid.Row="0" Grid.Column="0"
+                    Padding="14" BackgroundColor="White"
+                    Stroke="#DCE4EC" StrokeShape="RoundRectangle 12">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Bezeroaren fitxa" FontSize="17"
+                           FontAttributes="Bold" TextColor="#15263C" />
+                    <Label x:Name="BezeroXehetasunak" Text="Hautatu bezero bat."
+                           TextColor="#334155" FontSize="14" />
+                </VerticalStackLayout>
+            </Border>
+
+            <Border x:Name="IbilgailuPanela" Grid.Row="0" Grid.Column="1"
+                    Padding="12" BackgroundColor="White"
+                    Stroke="#DCE4EC" StrokeShape="RoundRectangle 12">
+                <Grid RowDefinitions="Auto,Auto,*" RowSpacing="8">
+                    <Label Text="Bezeroaren ibilgailuak" FontSize="17"
+                           FontAttributes="Bold" TextColor="#15263C" />
+                    <Label Grid.Row="1" Text="Sakatu bi aldiz ibilgailu bat irekitzeko."
+                           TextColor="#52677F" FontSize="12" />
+                    <CollectionView x:Name="IbilgailuZerrenda" Grid.Row="2"
+                                    SelectionMode="None" MaximumHeightRequest="180"
+                                    EmptyView="Ez dago ibilgailurik.">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Padding="4,8" ColumnDefinitions="100,*" ColumnSpacing="10">
+                                    <Grid.GestureRecognizers>
+                                        <TapGestureRecognizer NumberOfTapsRequired="2"
+                                                              CommandParameter="{Binding .}"
+                                                              Tapped="IbilgailuaBiAldizSakatuta" />
+                                    </Grid.GestureRecognizers>
+                                    <Label Text="{Binding Matrikula}" FontAttributes="Bold"
+                                           TextColor="#15263C" VerticalOptions="Center" />
+                                    <HorizontalStackLayout Grid.Column="1" Spacing="5">
+                                        <Label Text="{Binding Marka}" TextColor="#334155" />
+                                        <Label Text="{Binding Modeloa}" TextColor="#52677F" />
+                                    </HorizontalStackLayout>
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </Grid>
+            </Border>
+        </Grid>
+    </Grid>
 </ContentPage>

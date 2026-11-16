@@ -11,6 +11,7 @@ namespace I01_14_LurpekoParkingKudeaketa.Pantailak;
 public partial class IbilgailuakPage : ContentPage
 {
     private bool? _diseinuEstua;
+
     private ParkingKudeatzailea Kudeatzailea =>
         ((AppShell)Shell.Current).Kudeatzailea;
 
@@ -23,12 +24,13 @@ public partial class IbilgailuakPage : ContentPage
     }
 
     /// <summary>
-    /// Telefono edo leiho estuetan espazio gutxiago erabiltzen du.
+    /// Leiho estuetan fitxa eta historikoa bata bestearen azpian jartzen ditu.
     /// </summary>
     protected override void OnSizeAllocated(double width, double height)
     {
         base.OnSizeAllocated(width, height);
-        bool estua = width < 620 || DeviceInfo.Current.Idiom == DeviceIdiom.Phone;
+
+        bool estua = width < 800 || DeviceInfo.Current.Idiom == DeviceIdiom.Phone;
         if (_diseinuEstua == estua)
         {
             return;
@@ -37,6 +39,14 @@ public partial class IbilgailuakPage : ContentPage
         _diseinuEstua = estua;
         DiseinuNagusia.Padding = new Thickness(estua ? 10 : 18);
         Izenburua.FontSize = estua ? 21 : 25;
+
+        Grid.SetRow(IbilgailuFitxa, 0);
+        Grid.SetColumn(IbilgailuFitxa, 0);
+        Grid.SetColumnSpan(IbilgailuFitxa, estua ? 2 : 1);
+
+        Grid.SetRow(HistoriaPanela, estua ? 1 : 0);
+        Grid.SetColumn(HistoriaPanela, estua ? 0 : 1);
+        Grid.SetColumnSpan(HistoriaPanela, estua ? 2 : 1);
     }
 
     /// <summary>
@@ -45,7 +55,7 @@ public partial class IbilgailuakPage : ContentPage
     protected override void OnAppearing()
     {
         base.OnAppearing();
-        // Aukera gorde, zerrenda berriz kargatzeak hautapena ezabatu baitezake.
+
         var hautatua = Kudeatzailea.HautatutakoIbilgailua;
         if (hautatua is not null)
         {
@@ -62,12 +72,13 @@ public partial class IbilgailuakPage : ContentPage
     }
 
     /// <summary>
-    /// Bilaketaren emaitzak eguneratzen ditu, datuak aldatu gabe.
+    /// Bilaketarekin bat datozen ibilgailuak taulan erakusten ditu.
     /// </summary>
     private void IbilgailuakEguneratu()
     {
         var emaitzak = Kudeatzailea.IbilgailuakBilatu(Bilaketa.Text);
         IbilgailuZerrenda.ItemsSource = emaitzak;
+        IbilgailuZerrenda.HeightRequest = Math.Clamp(emaitzak.Count, 1, 6) * 47;
 
         if (IbilgailuZerrenda.SelectedItem is Ibilgailua hautatua
             && !emaitzak.Contains(hautatua))
@@ -78,7 +89,7 @@ public partial class IbilgailuakPage : ContentPage
     }
 
     /// <summary>
-    /// Bilaketa-testua aldatzean ibilgailuak iragazten ditu.
+    /// Bilaketa-testua aldatzean zerrenda eguneratzen du.
     /// </summary>
     private void BilaketaAldatuta(object? sender, TextChangedEventArgs e)
     {
@@ -89,7 +100,7 @@ public partial class IbilgailuakPage : ContentPage
     }
 
     /// <summary>
-    /// Zerrendan aukeratutako ibilgailuaren datuak erakusten ditu.
+    /// Zerrendan hautatutako ibilgailuaren datuak erakusten ditu.
     /// </summary>
     private void IbilgailuaHautatua(object? sender, SelectionChangedEventArgs e)
     {
@@ -97,16 +108,19 @@ public partial class IbilgailuakPage : ContentPage
     }
 
     /// <summary>
-    /// Ibilgailuaren fitxa eta historikoa prestatzen ditu.
+    /// Ibilgailuaren fitxa eta aparkatze-historia prestatzen ditu.
     /// </summary>
-    /// <param name="ibilgailua">Aukeratutako ibilgailua edo null.</param>
+    /// <param name="ibilgailua">Hautatutako ibilgailua edo null.</param>
     private void XehetasunakEguneratu(Ibilgailua? ibilgailua)
     {
         Kudeatzailea.HautatutakoIbilgailua = ibilgailua;
+
         if (ibilgailua is null)
         {
             IbilgailuXehetasunak.Text = AppResources.SelectVehicle;
             HistoriaZerrenda.ItemsSource = null;
+            HistoriaZerrenda.HeightRequest = 36;
+            HistoriaGoiburua.IsVisible = false;
             return;
         }
 
@@ -115,15 +129,20 @@ public partial class IbilgailuakPage : ContentPage
             ibilgailua.Matrikula, ibilgailua.Marka, ibilgailua.Modeloa,
             ibilgailua.Kolorea, ibilgailua.Jabea.IzenOsoa);
 
-        // Aurkezpen-formatua pantailan mantentzen dugu, eredua garbi uzteko.
-        HistoriaZerrenda.ItemsSource = Kudeatzailea.HistoriaBilatu(ibilgailua)
-            .Select(a => string.Format(AppResources.HistoryEntryFormat,
-                a.Plaza.Zenbakia,
-                a.SarreraData.ToString("dd/MM/yyyy HH:mm"),
-                a.IrteeraData?.ToString("dd/MM/yyyy HH:mm") ?? AppResources.Active,
-                a.OrdaindutakoZenbatekoa.HasValue
+        var historia = Kudeatzailea.HistoriaBilatu(ibilgailua)
+            .Select(a => new
+            {
+                Plaza = a.Plaza.Zenbakia,
+                Sarrera = a.SarreraData.ToString("dd/MM/yy\nHH:mm"),
+                Irteera = a.IrteeraData?.ToString("dd/MM/yy\nHH:mm") ?? AppResources.Active,
+                Zenbatekoa = a.OrdaindutakoZenbatekoa.HasValue
                     ? a.OrdaindutakoZenbatekoa.Value.ToString("N2") + " €"
-                    : "—"))
+                    : "—"
+            })
             .ToList();
+
+        HistoriaGoiburua.IsVisible = historia.Count > 0;
+        HistoriaZerrenda.ItemsSource = historia;
+        HistoriaZerrenda.HeightRequest = Math.Clamp(historia.Count, 1, 5) * 42;
     }
 }
