@@ -10,9 +10,13 @@ namespace I01_14_LurpekoParkingKudeaketa.Pantailak;
 public partial class BezeroakPage : ContentPage
 {
     private bool? _diseinuEstua;
+
     private ParkingKudeatzailea Kudeatzailea =>
         ((AppShell)Shell.Current).Kudeatzailea;
 
+    /// <summary>
+    /// Bezeroen pantailako XAML osagaiak hasieratzen ditu.
+    /// </summary>
     public BezeroakPage()
     {
         InitializeComponent();
@@ -21,6 +25,8 @@ public partial class BezeroakPage : ContentPage
     /// <summary>
     /// Pantailaren zabaleraren arabera fitxa eta ibilgailuak kokatzen ditu.
     /// </summary>
+    /// <param name="width">Pantailaren zabalera erabilgarria, unitate logikoetan.</param>
+    /// <param name="height">Pantailaren altuera erabilgarria, unitate logikoetan.</param>
     protected override void OnSizeAllocated(double width, double height)
     {
         base.OnSizeAllocated(width, height);
@@ -47,15 +53,19 @@ public partial class BezeroakPage : ContentPage
     protected override void OnAppearing()
     {
         base.OnAppearing();
+
         BezeroZerrenda.ItemsSource = Kudeatzailea.BezeroakLortu();
     }
 
     /// <summary>
     /// Hautatutako bezeroaren datuak eta ibilgailuak erakusten ditu.
     /// </summary>
+    /// <param name="sender">Gertaera sortu duen kontrola.</param>
+    /// <param name="e">Hautatutako bezeroaren informazioa.</param>
     private void BezeroaHautatua(object? sender, SelectionChangedEventArgs e)
     {
         var bezeroa = e.CurrentSelection.FirstOrDefault() as Bezeroa;
+
         if (bezeroa is null)
         {
             BezeroXehetasunak.Text = "Hautatu bezero bat.";
@@ -70,12 +80,15 @@ public partial class BezeroakPage : ContentPage
             $"Telefonoa: {bezeroa.Telefonoa}\n" +
             $"Emaila: {bezeroa.Emaila}";
 
-        IbilgailuZerrenda.ItemsSource = Kudeatzailea.BezeroarenIbilgailuakLortu(bezeroa);
+        IbilgailuZerrenda.ItemsSource =
+            Kudeatzailea.BezeroarenIbilgailuakLortu(bezeroa);
     }
 
     /// <summary>
     /// Bi aldiz sakatutako ibilgailuaren fitxara nabigatzen du.
     /// </summary>
+    /// <param name="sender">Gertaera sortu duen kontrola.</param>
+    /// <param name="e">Bi aldiz sakatutako ibilgailua duen gertaera.</param>
     private async void IbilgailuaBiAldizSakatuta(object? sender, TappedEventArgs e)
     {
         if (e.Parameter is not Ibilgailua ibilgailua)
@@ -84,6 +97,7 @@ public partial class BezeroakPage : ContentPage
         }
 
         Kudeatzailea.HautatutakoIbilgailua = ibilgailua;
+
         await Shell.Current.GoToAsync("//nagusia/ibilgailuTab/ibilgailuak");
     }
 }

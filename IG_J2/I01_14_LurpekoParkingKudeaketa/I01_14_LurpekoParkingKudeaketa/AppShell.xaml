@@ -6,14 +6,39 @@
        x:Class="I01_14_LurpekoParkingKudeaketa.AppShell"
        Shell.FlyoutBehavior="Disabled"
        Title="{x:Static testuak:AppResources.AppTitle}">
+
+    <!-- Aplikazioaren bost pantaila nagusietarako nabigazio-fitxak. -->
     <TabBar Route="nagusia">
+
+        <!-- Aparkalekuko plazen egoera eta iragazkiak. -->
         <Tab Title="{x:Static testuak:AppResources.ParkingTab}" Route="aparkalekuTab">
             <ShellContent Title="{x:Static testuak:AppResources.ParkingTab}" Route="aparkalekua"
                           ContentTemplate="{DataTemplate pantailak:AparkalekuaPage}" />
         </Tab>
+
+        <!-- Ibilgailuen fitxak eta aparkatzeen historikoa. -->
         <Tab Title="{x:Static testuak:AppResources.VehiclesTab}" Route="ibilgailuTab">
             <ShellContent Title="{x:Static testuak:AppResources.VehiclesTab}" Route="ibilgailuak"
                           ContentTemplate="{DataTemplate pantailak:IbilgailuakPage}" />
         </Tab>
+
+        <!-- Bezeroen datuak eta haiei lotutako ibilgailuak. -->
+        <Tab Title="Bezeroak" Route="bezeroakTab">
+            <ShellContent Title="Bezeroak" Route="bezeroak"
+                          ContentTemplate="{DataTemplate pantailak:BezeroakPage}" />
+        </Tab>
+
+        <!-- Ibilgailuen sarrerak, irteerak eta ordainketak kudeatzeko pantaila. -->
+        <Tab Title="Sarrera/Irteera" Route="sarreraIrteeraTab">
+            <ShellContent Title="Sarrera eta irteera" Route="sarreraIrteera"
+                          ContentTemplate="{DataTemplate pantailak:SarreraIrteeraPage}" />
+        </Tab>
+
+        <!-- Plazak sortzeko, aldatzeko eta mantentze-lanetan jartzeko pantaila. -->
+        <Tab Title="Administrazioa" Route="administrazioaTab">
+            <ShellContent Title="Administrazioa" Route="administrazioa"
+                          ContentTemplate="{DataTemplate pantailak:AdministrazioaPage}" />
+        </Tab>
+
     </TabBar>
 </Shell>

@@ -1,3 +1,4 @@
+
 using I01_14_LurpekoParkingKudeaketa.Ereduak;
 using I01_14_LurpekoParkingKudeaketa.Kudeaketa;
 using I01_14_LurpekoParkingKudeaketa.Resources.Strings;
@@ -16,7 +17,7 @@ public partial class IbilgailuakPage : ContentPage
         ((AppShell)Shell.Current).Kudeatzailea;
 
     /// <summary>
-    /// XAML osagaiak hasieratzen ditu.
+    /// Ibilgailuen pantailako XAML osagaiak hasieratzen ditu.
     /// </summary>
     public IbilgailuakPage()
     {
@@ -26,6 +27,8 @@ public partial class IbilgailuakPage : ContentPage
     /// <summary>
     /// Leiho estuetan fitxa eta historikoa bata bestearen azpian jartzen ditu.
     /// </summary>
+    /// <param name="width">Pantailaren zabalera erabilgarria, unitate logikoetan.</param>
+    /// <param name="height">Pantailaren altuera erabilgarria, unitate logikoetan.</param>
     protected override void OnSizeAllocated(double width, double height)
     {
         base.OnSizeAllocated(width, height);
@@ -57,40 +60,44 @@ public partial class IbilgailuakPage : ContentPage
         base.OnAppearing();
 
         var hautatua = Kudeatzailea.HautatutakoIbilgailua;
+
         if (hautatua is not null)
         {
             Bilaketa.Text = "";
         }
 
-        IbilgailuakEguneratu();
-
-        if (hautatua is not null)
-        {
-            IbilgailuZerrenda.SelectedItem = hautatua;
-            XehetasunakEguneratu(hautatua);
-        }
+        IbilgailuakEguneratu(hautatua?.Matrikula);
     }
 
     /// <summary>
-    /// Bilaketarekin bat datozen ibilgailuak taulan erakusten ditu.
+    /// Bilaketaren emaitzak erakusten ditu eta hautatutako ibilgailua
+    /// matrikularen bidez mantentzen du.
     /// </summary>
-    private void IbilgailuakEguneratu()
+    /// <param name="hautatutakoMatrikula">
+    /// Berreskuratu beharreko matrikula; null bada, uneko hautapena erabiltzen du.
+    /// </param>
+    private void IbilgailuakEguneratu(string? hautatutakoMatrikula = null)
     {
+        string? matrikula = hautatutakoMatrikula
+            ?? (IbilgailuZerrenda.SelectedItem as Ibilgailua)?.Matrikula;
+
         var emaitzak = Kudeatzailea.IbilgailuakBilatu(Bilaketa.Text);
+
+        var hautatua = emaitzak.FirstOrDefault(
+            i => i.Matrikula == matrikula);
+
         IbilgailuZerrenda.ItemsSource = emaitzak;
         IbilgailuZerrenda.HeightRequest = Math.Clamp(emaitzak.Count, 1, 6) * 47;
 
-        if (IbilgailuZerrenda.SelectedItem is Ibilgailua hautatua
-            && !emaitzak.Contains(hautatua))
-        {
-            IbilgailuZerrenda.SelectedItem = null;
-            XehetasunakEguneratu(null);
-        }
+        IbilgailuZerrenda.SelectedItem = hautatua;
+        XehetasunakEguneratu(hautatua);
     }
 
     /// <summary>
-    /// Bilaketa-testua aldatzean zerrenda eguneratzen du.
+    /// Bilaketa-testua aldatzean ibilgailuen zerrenda eguneratzen du.
     /// </summary>
+    /// <param name="sender">Gertaera sortu duen kontrola.</param>
+    /// <param name="e">Testu-aldaketaren informazioa.</param>
     private void BilaketaAldatuta(object? sender, TextChangedEventArgs e)
     {
         if (Shell.Current is not null)
@@ -102,6 +109,8 @@ public partial class IbilgailuakPage : ContentPage
     /// <summary>
     /// Zerrendan hautatutako ibilgailuaren datuak erakusten ditu.
     /// </summary>
+    /// <param name="sender">Gertaera sortu duen kontrola.</param>
+    /// <param name="e">Hautatutako elementuaren informazioa.</param>
     private void IbilgailuaHautatua(object? sender, SelectionChangedEventArgs e)
     {
         XehetasunakEguneratu(e.CurrentSelection.FirstOrDefault() as Ibilgailua);
@@ -126,15 +135,19 @@ public partial class IbilgailuakPage : ContentPage
 
         IbilgailuXehetasunak.Text = string.Format(
             AppResources.VehicleDetailsFormat,
-            ibilgailua.Matrikula, ibilgailua.Marka, ibilgailua.Modeloa,
-            ibilgailua.Kolorea, ibilgailua.Jabea.IzenOsoa);
+            ibilgailua.Matrikula,
+            ibilgailua.Marka,
+            ibilgailua.Modeloa,
+            ibilgailua.Kolorea,
+            ibilgailua.Jabea.IzenOsoa);
 
         var historia = Kudeatzailea.HistoriaBilatu(ibilgailua)
             .Select(a => new
             {
                 Plaza = a.Plaza.Zenbakia,
                 Sarrera = a.SarreraData.ToString("dd/MM/yy\nHH:mm"),
-                Irteera = a.IrteeraData?.ToString("dd/MM/yy\nHH:mm") ?? AppResources.Active,
+                Irteera = a.IrteeraData?.ToString("dd/MM/yy\nHH:mm")
+                    ?? AppResources.Active,
                 Zenbatekoa = a.OrdaindutakoZenbatekoa.HasValue
                     ? a.OrdaindutakoZenbatekoa.Value.ToString("N2") + " €"
                     : "—"

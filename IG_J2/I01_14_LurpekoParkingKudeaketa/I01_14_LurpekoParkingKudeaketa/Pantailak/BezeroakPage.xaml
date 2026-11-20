@@ -10,6 +10,7 @@
         <Label x:Name="Izenburua" Text="Bezeroak"
                FontSize="25" FontAttributes="Bold" TextColor="#15263C" />
 
+        <!-- Bezeroen zerrenda: izen osoa eta NANa erakusten ditu. -->
         <Border Grid.Row="1" Padding="8" BackgroundColor="White"
                 Stroke="#DCE4EC" StrokeShape="RoundRectangle 12">
             <CollectionView x:Name="BezeroZerrenda" SelectionMode="Single"
@@ -28,9 +29,12 @@
             </CollectionView>
         </Border>
 
+        <!-- Hautatutako bezeroaren fitxa eta hari lotutako ibilgailuak. -->
         <Grid x:Name="XehetasunSarea" Grid.Row="2"
               ColumnDefinitions="*,*" RowDefinitions="Auto,Auto" ColumnSpacing="12" RowSpacing="12"
               VerticalOptions="Start">
+
+            <!-- Bezeroaren identifikazio- eta harreman-datuen fitxa. -->
             <Border x:Name="BezeroFitxa" Grid.Row="0" Grid.Column="0"
                     Padding="14" BackgroundColor="White"
                     Stroke="#DCE4EC" StrokeShape="RoundRectangle 12">
@@ -42,6 +46,7 @@
                 </VerticalStackLayout>
             </Border>
 
+            <!-- Bezeroaren ibilgailuak; klik bikoitzak ibilgailuaren fitxa irekitzen du. -->
             <Border x:Name="IbilgailuPanela" Grid.Row="0" Grid.Column="1"
                     Padding="12" BackgroundColor="White"
                     Stroke="#DCE4EC" StrokeShape="RoundRectangle 12">

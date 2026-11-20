@@ -6,6 +6,8 @@
              Title="{x:Static testuak:AppResources.ParkingTab}"
              BackgroundColor="#F3F6FA">
     <Grid x:Name="DiseinuNagusia" Padding="18" RowDefinitions="Auto,Auto,*,Auto" RowSpacing="12">
+
+        <!-- Aparkalekuaren izenburua eta erakutsitako plazen kopurua. -->
         <VerticalStackLayout Grid.Row="0" Spacing="3">
             <Label x:Name="Izenburua" Text="{x:Static testuak:AppResources.ParkingStatusTitle}" FontSize="25"
                    FontAttributes="Bold" TextColor="#15263C" />
@@ -13,6 +15,7 @@
                    FontSize="13" TextColor="#52677F" />
         </VerticalStackLayout>
 
+        <!-- Plazak solairuaren, egoeraren eta motaren arabera iragazteko kontrolak. -->
         <VerticalStackLayout Grid.Row="1" Spacing="8">
             <Grid x:Name="IragazkiSarea" RowDefinitions="Auto,Auto,Auto"
                   ColumnDefinitions="*,*,*" ColumnSpacing="8">
@@ -41,6 +44,8 @@
                             SelectedIndexChanged="IragazkiakAldatuta" />
                 </VerticalStackLayout>
             </Grid>
+
+            <!-- Libre dauden plazak soilik erakusteko aukera. -->
             <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
                 <Label Text="{x:Static testuak:AppResources.OnlyFree}" VerticalOptions="Center"
                        TextColor="#15263C" />
@@ -49,6 +54,7 @@
             </Grid>
         </VerticalStackLayout>
 
+        <!-- Iragazkien emaitzak: plaza bakoitzaren zenbakia, mota, solairua eta egoera. -->
         <CollectionView x:Name="PlazaZerrenda" Grid.Row="2"
                         SelectionMode="Single" SelectionChanged="PlazaHautatua"
                         EmptyView="{x:Static testuak:AppResources.NoSpaces}">
@@ -76,6 +82,7 @@
             </CollectionView.ItemTemplate>
         </CollectionView>
 
+        <!-- Hautatutako plazaren xehetasunak eta bertan dagoen ibilgailurako sarbidea. -->
         <Border Grid.Row="3" Padding="14" BackgroundColor="White"
                 Stroke="#DCE4EC" StrokeShape="RoundRectangle 12">
             <VerticalStackLayout Spacing="6">

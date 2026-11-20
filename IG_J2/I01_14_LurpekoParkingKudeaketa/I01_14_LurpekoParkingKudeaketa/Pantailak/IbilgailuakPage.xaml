@@ -7,15 +7,19 @@
              BackgroundColor="#F3F6FA">
     <Grid x:Name="DiseinuNagusia" Padding="18"
           RowDefinitions="Auto,Auto,Auto,Auto" RowSpacing="10">
+
+        <!-- Ibilgailuen pantailaren izenburua. -->
         <Label x:Name="Izenburua" Grid.Row="0"
                Text="{x:Static testuak:AppResources.VehicleListTitle}"
                FontSize="25" FontAttributes="Bold" TextColor="#15263C" />
 
+        <!-- Matrikularen, markaren edo jabearen araberako bilaketa. -->
         <SearchBar x:Name="Bilaketa" Grid.Row="1"
                    Placeholder="{x:Static testuak:AppResources.SearchPlaceholder}"
                    TextChanged="BilaketaAldatuta" TextColor="#15263C"
                    PlaceholderColor="#52677F" BackgroundColor="White" />
 
+        <!-- Bilaketaren emaitzak eta ibilgailu bakoitzaren oinarrizko datuak. -->
         <Grid Grid.Row="2" RowDefinitions="Auto,Auto" RowSpacing="2">
             <Grid Grid.Row="0" Padding="10,4" ColumnDefinitions="90,*,110"
                   ColumnSpacing="8">
@@ -54,9 +58,12 @@
             </CollectionView>
         </Grid>
 
+        <!-- Hautatutako ibilgailuaren fitxa eta aparkatzeen historikoa. -->
         <Grid x:Name="XehetasunSarea" Grid.Row="3"
               ColumnDefinitions="0.85*,1.5*" RowDefinitions="Auto,Auto"
               ColumnSpacing="10" RowSpacing="10">
+
+            <!-- Matrikula, marka, modeloa, kolorea eta jabearen datuak. -->
             <Border x:Name="IbilgailuFitxa" Grid.Row="0" Grid.Column="0"
                     Padding="12" BackgroundColor="White"
                     Stroke="#DCE4EC" StrokeShape="RoundRectangle 10">
@@ -69,6 +76,7 @@
                 </VerticalStackLayout>
             </Border>
 
+            <!-- Sarrerak, irteerak, erabilitako plazak eta ordaindutako zenbatekoak. -->
             <Border x:Name="HistoriaPanela" Grid.Row="0" Grid.Column="1"
                     Padding="12" BackgroundColor="White"
                     Stroke="#DCE4EC" StrokeShape="RoundRectangle 10">

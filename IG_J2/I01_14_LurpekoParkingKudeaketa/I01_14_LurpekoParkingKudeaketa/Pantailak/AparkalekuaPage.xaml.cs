@@ -1,3 +1,4 @@
+
 using I01_14_LurpekoParkingKudeaketa.Ereduak;
 using I01_14_LurpekoParkingKudeaketa.Kudeaketa;
 using I01_14_LurpekoParkingKudeaketa.Resources.Strings;
@@ -20,7 +21,7 @@ public partial class AparkalekuaPage : ContentPage
         ((AppShell)Shell.Current).Kudeatzailea;
 
     /// <summary>
-    /// XAML osagaiak hasieratzen ditu.
+    /// Aparkalekuaren pantailako XAML osagaiak hasieratzen ditu.
     /// </summary>
     public AparkalekuaPage()
     {
@@ -28,35 +29,49 @@ public partial class AparkalekuaPage : ContentPage
     }
 
     /// <summary>
-    /// Gailuaren informazioa eta leihoaren zabalera erabiliz iragazkiak egokitzen ditu.
-    /// Telefonoetan goitik behera jartzen dira; tabletetan hiru zutabetan.
+    /// Gailuaren informazioa eta leihoaren zabalera erabiliz
+    /// iragazkiak egokitzen ditu.
+    /// Telefonoetan bertikalki eta tabletetan hiru zutabetan kokatzen ditu.
     /// </summary>
+    /// <param name="width">
+    /// Pantailaren zabalera erabilgarria, unitate logikoetan.
+    /// </param>
+    /// <param name="height">
+    /// Pantailaren altuera erabilgarria, unitate logikoetan.
+    /// </param>
     protected override void OnSizeAllocated(double width, double height)
     {
         base.OnSizeAllocated(width, height);
-        bool estua = width < 620 || DeviceInfo.Current.Idiom == DeviceIdiom.Phone;
+
+        bool estua = width < 620
+            || DeviceInfo.Current.Idiom == DeviceIdiom.Phone;
+
         if (_diseinuEstua == estua)
         {
             return;
         }
 
         _diseinuEstua = estua;
+
         DiseinuNagusia.Padding = new Thickness(estua ? 10 : 18);
         Izenburua.FontSize = estua ? 21 : 25;
 
         Grid.SetRow(SolairuIragazkiaMultzoa, 0);
         Grid.SetRow(EgoeraIragazkiaMultzoa, estua ? 1 : 0);
         Grid.SetRow(MotaIragazkiaMultzoa, estua ? 2 : 0);
+
         Grid.SetColumn(SolairuIragazkiaMultzoa, 0);
         Grid.SetColumn(EgoeraIragazkiaMultzoa, estua ? 0 : 1);
         Grid.SetColumn(MotaIragazkiaMultzoa, estua ? 0 : 2);
+
         Grid.SetColumnSpan(SolairuIragazkiaMultzoa, estua ? 3 : 1);
         Grid.SetColumnSpan(EgoeraIragazkiaMultzoa, estua ? 3 : 1);
         Grid.SetColumnSpan(MotaIragazkiaMultzoa, estua ? 3 : 1);
     }
 
     /// <summary>
-    /// Pantaila agertzen denean iragazkiak eta plazen zerrenda prestatzen ditu.
+    /// Pantaila agertzean iragazkiak hasieratzen ditu
+    /// eta plazen zerrenda eguneratzen du.
     /// </summary>
     protected override void OnAppearing()
     {
@@ -70,8 +85,11 @@ public partial class AparkalekuaPage : ContentPage
 
             foreach (var egoera in new[]
             {
-                AppResources.All, AppResources.Available, AppResources.Occupied,
-                AppResources.Reserved, AppResources.Maintenance
+                AppResources.All,
+                AppResources.Available,
+                AppResources.Occupied,
+                AppResources.Reserved,
+                AppResources.Maintenance
             })
             {
                 EgoeraIragazkia.Items.Add(egoera);
@@ -79,22 +97,29 @@ public partial class AparkalekuaPage : ContentPage
 
             foreach (var mota in new[]
             {
-                AppResources.All, AppResources.Car, AppResources.Motorcycle,
-                AppResources.Accessible, AppResources.Electric
+                AppResources.All,
+                AppResources.Car,
+                AppResources.Motorcycle,
+                AppResources.Accessible,
+                AppResources.Electric
             })
             {
                 MotaIragazkia.Items.Add(mota);
             }
 
-            // Hasierako hautapena aurreko saioaren hobespenetatik berreskuratu.
-            // Indizeak mugatu egiten dira, aplikazioaren aukerak aldatuz gero.
+            // Aurreko iragazkiak berreskuratu eta indizeak mugatzen ditu.
             SolairuIragazkia.SelectedIndex = Math.Clamp(
                 Preferences.Default.Get("parking.solairu", 0), 0, 2);
+
             EgoeraIragazkia.SelectedIndex = Math.Clamp(
                 Preferences.Default.Get("parking.egoera", 0), 0, 4);
+
             MotaIragazkia.SelectedIndex = Math.Clamp(
                 Preferences.Default.Get("parking.mota", 0), 0, 4);
-            LibreakBakarrik.IsToggled = Preferences.Default.Get("parking.libreak", false);
+
+            LibreakBakarrik.IsToggled =
+                Preferences.Default.Get("parking.libreak", false);
+
             _iragazkiakHasieratuta = true;
         }
 
@@ -102,7 +127,8 @@ public partial class AparkalekuaPage : ContentPage
     }
 
     /// <summary>
-    /// Hautatutako iragazkiak aplikatu eta zerrenda eguneratzen du.
+    /// Hautatutako iragazkiak aplikatzen ditu eta
+    /// plaza hautatua zenbakiaren bidez berreskuratzen du.
     /// </summary>
     private void PlazakEguneratu()
     {
@@ -131,22 +157,32 @@ public partial class AparkalekuaPage : ContentPage
             _ => null
         };
 
+        string? hautatutakoZenbakia = _hautatutakoPlaza?.Zenbakia;
+
         var plazak = Kudeatzailea.PlazakIragazi(
-            solairua, egoera, mota, LibreakBakarrik.IsToggled);
+            solairua,
+            egoera,
+            mota,
+            LibreakBakarrik.IsToggled);
+
+        var hautatua = plazak.FirstOrDefault(
+            p => p.Zenbakia == hautatutakoZenbakia);
 
         PlazaZerrenda.ItemsSource = plazak;
-        PlazaKopurua.Text = string.Format(AppResources.SpaceCountFormat, plazak.Count);
 
-        if (_hautatutakoPlaza is not null && !plazak.Contains(_hautatutakoPlaza))
-        {
-            PlazaZerrenda.SelectedItem = null;
-            XehetasunakEguneratu(null);
-        }
+        PlazaKopurua.Text = string.Format(
+            AppResources.SpaceCountFormat, plazak.Count);
+
+        PlazaZerrenda.SelectedItem = hautatua;
+        XehetasunakEguneratu(hautatua);
     }
 
     /// <summary>
-    /// Picker baten balioa aldatzean zerrenda berriz iragazten du.
+    /// Picker baten balioa aldatzean iragazkiak gorde
+    /// eta plazen zerrenda eguneratzen du.
     /// </summary>
+    /// <param name="sender">Gertaera sortu duen kontrola.</param>
+    /// <param name="e">Gertaerari lotutako informazioa.</param>
     private void IragazkiakAldatuta(object? sender, EventArgs e)
     {
         if (_iragazkiakHasieratuta)
@@ -157,8 +193,11 @@ public partial class AparkalekuaPage : ContentPage
     }
 
     /// <summary>
-    /// Plaza libreen aukerak zerrenda berriz iragazten du.
+    /// Plaza libreak soilik erakusteko aukera aldatzean
+    /// iragazkiak gorde eta zerrenda eguneratzen du.
     /// </summary>
+    /// <param name="sender">Gertaera sortu duen kontrola.</param>
+    /// <param name="e">Aukeraren egoera berriari buruzko informazioa.</param>
     private void LibreakBakarrikAldatuta(object? sender, ToggledEventArgs e)
     {
         if (_iragazkiakHasieratuta)
@@ -169,32 +208,47 @@ public partial class AparkalekuaPage : ContentPage
     }
 
     /// <summary>
-    /// Iragazkien aukera txikiak gailuko hobespen pribatuetan gordetzen ditu.
-    /// Ez du bezero edo ibilgailuen daturik gordetzen.
+    /// Iragazkien aukerak gailuko hobespen pribatuetan gordetzen ditu.
+    /// Ez ditu parkingeko erregistroak aldatzen.
     /// </summary>
     private void IragazkiakGorde()
     {
-        Preferences.Default.Set("parking.solairu", SolairuIragazkia.SelectedIndex);
-        Preferences.Default.Set("parking.egoera", EgoeraIragazkia.SelectedIndex);
-        Preferences.Default.Set("parking.mota", MotaIragazkia.SelectedIndex);
-        Preferences.Default.Set("parking.libreak", LibreakBakarrik.IsToggled);
+        Preferences.Default.Set(
+            "parking.solairu", SolairuIragazkia.SelectedIndex);
+
+        Preferences.Default.Set(
+            "parking.egoera", EgoeraIragazkia.SelectedIndex);
+
+        Preferences.Default.Set(
+            "parking.mota", MotaIragazkia.SelectedIndex);
+
+        Preferences.Default.Set(
+            "parking.libreak", LibreakBakarrik.IsToggled);
     }
 
     /// <summary>
-    /// Hautatutako plazaren eta bertako ibilgailuaren informazioa erakusten du.
+    /// Hautatutako plazaren eta bertako ibilgailuaren
+    /// informazioa erakusten du.
     /// </summary>
+    /// <param name="sender">Gertaera sortu duen kontrola.</param>
+    /// <param name="e">Hautatutako plazaren informazioa.</param>
     private void PlazaHautatua(object? sender, SelectionChangedEventArgs e)
     {
-        XehetasunakEguneratu(e.CurrentSelection.FirstOrDefault() as Plaza);
+        XehetasunakEguneratu(
+            e.CurrentSelection.FirstOrDefault() as Plaza);
     }
 
     /// <summary>
-    /// Plaza- eta ibilgailu-xehetasunak eguneratzen ditu.
+    /// Hautatutako plazaren eta bertako ibilgailuaren
+    /// xehetasunak eguneratzen ditu.
     /// </summary>
-    /// <param name="plaza">Hautatutako plaza edo null.</param>
+    /// <param name="plaza">
+    /// Hautatutako plaza; null bada, xehetasunak garbitzen ditu.
+    /// </param>
     private void XehetasunakEguneratu(Plaza? plaza)
     {
         _hautatutakoPlaza = plaza;
+
         if (plaza is null)
         {
             PlazaXehetasunak.Text = AppResources.SelectSpace;
@@ -203,19 +257,32 @@ public partial class AparkalekuaPage : ContentPage
             return;
         }
 
-        PlazaXehetasunak.Text = string.Format(AppResources.SpaceDetailsFormat,
-            plaza.Zenbakia, plaza.Solairua, plaza.MotaIzena, plaza.EgoeraIzena);
+        PlazaXehetasunak.Text = string.Format(
+            AppResources.SpaceDetailsFormat,
+            plaza.Zenbakia,
+            plaza.Solairua,
+            plaza.MotaIzena,
+            plaza.EgoeraIzena);
+
         IbilgailuXehetasunak.Text = plaza.Ibilgailua is null
             ? AppResources.NoVehicleInSpace
-            : string.Format(AppResources.VehicleInSpaceFormat,
-                plaza.Ibilgailua.Matrikula, plaza.Ibilgailua.Marka,
-                plaza.Ibilgailua.Modeloa, plaza.Ibilgailua.Jabea.IzenOsoa);
-        IbilgailuaIkusiBotoia.IsEnabled = plaza.Ibilgailua is not null;
+            : string.Format(
+                AppResources.VehicleInSpaceFormat,
+                plaza.Ibilgailua.Matrikula,
+                plaza.Ibilgailua.Marka,
+                plaza.Ibilgailua.Modeloa,
+                plaza.Ibilgailua.Jabea.IzenOsoa);
+
+        IbilgailuaIkusiBotoia.IsEnabled =
+            plaza.Ibilgailua is not null;
     }
 
     /// <summary>
-    /// Okupatutako plazako ibilgailua aukeratu eta haren pantailara doa.
+    /// Okupatutako plazako ibilgailua aukeratu
+    /// eta ibilgailuen pantailara nabigatzen du.
     /// </summary>
+    /// <param name="sender">Gertaera sortu duen kontrola.</param>
+    /// <param name="e">Gertaerari lotutako informazioa.</param>
     private async void IbilgailuaIkusi(object? sender, EventArgs e)
     {
         if (_hautatutakoPlaza?.Ibilgailua is null)
@@ -223,7 +290,10 @@ public partial class AparkalekuaPage : ContentPage
             return;
         }
 
-        Kudeatzailea.HautatutakoIbilgailua = _hautatutakoPlaza.Ibilgailua;
-        await Shell.Current.GoToAsync("//nagusia/ibilgailuTab/ibilgailuak");
+        Kudeatzailea.HautatutakoIbilgailua =
+            _hautatutakoPlaza.Ibilgailua;
+
+        await Shell.Current.GoToAsync(
+            "//nagusia/ibilgailuTab/ibilgailuak");
     }
 }

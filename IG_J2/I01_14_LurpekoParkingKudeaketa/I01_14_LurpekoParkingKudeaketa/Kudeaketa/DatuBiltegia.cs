@@ -3,8 +3,8 @@ using I01_14_LurpekoParkingKudeaketa.Ereduak;
 namespace I01_14_LurpekoParkingKudeaketa.Kudeaketa;
 
 /// <summary>
-/// Bi pantailak probatzeko memoria barruko adibide-datuak prestatzen ditu.
-/// Datuak ez dira oraindik diskoan gordetzen.
+/// SQLite datu-base hutsa lehen aldiz betetzeko adibide-datuak prestatzen ditu.
+/// Gainerako abioetan diskoan gordetako datuak erabiltzen dira.
 /// </summary>
 public class DatuBiltegia
 {

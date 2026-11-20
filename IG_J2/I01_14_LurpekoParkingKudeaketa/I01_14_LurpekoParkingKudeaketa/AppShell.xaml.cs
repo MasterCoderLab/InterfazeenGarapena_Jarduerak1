@@ -1,16 +1,24 @@
+
 using I01_14_LurpekoParkingKudeaketa.Kudeaketa;
 
 namespace I01_14_LurpekoParkingKudeaketa;
 
 /// <summary>
-/// Bi pantailen nabigazioa eta partekatutako kudeatzailea prestatzen ditu.
+/// Bost pantailen nabigazioa eta partekatutako
+/// aparkalekuaren kudeatzailea prestatzen ditu.
 /// </summary>
 public partial class AppShell : Shell
 {
-    public ParkingKudeatzailea Kudeatzailea { get; } = new(new DatuBiltegia());
+    /// <summary>
+    /// Pantaila guztiek erabiltzen duten aparkalekuaren
+    /// kudeatzaile partekatua eskuratzen du.
+    /// </summary>
+    public ParkingKudeatzailea Kudeatzailea { get; } =
+        new(new ParkingDatuBasea());
 
     /// <summary>
-    /// Shell nabigazioa hasieratzen du.
+    /// Aparkalekuaren nabigazio-egitura eta XAML osagaiak
+    /// hasieratzen ditu.
     /// </summary>
     public AppShell()
     {

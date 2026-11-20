@@ -1,15 +1,83 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage
-    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    x:Class="I01_14_LurpekoParkingKudeaketa.Pantailak.AdministrazioaPage"
-    Title="Administrazioa">
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="I01_14_LurpekoParkingKudeaketa.Pantailak.AdministrazioaPage"
+             Title="Administrazioa" BackgroundColor="#F3F6FA">
+    <ScrollView>
+        <VerticalStackLayout Padding="18" Spacing="12">
 
-    <VerticalStackLayout Padding="24">
-        <Label
-            Text="Administrazioa"
-            FontSize="24"
-            FontAttributes="Bold" />
-    </VerticalStackLayout>
+            <!-- Administrazio-pantailaren izenburua. -->
+            <Label Text="Plazen administrazioa" FontSize="24"
+                   FontAttributes="Bold" TextColor="#15263C" />
 
+            <!-- Plazen zerrendako zutabeen goiburuak. -->
+            <Grid Padding="8,4" ColumnDefinitions="75,85,*,*" ColumnSpacing="8">
+                <Label Text="Plaza" FontAttributes="Bold" FontSize="12" />
+                <Label Grid.Column="1" Text="Solairua" FontAttributes="Bold" FontSize="12" />
+                <Label Grid.Column="2" Text="Mota" FontAttributes="Bold" FontSize="12" />
+                <Label Grid.Column="3" Text="Egoera" FontAttributes="Bold" FontSize="12" />
+            </Grid>
+
+            <!-- Plaza bat aukeratzeko zerrenda, haren datuak formularioan kargatzeko. -->
+            <CollectionView x:Name="PlazaZerrenda" HeightRequest="250"
+                            SelectionMode="Single" SelectionChanged="PlazaHautatua">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="8,7" Margin="0,1" BackgroundColor="White"
+                              ColumnDefinitions="75,85,*,*" ColumnSpacing="8">
+                            <Label Text="{Binding Zenbakia}" FontSize="12" TextColor="#15263C" />
+                            <Label Grid.Column="1" Text="{Binding Solairua}" FontSize="12" />
+                            <Label Grid.Column="2" Text="{Binding MotaIzena}" FontSize="12" />
+                            <Label Grid.Column="3" Text="{Binding EgoeraIzena}" FontSize="12" />
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <!-- Plazak gehitzeko, aldatzeko eta kudeatzeko formularioa. -->
+            <Border Padding="14" BackgroundColor="White" Stroke="#DCE4EC"
+                    StrokeShape="RoundRectangle 12">
+                <VerticalStackLayout Spacing="9">
+                    <Label Text="Plaza gehitu edo aldatu" FontSize="17"
+                           FontAttributes="Bold" TextColor="#15263C" />
+
+                    <!-- Plazaren identifikatzailea, solairua, mota eta egoera aukeratzeko eremuak. -->
+                    <Grid x:Name="FormularioEremuak" ColumnDefinitions="*,*,*,*" RowDefinitions="Auto,Auto" ColumnSpacing="8" RowSpacing="8">
+                        <Entry x:Name="PlazaZenbakia" Placeholder="P13" />
+                        <Entry x:Name="Solairua" Grid.Column="1" Placeholder="-1"
+                               Keyboard="Numeric" />
+                        <Picker x:Name="PlazaMotaAukera" Grid.Column="2" Title="Mota">
+                            <Picker.Items>
+                                <x:String>Autoa</x:String>
+                                <x:String>Motorra</x:String>
+                                <x:String>Mugikortasun urrikoa</x:String>
+                                <x:String>Elektrikoa</x:String>
+                            </Picker.Items>
+                        </Picker>
+                        <Picker x:Name="PlazaEgoeraAukera" Grid.Column="3" Title="Egoera">
+                            <Picker.Items>
+                                <x:String>Libre</x:String>
+                                <x:String>Okupatuta</x:String>
+                                <x:String>Erreserbatuta</x:String>
+                                <x:String>Mantentze-lanetan</x:String>
+                            </Picker.Items>
+                        </Picker>
+                    </Grid>
+
+                    <!-- Plaza gehitu, aldatu, mantentze-lanetan jarri edo ezabatzeko ekintzak. -->
+                    <Grid x:Name="EkintzaBotoiak" ColumnDefinitions="*,*,*,*" RowDefinitions="Auto,Auto" ColumnSpacing="8" RowSpacing="8">
+                        <Button x:Name="GehituBotoia" Text="Gehitu" Clicked="PlazaGehitu" />
+                        <Button x:Name="AldatuBotoia" Grid.Column="1" Text="Aldatu" Clicked="PlazaAldatu" />
+                        <Button x:Name="MantentzeBotoia" Grid.Column="2" Text="Mantentzera" Clicked="MantentzeraJarri" />
+                        <Button x:Name="EzabatuBotoia" Grid.Column="3" Text="Ezabatu" Clicked="PlazaEzabatu"
+                                BackgroundColor="#8B2A34" TextColor="White" />
+                    </Grid>
+
+                    <!-- Okupatutako plazak babesteko administrazio-murrizketaren azalpena. -->
+                    <Label Text="Okupatutako plazak ezin dira ezabatu edo mantentze-lanetan jarri."
+                           FontSize="12" TextColor="#52677F" />
+                </VerticalStackLayout>
+            </Border>
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>
