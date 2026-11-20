@@ -22,19 +22,26 @@
                         <Entry x:Name="SarreraMatrikula" Placeholder="Matrikula"
                                TextChanged="SarreraTestuaAldatuta" FontSize="16"
                                PlaceholderColor="#60738B" TextColor="#15263C" />
-                        <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8">
+
+                        <!-- Etengailuaren altuera finkatzen da bi panelak lerrokatzeko. -->
+                        <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8"
+                              HeightRequest="48">
                             <Label Text="Mugikortasun urriko plaza eskatu"
                                    FontSize="14" TextColor="#334155" VerticalOptions="Center" />
                             <Switch x:Name="Irisgarria" Grid.Column="1"
+                                    VerticalOptions="Center"
                                     Toggled="SarreraAukeraAldatuta" />
                         </Grid>
+
                         <Button Text="Plaza proposatu" Clicked="PlazaProposatu"
                                 BackgroundColor="#1F5586" TextColor="White" />
 
                         <!-- Proposatutako plazaren informazioa. -->
                         <Label x:Name="Proposamena" Text="Sartu matrikula bat."
                                BackgroundColor="#EDF3F9" Padding="12,10"
-                               FontSize="15" TextColor="#334155" />
+                               FontSize="15" TextColor="#334155"
+                               MinimumHeightRequest="92" />
+
                         <Button x:Name="SarreraBaieztatuBotoia" Text="Sarrera baieztatu"
                                 Clicked="SarreraBaieztatu" IsEnabled="False" />
                     </VerticalStackLayout>
@@ -49,12 +56,20 @@
                         <Entry x:Name="IrteeraMatrikula" Placeholder="Matrikula"
                                TextChanged="IrteeraTestuaAldatuta" FontSize="16"
                                PlaceholderColor="#60738B" TextColor="#15263C" />
+
+                        <!-- Ezkerreko etengailuaren lekua gordetzen da. -->
+                        <Grid HeightRequest="48" InputTransparent="True" />
+
                         <Button Text="Denbora eta zenbatekoa kalkulatu"
                                 Clicked="IrteeraKalkulatu"
                                 BackgroundColor="#1F5586" TextColor="White" />
+
+                        <!-- Bi emaitza-eremuek gutxieneko altuera bera dute. -->
                         <Label x:Name="IrteeraXehetasunak" Text="Sartu matrikula bat."
                                BackgroundColor="#EDF3F9" Padding="12,10"
-                               FontSize="15" TextColor="#334155" />
+                               FontSize="15" TextColor="#334155"
+                               MinimumHeightRequest="92" />
+
                         <Button x:Name="IrteeraBaieztatuBotoia" Text="Irteera baieztatu"
                                 Clicked="IrteeraBaieztatu" IsEnabled="False" />
                     </VerticalStackLayout>

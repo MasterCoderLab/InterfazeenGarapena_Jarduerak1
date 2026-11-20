@@ -39,14 +39,54 @@
                                         </VisualStateGroup>
                                     </VisualStateGroupList>
                                 </VisualStateManager.VisualStateGroups>
+
                                 <Label Text="{Binding Zenbakia}" FontSize="14" FontAttributes="Bold"
                                        TextColor="#15263C" VerticalOptions="Center" />
                                 <Label Grid.Column="1" Text="{Binding Solairua}" FontSize="14"
                                        TextColor="#334155" VerticalOptions="Center" />
                                 <Label Grid.Column="2" Text="{Binding MotaIzena}" FontSize="14"
                                        TextColor="#334155" VerticalOptions="Center" />
-                                <Label Grid.Column="3" Text="{Binding EgoeraIzena}" FontSize="14"
-                                       TextColor="#1F5586" VerticalOptions="Center" />
+
+                                <!-- Egoeraren arabera kolore leunak erabiltzen dira. -->
+                                <Label Grid.Column="3"
+                                       Text="{Binding EgoeraIzena}"
+                                       FontSize="13"
+                                       TextColor="#40536D"
+                                       BackgroundColor="#E6EBF2"
+                                       Padding="8,5"
+                                       HorizontalOptions="Start"
+                                       VerticalOptions="Center">
+
+                                    <Label.Triggers>
+                                        <DataTrigger TargetType="Label"
+                                                     Binding="{Binding EgoeraIzena}"
+                                                     Value="Libre">
+                                            <Setter Property="BackgroundColor" Value="#E2F3E9" />
+                                            <Setter Property="TextColor" Value="#235C40" />
+                                        </DataTrigger>
+
+                                        <DataTrigger TargetType="Label"
+                                                     Binding="{Binding EgoeraIzena}"
+                                                     Value="Okupatuta">
+                                            <Setter Property="BackgroundColor" Value="#FBE5E7" />
+                                            <Setter Property="TextColor" Value="#943B45" />
+                                        </DataTrigger>
+
+                                        <DataTrigger TargetType="Label"
+                                                     Binding="{Binding EgoeraIzena}"
+                                                     Value="Erreserbatuta">
+                                            <Setter Property="BackgroundColor" Value="#FFF0D6" />
+                                            <Setter Property="TextColor" Value="#865D20" />
+                                        </DataTrigger>
+
+                                        <DataTrigger TargetType="Label"
+                                                     Binding="{Binding EgoeraIzena}"
+                                                     Value="Mantentze-lanetan">
+                                            <Setter Property="BackgroundColor" Value="#E6EBF2" />
+                                            <Setter Property="TextColor" Value="#40536D" />
+                                        </DataTrigger>
+                                    </Label.Triggers>
+                                </Label>
                             </Grid>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
@@ -89,8 +129,14 @@
                 <!-- Operazioak kudeatzaileak baliozkotzen ditu; ezabatzeko baieztapena eskatzen da. -->
                 <Grid x:Name="EkintzaBotoiak" ColumnDefinitions="*,*,*,*"
                       RowDefinitions="Auto,Auto" ColumnSpacing="8" RowSpacing="8">
-                    <Button x:Name="GehituBotoia" Text="Gehitu" Clicked="PlazaGehitu" />
-                    <Button x:Name="AldatuBotoia" Grid.Column="1" Text="Aldatu" Clicked="PlazaAldatu" />
+                    <!-- Berdea: plaza berria gehitzeko. -->
+                    <Button x:Name="GehituBotoia" Text="Gehitu" Clicked="PlazaGehitu"
+                            BackgroundColor="#23845B" TextColor="White" />
+
+                    <!-- Urdina: hautatutako plaza aldatzeko. -->
+                    <Button x:Name="AldatuBotoia" Grid.Column="1" Text="Aldatu" Clicked="PlazaAldatu"
+                            BackgroundColor="#1F5586" TextColor="White" />
+
                     <Button x:Name="MantentzeBotoia" Grid.Column="2" Text="Mantentzera"
                             Clicked="MantentzeraJarri" BackgroundColor="#52677F" TextColor="White" />
                     <Button x:Name="EzabatuBotoia" Grid.Column="3" Text="Ezabatu" Clicked="PlazaEzabatu"
