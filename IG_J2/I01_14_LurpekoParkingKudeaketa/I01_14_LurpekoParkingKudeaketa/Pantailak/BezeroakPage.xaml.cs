@@ -5,7 +5,7 @@ using Microsoft.Maui.Devices;
 namespace I01_14_LurpekoParkingKudeaketa.Pantailak;
 
 /// <summary>
-/// Bezeroak, haien datuak eta ibilgailuak erakusten ditu.
+/// Bezeroen zerrenda, haien datuak eta ibilgailuak erakusten ditu.
 /// </summary>
 public partial class BezeroakPage : ContentPage
 {
@@ -23,7 +23,8 @@ public partial class BezeroakPage : ContentPage
     }
 
     /// <summary>
-    /// Pantailaren zabaleraren arabera fitxa eta ibilgailuak kokatzen ditu.
+    /// Tabletetan zerrenda ezkerrean eta fitxak eskuinean kokatzen ditu;
+    /// telefonoetan, berriz, bata bestearen azpian.
     /// </summary>
     /// <param name="width">Pantailaren zabalera erabilgarria, unitate logikoetan.</param>
     /// <param name="height">Pantailaren altuera erabilgarria, unitate logikoetan.</param>
@@ -31,7 +32,7 @@ public partial class BezeroakPage : ContentPage
     {
         base.OnSizeAllocated(width, height);
 
-        bool estua = width < 620 || DeviceInfo.Current.Idiom == DeviceIdiom.Phone;
+        bool estua = width < 800 || DeviceInfo.Current.Idiom == DeviceIdiom.Phone;
         if (_diseinuEstua == estua)
         {
             return;
@@ -41,10 +42,15 @@ public partial class BezeroakPage : ContentPage
         DiseinuNagusia.Padding = new Thickness(estua ? 10 : 18);
         Izenburua.FontSize = estua ? 21 : 25;
 
-        Grid.SetRow(IbilgailuPanela, estua ? 1 : 0);
-        Grid.SetColumn(IbilgailuPanela, estua ? 0 : 1);
-        Grid.SetColumnSpan(BezeroFitxa, estua ? 2 : 1);
-        Grid.SetColumnSpan(IbilgailuPanela, estua ? 2 : 1);
+        Grid.SetRow(BezeroZerrendaPanela, 1);
+        Grid.SetColumn(BezeroZerrendaPanela, 0);
+        Grid.SetRowSpan(BezeroZerrendaPanela, estua ? 1 : 2);
+        Grid.SetColumnSpan(BezeroZerrendaPanela, estua ? 2 : 1);
+
+        Grid.SetRow(XehetasunSarea, estua ? 2 : 1);
+        Grid.SetColumn(XehetasunSarea, estua ? 0 : 1);
+        Grid.SetRowSpan(XehetasunSarea, estua ? 1 : 2);
+        Grid.SetColumnSpan(XehetasunSarea, estua ? 2 : 1);
     }
 
     /// <summary>
@@ -53,7 +59,6 @@ public partial class BezeroakPage : ContentPage
     protected override void OnAppearing()
     {
         base.OnAppearing();
-
         BezeroZerrenda.ItemsSource = Kudeatzailea.BezeroakLortu();
     }
 
@@ -97,7 +102,6 @@ public partial class BezeroakPage : ContentPage
         }
 
         Kudeatzailea.HautatutakoIbilgailua = ibilgailua;
-
         await Shell.Current.GoToAsync("//nagusia/ibilgailuTab/ibilgailuak");
     }
 }

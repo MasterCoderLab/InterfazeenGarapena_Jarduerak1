@@ -1,4 +1,3 @@
-
 using I01_14_LurpekoParkingKudeaketa.Ereduak;
 using I01_14_LurpekoParkingKudeaketa.Kudeaketa;
 using I01_14_LurpekoParkingKudeaketa.Resources.Strings;
@@ -86,9 +85,8 @@ public partial class IbilgailuakPage : ContentPage
         var hautatua = emaitzak.FirstOrDefault(
             i => i.Matrikula == matrikula);
 
+        // Zerrendaren altuera Grid-ak kudeatzen du, erregistro gehiago erakusteko.
         IbilgailuZerrenda.ItemsSource = emaitzak;
-        IbilgailuZerrenda.HeightRequest = Math.Clamp(emaitzak.Count, 1, 6) * 47;
-
         IbilgailuZerrenda.SelectedItem = hautatua;
         XehetasunakEguneratu(hautatua);
     }

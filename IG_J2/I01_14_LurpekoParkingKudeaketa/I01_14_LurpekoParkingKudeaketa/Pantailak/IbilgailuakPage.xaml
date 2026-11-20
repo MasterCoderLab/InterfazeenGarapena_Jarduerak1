@@ -4,116 +4,111 @@
              xmlns:testuak="clr-namespace:I01_14_LurpekoParkingKudeaketa.Resources.Strings"
              x:Class="I01_14_LurpekoParkingKudeaketa.Pantailak.IbilgailuakPage"
              Title="{x:Static testuak:AppResources.VehiclesTab}"
-             BackgroundColor="#F3F6FA">
+             Shell.NavBarIsVisible="False" BackgroundColor="#F3F6FA">
     <Grid x:Name="DiseinuNagusia" Padding="18"
-          RowDefinitions="Auto,Auto,Auto,Auto" RowSpacing="10">
-
-        <!-- Ibilgailuen pantailaren izenburua. -->
-        <Label x:Name="Izenburua" Grid.Row="0"
-               Text="{x:Static testuak:AppResources.VehicleListTitle}"
+          RowDefinitions="Auto,Auto,*,Auto" RowSpacing="10">
+        <Label x:Name="Izenburua" Text="{x:Static testuak:AppResources.VehicleListTitle}"
                FontSize="25" FontAttributes="Bold" TextColor="#15263C" />
 
-        <!-- Matrikularen, markaren edo jabearen araberako bilaketa. -->
+        <!-- Matrikula, marka edo jabearen arabera bilatzeko eremua. -->
         <SearchBar x:Name="Bilaketa" Grid.Row="1"
                    Placeholder="{x:Static testuak:AppResources.SearchPlaceholder}"
-                   TextChanged="BilaketaAldatuta" TextColor="#15263C"
-                   PlaceholderColor="#52677F" BackgroundColor="White" />
+                   TextChanged="BilaketaAldatuta" FontSize="16"
+                   TextColor="#15263C" PlaceholderColor="#52677F" BackgroundColor="White" />
 
-        <!-- Bilaketaren emaitzak eta ibilgailu bakoitzaren oinarrizko datuak. -->
-        <Grid Grid.Row="2" RowDefinitions="Auto,Auto" RowSpacing="2">
-            <Grid Grid.Row="0" Padding="10,4" ColumnDefinitions="90,*,110"
-                  ColumnSpacing="8">
-                <Label Text="Matrikula" FontSize="12" FontAttributes="Bold"
-                       TextColor="#52677F" />
-                <Label Grid.Column="1" Text="Ibilgailua" FontSize="12"
-                       FontAttributes="Bold" TextColor="#52677F" />
-                <Label Grid.Column="2" Text="Jabea" FontSize="12"
-                       FontAttributes="Bold" TextColor="#52677F" />
+        <!-- Ibilgailuen taula trinkoa, erregistro asko batera arakatzeko. -->
+        <Border Grid.Row="2" Padding="10" BackgroundColor="White"
+                Stroke="#DCE4EC" StrokeShape="RoundRectangle 12">
+            <Grid RowDefinitions="Auto,*" RowSpacing="4">
+                <Grid Padding="8,8" ColumnDefinitions="105,2*,1.3*" ColumnSpacing="10"
+                      BackgroundColor="#EDF3F9">
+                    <Label Text="Matrikula" FontSize="13" FontAttributes="Bold" TextColor="#334155" />
+                    <Label Grid.Column="1" Text="Ibilgailua" FontSize="13"
+                           FontAttributes="Bold" TextColor="#334155" />
+                    <Label Grid.Column="2" Text="Jabea" FontSize="13"
+                           FontAttributes="Bold" TextColor="#334155" />
+                </Grid>
+                <CollectionView x:Name="IbilgailuZerrenda" Grid.Row="1"
+                                SelectionMode="Single" SelectionChanged="IbilgailuaHautatua"
+                                EmptyView="{x:Static testuak:AppResources.NoVehicles}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Padding="8,7" Margin="0,0,0,1" BackgroundColor="#F8FAFD"
+                                  ColumnDefinitions="105,2*,1.3*" ColumnSpacing="10">
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroupList>
+                                        <VisualStateGroup x:Name="CommonStates">
+                                            <VisualState x:Name="Normal" />
+                                            <VisualState x:Name="Selected">
+                                                <VisualState.Setters>
+                                                    <Setter Property="BackgroundColor" Value="#DCEBFA" />
+                                                </VisualState.Setters>
+                                            </VisualState>
+                                        </VisualStateGroup>
+                                    </VisualStateGroupList>
+                                </VisualStateManager.VisualStateGroups>
+                                <Label Text="{Binding Matrikula}" FontSize="14" FontAttributes="Bold"
+                                       TextColor="#15263C" VerticalOptions="Center" />
+                                <VerticalStackLayout Grid.Column="1" Spacing="1">
+                                    <Label Text="{Binding Marka}" FontSize="14" TextColor="#15263C" />
+                                    <Label Text="{Binding Modeloa}" FontSize="12" TextColor="#52677F" />
+                                </VerticalStackLayout>
+                                <Label Grid.Column="2" Text="{Binding Jabea.IzenOsoa}" FontSize="14"
+                                       TextColor="#334155" VerticalOptions="Center" />
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
             </Grid>
+        </Border>
 
-            <CollectionView x:Name="IbilgailuZerrenda" Grid.Row="1"
-                            HeightRequest="190" SelectionMode="Single"
-                            SelectionChanged="IbilgailuaHautatua"
-                            EmptyView="{x:Static testuak:AppResources.NoVehicles}">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <Grid Margin="0,1" Padding="10,6"
-                              BackgroundColor="White"
-                              ColumnDefinitions="90,*,110" ColumnSpacing="8">
-                            <Label Text="{Binding Matrikula}" FontSize="12"
-                                   FontAttributes="Bold" TextColor="#15263C"
-                                   VerticalOptions="Center" />
-                            <VerticalStackLayout Grid.Column="1" Spacing="0">
-                                <Label Text="{Binding Marka}" FontSize="12"
-                                       TextColor="#15263C" />
-                                <Label Text="{Binding Modeloa}" FontSize="11"
-                                       TextColor="#52677F" />
-                            </VerticalStackLayout>
-                            <Label Grid.Column="2" Text="{Binding Jabea.Izena}"
-                                   FontSize="12" TextColor="#52677F"
-                                   VerticalOptions="Center" />
-                        </Grid>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-        </Grid>
-
-        <!-- Hautatutako ibilgailuaren fitxa eta aparkatzeen historikoa. -->
+        <!-- Ibilgailuaren fitxa eta historikoa tabletetan alboz albo agertzen dira. -->
         <Grid x:Name="XehetasunSarea" Grid.Row="3"
               ColumnDefinitions="0.85*,1.5*" RowDefinitions="Auto,Auto"
               ColumnSpacing="10" RowSpacing="10">
-
-            <!-- Matrikula, marka, modeloa, kolorea eta jabearen datuak. -->
             <Border x:Name="IbilgailuFitxa" Grid.Row="0" Grid.Column="0"
-                    Padding="12" BackgroundColor="White"
+                    Padding="14" BackgroundColor="White"
                     Stroke="#DCE4EC" StrokeShape="RoundRectangle 10">
-                <VerticalStackLayout Spacing="6">
+                <VerticalStackLayout Spacing="8">
                     <Label Text="{x:Static testuak:AppResources.VehicleCardTitle}"
-                           FontSize="16" FontAttributes="Bold" TextColor="#15263C" />
+                           FontSize="18" FontAttributes="Bold" TextColor="#15263C" />
                     <Label x:Name="IbilgailuXehetasunak"
                            Text="{x:Static testuak:AppResources.SelectVehicle}"
-                           FontSize="12" TextColor="#334155" />
+                           FontSize="14" TextColor="#334155" />
                 </VerticalStackLayout>
             </Border>
 
-            <!-- Sarrerak, irteerak, erabilitako plazak eta ordaindutako zenbatekoak. -->
+            <!-- Sarrera, irteera, plaza eta ordaindutako zenbatekoa taula batean. -->
             <Border x:Name="HistoriaPanela" Grid.Row="0" Grid.Column="1"
-                    Padding="12" BackgroundColor="White"
+                    Padding="14" BackgroundColor="White"
                     Stroke="#DCE4EC" StrokeShape="RoundRectangle 10">
-                <Grid RowDefinitions="Auto,Auto,Auto" RowSpacing="6">
+                <Grid RowDefinitions="Auto,Auto,Auto" RowSpacing="7">
                     <Label Text="{x:Static testuak:AppResources.HistoryTitle}"
-                           FontSize="16" FontAttributes="Bold" TextColor="#15263C" />
-
+                           FontSize="18" FontAttributes="Bold" TextColor="#15263C" />
                     <Grid x:Name="HistoriaGoiburua" Grid.Row="1"
-                          ColumnDefinitions="46,*,*,65" ColumnSpacing="6"
-                          IsVisible="False">
-                        <Label Text="Plaza" FontSize="11" FontAttributes="Bold"
-                               TextColor="#52677F" />
-                        <Label Grid.Column="1" Text="Sarrera" FontSize="11"
+                          ColumnDefinitions="58,*,*,90" ColumnSpacing="8" IsVisible="False">
+                        <Label Text="Plaza" FontSize="13" FontAttributes="Bold" TextColor="#52677F" />
+                        <Label Grid.Column="1" Text="Sarrera" FontSize="13"
                                FontAttributes="Bold" TextColor="#52677F" />
-                        <Label Grid.Column="2" Text="Irteera" FontSize="11"
+                        <Label Grid.Column="2" Text="Irteera" FontSize="13"
                                FontAttributes="Bold" TextColor="#52677F" />
-                        <Label Grid.Column="3" Text="€" FontSize="11"
-                               FontAttributes="Bold" TextColor="#52677F"
-                               HorizontalTextAlignment="End" />
+                        <Label Grid.Column="3" Text="€" FontSize="13" FontAttributes="Bold"
+                               TextColor="#52677F" HorizontalTextAlignment="End" />
                     </Grid>
-
                     <CollectionView x:Name="HistoriaZerrenda" Grid.Row="2"
-                                    HeightRequest="36" SelectionMode="None"
+                                    HeightRequest="42" SelectionMode="None"
                                     EmptyView="{x:Static testuak:AppResources.NoHistory}">
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
-                                <Grid Padding="2,5" ColumnDefinitions="44,*,*,65"
-                                      ColumnSpacing="6">
-                                    <Label Text="{Binding Plaza}" FontSize="11"
+                                <Grid Padding="3,6" ColumnDefinitions="58,*,*,90" ColumnSpacing="8">
+                                    <Label Text="{Binding Plaza}" FontSize="13"
                                            TextColor="#15263C" VerticalOptions="Center" />
-                                    <Label Grid.Column="1" Text="{Binding Sarrera}"
-                                           FontSize="11" TextColor="#334155" />
-                                    <Label Grid.Column="2" Text="{Binding Irteera}"
-                                           FontSize="11" TextColor="#334155" />
-                                    <Label Grid.Column="3" Text="{Binding Zenbatekoa}"
-                                           FontSize="11" TextColor="#334155"
-                                           VerticalOptions="Center"
+                                    <Label Grid.Column="1" Text="{Binding Sarrera}" FontSize="13"
+                                           TextColor="#334155" />
+                                    <Label Grid.Column="2" Text="{Binding Irteera}" FontSize="13"
+                                           TextColor="#334155" />
+                                    <Label Grid.Column="3" Text="{Binding Zenbatekoa}" FontSize="13"
+                                           TextColor="#334155" VerticalOptions="Center"
                                            HorizontalTextAlignment="End" />
                                 </Grid>
                             </DataTemplate>

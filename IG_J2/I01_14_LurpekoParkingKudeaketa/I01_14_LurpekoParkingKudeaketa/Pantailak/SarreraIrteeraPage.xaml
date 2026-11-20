@@ -2,73 +2,68 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="I01_14_LurpekoParkingKudeaketa.Pantailak.SarreraIrteeraPage"
-             Title="Sarrera eta irteera" BackgroundColor="#F3F6FA">
+             Title="Sarrera eta irteera" Shell.NavBarIsVisible="False"
+             BackgroundColor="#F3F6FA">
     <ScrollView>
         <VerticalStackLayout Padding="18" Spacing="14">
-
             <Label Text="Sarrera eta irteera" FontSize="24"
                    FontAttributes="Bold" TextColor="#15263C" />
 
-            <!-- Sarrera- eta irteera-panelak; kokapena pantailaren zabalerara egokitzen da. -->
-            <Grid x:Name="FormularioSarea" ColumnDefinitions="*,*" ColumnSpacing="12" RowSpacing="12" RowDefinitions="Auto,Auto">
+            <!-- Sarrera eta irteera tabletetan paraleloan eta mugikorretan bertikalki. -->
+            <Grid x:Name="FormularioSarea" ColumnDefinitions="*,*"
+                  ColumnSpacing="12" RowSpacing="12" RowDefinitions="Auto,Auto">
 
-                <!-- Ibilgailuaren sarrera: matrikula, plaza mota eta plaza-proposamena. -->
-                <Border x:Name="SarreraPanela" Grid.Column="0" Padding="14" BackgroundColor="White"
+                <!-- Matrikula identifikatu, plaza proposatu eta sarrera baieztatu. -->
+                <Border x:Name="SarreraPanela" Grid.Column="0" Padding="16" BackgroundColor="White"
                         Stroke="#DCE4EC" StrokeShape="RoundRectangle 12">
-                    <VerticalStackLayout Spacing="10">
-                        <Label Text="Ibilgailuaren sarrera" FontSize="18"
+                    <VerticalStackLayout Spacing="12">
+                        <Label Text="Ibilgailuaren sarrera" FontSize="19"
                                FontAttributes="Bold" TextColor="#15263C" />
-
                         <Entry x:Name="SarreraMatrikula" Placeholder="Matrikula"
-                               TextChanged="SarreraTestuaAldatuta" />
-
-                        <!-- Mugikortasun urriko plaza eskatzeko aukerako baldintza. -->
+                               TextChanged="SarreraTestuaAldatuta" FontSize="16"
+                               PlaceholderColor="#60738B" TextColor="#15263C" />
                         <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8">
                             <Label Text="Mugikortasun urriko plaza eskatu"
-                                   FontSize="12" TextColor="#334155" VerticalOptions="Center" />
+                                   FontSize="14" TextColor="#334155" VerticalOptions="Center" />
                             <Switch x:Name="Irisgarria" Grid.Column="1"
                                     Toggled="SarreraAukeraAldatuta" />
                         </Grid>
-
                         <Button Text="Plaza proposatu" Clicked="PlazaProposatu"
                                 BackgroundColor="#1F5586" TextColor="White" />
 
+                        <!-- Proposatutako plazaren informazioa. -->
                         <Label x:Name="Proposamena" Text="Sartu matrikula bat."
-                               TextColor="#334155" />
-
-                        <!-- Proposatutako plaza egiaztatu ondoren sarrera baieztatzeko botoia. -->
+                               BackgroundColor="#EDF3F9" Padding="12,10"
+                               FontSize="15" TextColor="#334155" />
                         <Button x:Name="SarreraBaieztatuBotoia" Text="Sarrera baieztatu"
                                 Clicked="SarreraBaieztatu" IsEnabled="False" />
                     </VerticalStackLayout>
                 </Border>
 
-                <!-- Ibilgailuaren irteera: egonaldia kalkulatu eta ordainketa baieztatu. -->
-                <Border x:Name="IrteeraPanela" Grid.Column="1" Padding="14" BackgroundColor="White"
+                <!-- Egonaldiaren iraupena eta ordaindu beharreko zenbatekoa. -->
+                <Border x:Name="IrteeraPanela" Grid.Column="1" Padding="16" BackgroundColor="White"
                         Stroke="#DCE4EC" StrokeShape="RoundRectangle 12">
-                    <VerticalStackLayout Spacing="10">
-                        <Label Text="Ibilgailuaren irteera" FontSize="18"
+                    <VerticalStackLayout Spacing="12">
+                        <Label Text="Ibilgailuaren irteera" FontSize="19"
                                FontAttributes="Bold" TextColor="#15263C" />
-
                         <Entry x:Name="IrteeraMatrikula" Placeholder="Matrikula"
-                               TextChanged="IrteeraTestuaAldatuta" />
-
+                               TextChanged="IrteeraTestuaAldatuta" FontSize="16"
+                               PlaceholderColor="#60738B" TextColor="#15263C" />
                         <Button Text="Denbora eta zenbatekoa kalkulatu"
                                 Clicked="IrteeraKalkulatu"
                                 BackgroundColor="#1F5586" TextColor="White" />
-
                         <Label x:Name="IrteeraXehetasunak" Text="Sartu matrikula bat."
-                               TextColor="#334155" />
-
-                        <!-- Kalkulatutako irteera eta ordainketa erregistratzeko botoia. -->
+                               BackgroundColor="#EDF3F9" Padding="12,10"
+                               FontSize="15" TextColor="#334155" />
                         <Button x:Name="IrteeraBaieztatuBotoia" Text="Irteera baieztatu"
                                 Clicked="IrteeraBaieztatu" IsEnabled="False" />
                     </VerticalStackLayout>
                 </Border>
             </Grid>
 
-            <!-- Aplikazioak erabilitako orduko tarifa eta kalkuluaren irizpidea. -->
+            <!-- Erabiltzaileari erakusten zaion tarifa, kalkuluaren oinarria. -->
             <Label Text="Tarifa: 1,80 €/ordu. Minutuen arabera kalkulatzen da."
-                   FontSize="12" TextColor="#52677F" />
+                   FontSize="14" TextColor="#52677F" />
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>
