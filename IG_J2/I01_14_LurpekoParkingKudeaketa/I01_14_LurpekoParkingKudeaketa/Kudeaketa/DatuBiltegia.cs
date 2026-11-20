@@ -1,3 +1,4 @@
+
 using I01_14_LurpekoParkingKudeaketa.Ereduak;
 
 namespace I01_14_LurpekoParkingKudeaketa.Kudeaketa;
@@ -24,7 +25,21 @@ public class DatuBiltegia
             "600000002", "jon@example.com");
         var maite = new Bezeroa("00000002W", "Maite", "Zubizarreta",
             "600000003", "maite@example.com");
-        Bezeroak = new List<Bezeroa> { ane, jon, maite };
+
+        // Sarrerak probatzeko bezero berriak.
+        var unai = new Bezeroa("00000003A", "Unai", "Agirre",
+            "600000004", "unai@example.com");
+        var leire = new Bezeroa("00000004G", "Leire", "Mendizabal",
+            "600000005", "leire@example.com");
+        var mikel = new Bezeroa("00000005M", "Mikel", "Urresti",
+            "600000006", "mikel@example.com");
+        var nerea = new Bezeroa("00000006Y", "Nerea", "Goikoetxea",
+            "600000007", "nerea@example.com");
+
+        Bezeroak = new List<Bezeroa>
+        {
+            ane, jon, maite, unai, leire, mikel, nerea
+        };
 
         var autoa = new Ibilgailua("1234ABC", "SEAT", "León",
             "Gorria", ane, IbilgailuMota.Autoa, false);
@@ -34,7 +49,22 @@ public class DatuBiltegia
             "Beltza", ane, IbilgailuMota.Motorra, false);
         var zoe = new Ibilgailua("4444JKL", "Renault", "Zoe",
             "Urdina", maite, IbilgailuMota.Autoa, true);
-        Ibilgailuak = new List<Ibilgailua> { autoa, tesla, motorra, zoe };
+
+        // Ibilgailu hauek erregistratuta daude, baina aparkalekutik kanpo.
+        var golf = new Ibilgailua("3456MNP", "Volkswagen", "Golf",
+            "Grisa", unai, IbilgailuMota.Autoa, false);
+        var corolla = new Ibilgailua("6789RST", "Toyota", "Corolla",
+            "Zuria", leire, IbilgailuMota.Autoa, false);
+        var yamaha = new Ibilgailua("2345VWX", "Yamaha", "MT-07",
+            "Beltza", mikel, IbilgailuMota.Motorra, false);
+        var leaf = new Ibilgailua("7890BCD", "Nissan", "Leaf",
+            "Urdina", nerea, IbilgailuMota.Autoa, true);
+
+        Ibilgailuak = new List<Ibilgailua>
+        {
+            autoa, tesla, motorra, zoe,
+            golf, corolla, yamaha, leaf
+        };
 
         var p01 = new Plaza("P01", -1, PlazaMota.Autoa, PlazaEgoera.Okupatuta, autoa);
         var p02 = new Plaza("P02", -1, PlazaMota.Autoa, PlazaEgoera.Libre);
